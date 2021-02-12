@@ -1,19 +1,26 @@
 #pragma once
-#include <iostream>
 namespace Crusade
 {
+	class GameObject;
 	class Component
 	{
 	public:
-		Component() = default;
+		enum class Command
+		{
+		};
+		explicit Component(GameObject* owner) :m_Owner(owner){}
 		virtual ~Component() = default;
 
-		virtual void SendMessage(const std::string& message) = 0;
+		virtual void SendCommand(const Command&){};
+		virtual void Update(){}
+		virtual void Render()const{}
 		
 		Component(const Component& other) = delete;
 		Component(Component&& other) = delete;
 		Component& operator=(const Component& other) = delete;
 		Component& operator=(Component&& other) = delete;
+	protected:
+		GameObject* m_Owner;
 	};
 }
 

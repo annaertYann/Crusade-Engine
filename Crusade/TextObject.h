@@ -1,16 +1,16 @@
 #pragma once
-#include "SceneObject.h"
+
 #include "Transform.h"
 
 namespace Crusade
 {
 	class Font;
 	class Texture2D;
-	class TextObject final : public SceneObject
+	class TextObject final 
 	{
 	public:
-		void Update() override;
-		void Render() const override;
+		void Update() ;
+		void Render() const ;
 
 		void SetText(const std::string& text);
 		void SetPosition(float x, float y);

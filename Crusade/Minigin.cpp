@@ -7,10 +7,11 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include <SDL.h>
-#include "TextObject.h"
+#include "Render.h"
 #include "GameObject.h"
 #include "Scene.h"
 #include  "Time.h"
+#include  "Render.h"
 using namespace std;
 using namespace std::chrono;
 
@@ -45,18 +46,18 @@ void Crusade::Minigin::LoadGame() const
 	auto& scene = SceneManager::GetInstance().CreateScene("Demo");
 
 	auto go = std::make_shared<GameObject>();
-	go->SetTexture("background.jpg");
+	go->AddComponent( shared_ptr<Component> { new CRender{go.get()} } );
 	scene.Add(go);
 
-	go = std::make_shared<GameObject>();
-	go->SetTexture("logo.png");
-	go->SetPosition(216, 180);
-	scene.Add(go);
+	//go = std::make_shared<GameObject>();
+	//go->SetTexture("logo.png");
+	//go->SetPosition(216, 180);
+	//scene.Add(go);
 
-	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
-	auto to = std::make_shared<TextObject>("Crusade Engine", font);
-	to->SetPosition(80, 20);
-	scene.Add(to);
+	//auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
+	//auto to = std::make_shared<TextObject>("Crusade Engine", font);
+	//to->SetPosition(80, 20);
+	//scene.Add(to);
 }
 
 void Crusade::Minigin::Cleanup()

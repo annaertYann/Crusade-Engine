@@ -1,24 +1,19 @@
 #include "MiniginPCH.h"
 #include "GameObject.h"
-#include "ResourceManager.h"
-#include "Renderer.h"
+using namespace Crusade;
 
-Crusade::GameObject::~GameObject() = default;
-
-void Crusade::GameObject::Update(){}
-
-void Crusade::GameObject::Render() const
+void GameObject::SendCommand(const Component::Command& command)
 {
-	const auto pos = m_Transform.GetPosition();
-	Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
+	for (const auto& component :m_components)
+	{
+		component->SendCommand(command);
+	}
+}
+void GameObject::Update()
+{
+	for (const auto& component : m_components)
+	{
+		component->Update();
+	}
 }
 
-void Crusade::GameObject::SetTexture(const std::string& filename)
-{
-	m_Texture = ResourceManager::GetInstance().LoadTexture(filename);
-}
-
-void Crusade::GameObject::SetPosition(float x, float y)
-{
-	m_Transform.SetPosition(x, y, 0.0f);
-}

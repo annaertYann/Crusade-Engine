@@ -1,28 +1,44 @@
 #pragma once
-#include "Transform.h"
-#include "SceneObject.h"
-
+#include "BaseComponent.h"
 namespace Crusade
 {
-	class Texture2D;
-	class GameObject final: public SceneObject
+	class GameObject final
 	{
 	public:
-		void Update() override;
-		void Render() const override;
-
-		void SetTexture(const std::string& filename);
-		void SetPosition(float x, float y);
 
 		GameObject() = default;
-		virtual ~GameObject();
+		~GameObject()=default;
+
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
+		void Update();
+		void SendCommand(const Component::Command& command);
+
+		//COMPONENT CONTROL
+		std::vector<std::shared_ptr<Component>> GetAllComponents() const{ return m_components; }
+		void AddComponent(const std::shared_ptr<Component> component) { m_components.push_back(component); };
+		template <typename T>
+		T* GetComponent();
+	
 	private:
-		Transform m_Transform;
-		std::shared_ptr<Texture2D> m_Texture{};
+		std::vector<std::shared_ptr<Component>> m_components{};
 	};
+	
+	template <typename T>
+	T* GameObject::GetComponent()
+	{
+		for (const auto& component : m_components)
+		{
+			T* temp = dynamic_cast<T*>(component.get());
+			if (temp != nullptr)
+			{
+				return temp;
+			}
+		}
+		return nullptr;
+	}
 }
+
