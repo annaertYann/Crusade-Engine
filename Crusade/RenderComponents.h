@@ -9,14 +9,14 @@ namespace Crusade
 	class CRender final : public Component
 	{
 		public:
-		explicit CRender(GameObject* owner):Component(owner){}
 		void RenderObject()const;
 	};
 	
 	class CTexture2DRender final : public Component
 	{
 	public:
-		explicit CTexture2DRender(GameObject* owner, const std::shared_ptr<Texture2D> &texture);
+		explicit CTexture2DRender(const std::shared_ptr<Texture2D> &texture);
+		void Init()override;
 		void Render()const override;
 		void SetTexture(const std::string& filename);
 		
@@ -32,10 +32,12 @@ namespace Crusade
 	class CTextRender final : public Component
 	{
 	public:
-		explicit CTextRender(GameObject* owner, const std::string& text, const std::shared_ptr<Font>& font,const SDL_Color& color);
+		explicit CTextRender(const std::string& text, const std::shared_ptr<Font>& font,const SDL_Color& color);
+		void Init()override;
 		void Render()const override;
 		void Update() override;
 		void SetText(const std::string& text);
+		void SetFont(const std::shared_ptr<Font>& font) { m_Font = font; }
 		void SetColor(const SDL_Color& color) { m_Color = color; }
 	private:
 		bool m_NeedsUpdate;

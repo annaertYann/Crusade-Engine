@@ -26,15 +26,18 @@ void CRender::RenderObject()const
 ////////////////////////////////////////////////////////////////////////////////////////////
 //TEXT RENDER
 ////////////////////////////////////////////////////////////////////////////////////////////
-CTextRender::CTextRender(GameObject* owner, const std::string& text, const std::shared_ptr<Font>& font, const SDL_Color& color)
-	:Component(owner), m_NeedsUpdate(true), m_Text(text), m_Font(font), m_Texture(nullptr),m_Color(color)
+CTextRender::CTextRender( const std::string& text, const std::shared_ptr<Font>& font, const SDL_Color& color)
+	:m_NeedsUpdate(true), m_Text(text), m_Font(font), m_Texture(nullptr),m_Color(color)
+{
+}
+void CTextRender::Init()
 {
 	if (m_Owner->GetComponent<CRender>() == nullptr)
 	{
-		m_Owner->AddComponent<CRender>(std::make_shared<CRender>(m_Owner));
+		m_Owner->AddComponent<CRender>(std::make_shared<CRender>());
 	}
-	
 }
+
 void CTextRender::Render() const
 {
 	if (m_Texture != nullptr)
@@ -72,16 +75,22 @@ void CTextRender::SetText(const std::string& text)
 	m_NeedsUpdate = true;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////
+//Texture2D Render
+////////////////////////////////////////////////////////////////////////////////////////////
 
-
-CTexture2DRender::CTexture2DRender(GameObject* owner, const std::shared_ptr<Texture2D>& texture)
-	:Component(owner), m_Texture(texture), m_SourceRect{}, m_Width{},m_Height{}
+CTexture2DRender::CTexture2DRender( const std::shared_ptr<Texture2D>& texture)
+	:m_Texture(texture), m_SourceRect{}, m_Width{},m_Height{}
+{
+}
+void CTexture2DRender::Init()
 {
 	if (m_Owner->GetComponent<CRender>() == nullptr)
 	{
-		m_Owner->AddComponent<CRender>(std::make_shared<CRender>(m_Owner));
+		m_Owner->AddComponent<CRender>(std::make_shared<CRender>());
 	}
 }
+
 void CTexture2DRender::Render()const
 {
 	const auto transform = m_Owner->GetComponent<Transform>();

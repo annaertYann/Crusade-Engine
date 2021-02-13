@@ -7,7 +7,7 @@ int GameObject::m_NextTag = 0;
 
 GameObject::GameObject()
 {
-	AddComponent<Transform>(std::make_shared<Transform>(this));
+	AddComponent<Transform>(std::make_shared<Transform>());
 	m_Tag = m_NextTag;
 	m_NextTag++;
 }

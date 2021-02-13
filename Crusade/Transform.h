@@ -9,7 +9,7 @@ namespace Crusade
 	class Transform final : public Component
 	{
 	public:
-		explicit Transform(GameObject* owner);
+		void Init()override;
 		
 		const glm::vec3& GetPosition() const { return m_Position; }
 		void SetPosition(float x, float y, float z);

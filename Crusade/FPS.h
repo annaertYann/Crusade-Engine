@@ -5,9 +5,9 @@ namespace Crusade
 	class CFPS final :public Component
 	{
 	public:
-		explicit CFPS(GameObject* owner) :Component(owner){}
 		void Update()override;
 		int GetCurrentFPS()const;
+		void SetMaxFrames(const float maxFrames) { m_MaxFrames = maxFrames; }
 	private:
 		void Reset();
 		float m_LastFPS=0;

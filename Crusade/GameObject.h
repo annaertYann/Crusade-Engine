@@ -51,6 +51,8 @@ namespace Crusade
 	{
 		if (GetComponent<T>()==nullptr)
 		{
+			component->SetOwner(this);
+			component->Init();
 			m_Components.push_back(component);
 		}
 	}

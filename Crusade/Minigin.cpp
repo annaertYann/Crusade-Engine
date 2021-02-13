@@ -47,26 +47,26 @@ void Crusade::Minigin::LoadGame() const
 	auto& scene = SceneManager::GetInstance().CreateScene("Exercise - FPS");
 	
 	auto object1 = std::make_shared<GameObject>();
-	object1->AddComponent<CTexture2DRender>(std::make_shared<CTexture2DRender>(object1.get(), ResourceManager::GetInstance().LoadTexture("background.jpg")));
+	object1->AddComponent<CTexture2DRender>(std::make_shared<CTexture2DRender>(ResourceManager::GetInstance().LoadTexture("background.jpg")));
 	scene.Add(object1);
 
 	const auto object2 = std::make_shared<GameObject>();
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
 	object2->GetComponent<Transform>()->SetPosition(80, 20,0);
-	object2->AddComponent<CTextRender>(std::make_shared<CTextRender>(object2.get(), "Crusade Engine", font, SDL_Color {255,255,255,255} ));
+	object2->AddComponent<CTextRender>(std::make_shared<CTextRender>("Crusade Engine", font, SDL_Color {255,255,255,255} ));
 	scene.Add(object2);
 
 	auto object3 = std::make_shared<GameObject>();
-	object3->AddComponent<CTexture2DRender>( std::make_shared<CTexture2DRender>(object3.get(), ResourceManager::GetInstance().LoadTexture("logo.png") ));
-	object3->AddComponent<CFPS>(std::make_shared<CFPS>(object3.get() ) );
+	object3->AddComponent<CTexture2DRender>( std::make_shared<CTexture2DRender>( ResourceManager::GetInstance().LoadTexture("logo.png") ));
+	object3->AddComponent<CFPS>(std::make_shared<CFPS>() );
 	object3->GetComponent<Transform>()->SetPosition(216, 180, 0);
 	scene.Add(object3);
 
 	auto font1 = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 	auto object4 = std::make_shared<GameObject>();
-	object4->AddComponent<CTextRender>(std::make_shared<CTextRender>(object4.get(), "1", font1,SDL_Color{100,255,100,255}));
-	object4->AddComponent<CFPS>(std::make_shared<CFPS>(object4.get()));
-	object4->AddComponent<DisplayFPS>(std::make_shared<DisplayFPS>(object4.get()));
+	object4->AddComponent<CTextRender>(std::make_shared<CTextRender>("1", font1,SDL_Color{100,255,100,255}));
+	object4->AddComponent<CFPS>(std::make_shared<CFPS>());
+	object4->AddComponent<DisplayFPS>(std::make_shared<DisplayFPS>());
 	object4->GetComponent<Transform>()->SetPosition(0, 0, 0);
 	scene.Add(object4);
 }
