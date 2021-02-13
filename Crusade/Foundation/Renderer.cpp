@@ -1,8 +1,8 @@
 #include "MiniginPCH.h"
 #include "Renderer.h"
 #include <SDL.h>
-#include "SceneManager.h"
-#include "Texture2D.h"
+#include "../Scene/SceneManager.h"
+#include "../Wrapper/Texture2D.h"
 int GetOpenGLDriverIndex()
 {
 	auto openglIndex = -1;

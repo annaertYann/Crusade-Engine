@@ -1,17 +1,16 @@
 #include "MiniginPCH.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include "Renderer.h"
-#include "Font.h"
-#include "Texture2D.h"
+#include "../../../Foundation/Renderer.h"
 #include "RenderComponents.h"
-#include "GameObject.h"
+#include "../GameObject.h"
 #pragma warning(push)
 #pragma warning (disable:26495)
 #pragma warning (disable:4201)
 #include <glm/geometric.hpp>
 #pragma warning(pop)
-#include "ResourceManager.h"
+#include "../../../Foundation/ResourceManager.h"
+#include "Transform.h"
 using namespace Crusade;
 ////////////////////////////////////////////////////////////////////////////////////////////
 //RENDER COMPONENT

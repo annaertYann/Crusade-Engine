@@ -197,48 +197,48 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BaseComponent.h" />
-    <ClInclude Include="Delay.h" />
-    <ClInclude Include="Font.h" />
-    <ClInclude Include="FPS.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Minigin.h" />
-    <ClInclude Include="MiniginPCH.h" />
-    <ClInclude Include="RenderComponents.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="ScriptComponents.h" />
-    <ClInclude Include="Singleton.h" />
-    <ClInclude Include="Texture2D.h" />
-    <ClInclude Include="Time.h" />
-    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Scene\Object\Component\BaseComponent.h" />
+    <ClInclude Include="Utility\Delay.h" />
+    <ClInclude Include="Wrapper\Font.h" />
+    <ClInclude Include="Scene\Object\Component\FPS.h" />
+    <ClInclude Include="Scene\Object\GameObject.h" />
+    <ClInclude Include="Foundation\InputManager.h" />
+    <ClInclude Include="Foundation\Minigin.h" />
+    <ClInclude Include="Foundation\MiniginPCH.h" />
+    <ClInclude Include="Scene\Object\Component\RenderComponents.h" />
+    <ClInclude Include="Foundation\Renderer.h" />
+    <ClInclude Include="Foundation\ResourceManager.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
+    <ClInclude Include="Scene\Object\Component\ScriptComponents.h" />
+    <ClInclude Include="Utility\Singleton.h" />
+    <ClInclude Include="Wrapper\Texture2D.h" />
+    <ClInclude Include="Foundation\Time.h" />
+    <ClInclude Include="Scene\Object\Component\Transform.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Font.cpp" />
-    <ClCompile Include="FPS.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Minigin.cpp" />
-    <ClCompile Include="MiniginPCH.cpp">
+    <ClCompile Include="Wrapper\Font.cpp" />
+    <ClCompile Include="Scene\Object\Component\FPS.cpp" />
+    <ClCompile Include="Scene\Object\GameObject.cpp" />
+    <ClCompile Include="Foundation\InputManager.cpp" />
+    <ClCompile Include="Foundation\Main.cpp" />
+    <ClCompile Include="Foundation\Minigin.cpp" />
+    <ClCompile Include="Foundation\MiniginPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MiniginPCH.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="RenderComponents.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="ScriptComponents.cpp" />
-    <ClCompile Include="Texture2D.cpp" />
-    <ClCompile Include="Time.cpp" />
-    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Scene\Object\Component\RenderComponents.cpp" />
+    <ClCompile Include="Foundation\Renderer.cpp" />
+    <ClCompile Include="Foundation\ResourceManager.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
+    <ClCompile Include="Scene\Object\Component\ScriptComponents.cpp" />
+    <ClCompile Include="Wrapper\Texture2D.cpp" />
+    <ClCompile Include="Foundation\Time.cpp" />
+    <ClCompile Include="Scene\Object\Component\Transform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

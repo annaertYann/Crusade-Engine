@@ -2,6 +2,7 @@
 #include "FPS.h"
 #include <cmath>
 #include "Time.h"
+
 using namespace Crusade;
 void CFPS::Update()
 {

@@ -5,8 +5,8 @@
 #include <SDL_ttf.h>
 
 #include "Renderer.h"
-#include "Texture2D.h"
-#include "Font.h"
+#include "../Wrapper/Texture2D.h"
+#include "../Wrapper/Font.h"
 
 void Crusade::ResourceManager::Init(const std::string& dataPath)
 {

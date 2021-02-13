@@ -1,8 +1,7 @@
 #pragma once
 #include "BaseComponent.h"
-#include "Texture2D.h"
-#include "Font.h"
-#include "Transform.h"
+#include "../../../Wrapper/Font.h"
+#include "../../../Wrapper/Texture2D.h"
 #include "SDL.h"
 namespace Crusade
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "BaseComponent.h"
+#include "Component/FPS.h"
 namespace Crusade
 {
 	class GameObject final

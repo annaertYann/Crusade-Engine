@@ -3,16 +3,17 @@
 #include <chrono>
 #include <thread>
 #include "InputManager.h"
-#include "SceneManager.h"
+#include "../Scene/SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include <SDL.h>
-#include "RenderComponents.h"
-#include "GameObject.h"
-#include "Scene.h"
+#include "../Scene/Object/Component/RenderComponents.h"
+#include "../Scene/Object/GameObject.h"
+#include "../Scene/Scene.h"
 #include  "Time.h"
-#include "FPS.h"
-#include "ScriptComponents.h"
+#include "../Scene/Object/Component/FPS.h"
+#include "../Scene/Object/Component/ScriptComponents.h"
+#include "../Scene/Object/Component/Transform.h"
 using namespace std;
 using namespace std::chrono;
 

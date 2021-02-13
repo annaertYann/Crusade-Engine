@@ -1,6 +1,6 @@
 #include "MiniginPCH.h"
 #include "GameObject.h"
-#include "Transform.h"
+#include "Component/Transform.h"
 using namespace Crusade;
 
 int GameObject::m_NextTag = 0;

@@ -1,6 +1,6 @@
 #include "MiniginPCH.h"
 #include "ScriptComponents.h"
-#include "GameObject.h"
+#include "../GameObject.h"
 #include "FPS.h"
 #include "RenderComponents.h"
 using namespace Crusade;

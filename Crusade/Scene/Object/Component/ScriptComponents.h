@@ -1,9 +1,8 @@
 #pragma once
 #include "BaseComponent.h"
-#include "Delay.h"
+#include "../../../Utility/Delay.h"
 namespace Crusade
 {
-	
 	class DisplayFPS final :public Component
 	{
 	public:
