@@ -3,6 +3,7 @@
 #include "../GameObject.h"
 #include "FPS.h"
 #include "RenderComponents.h"
+#include "../../../Foundation/Time.h"
 using namespace Crusade;
 void DisplayFPS::Update()
 {
