@@ -1,5 +1,4 @@
 #pragma once
-
 struct _TTF_Font;
 namespace Crusade
 {

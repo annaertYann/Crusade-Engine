@@ -1,7 +1,7 @@
 #include "MiniginPCH.h"
 #include "Scene.h"
 #include "GameObject.h"
-#include "Render.h"
+#include "RenderComponents.h"
 using namespace Crusade;
 
 unsigned int Scene::m_IdCounter = 0;

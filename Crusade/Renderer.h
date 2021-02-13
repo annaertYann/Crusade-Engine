@@ -3,9 +3,10 @@
 
 struct SDL_Window;
 struct SDL_Renderer;
-
+struct SDL_Rect;
 namespace Crusade
 {
+	
 	class Texture2D;
 	/**
 	 * Simple RAII wrapper for the SDL renderer
@@ -19,7 +20,8 @@ namespace Crusade
 
 		void RenderTexture(const Texture2D& texture, float x, float y) const;
 		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height) const;
-
+		void RenderTexture(const Texture2D& texture,  SDL_Rect destRect) const;
+		void RenderTexture(const Texture2D& texture,  SDL_Rect destRect,SDL_Rect sourceRect) const;
 		SDL_Renderer* GetSDLRenderer() const { return m_Renderer; }
 	private:
 		SDL_Renderer* m_Renderer{};

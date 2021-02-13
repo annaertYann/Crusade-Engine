@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include "SceneManager.h"
 #include "Texture2D.h"
-
 int GetOpenGLDriverIndex()
 {
 	auto openglIndex = -1;
@@ -30,7 +29,7 @@ void Crusade::Renderer::Init(SDL_Window * window)
 void Crusade::Renderer::Render() const
 {
 	SDL_RenderClear(m_Renderer);
-
+	
 	SceneManager::GetInstance().Render();
 	
 	SDL_RenderPresent(m_Renderer);
@@ -60,6 +59,14 @@ void Crusade::Renderer::RenderTexture(const Texture2D& texture, const float x, c
 	dst.x = static_cast<int>(x);
 	dst.y = static_cast<int>(y);
 	dst.w = static_cast<int>(width);
-	dst.h = static_cast<int>(height);
+	dst.h = static_cast<int>( height);
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+}
+void  Crusade::Renderer::RenderTexture(const Texture2D& texture,  SDL_Rect destRect)const
+{
+	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &destRect);
+}
+void  Crusade::Renderer::RenderTexture(const Texture2D& texture, SDL_Rect destRect, SDL_Rect sourceRect)const
+{
+	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(),&sourceRect, &destRect);
 }

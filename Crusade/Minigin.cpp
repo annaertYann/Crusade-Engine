@@ -7,11 +7,12 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include <SDL.h>
-#include "Render.h"
+#include "RenderComponents.h"
 #include "GameObject.h"
 #include "Scene.h"
 #include  "Time.h"
-#include  "Render.h"
+#include "FPS.h"
+#include "ScriptComponents.h"
 using namespace std;
 using namespace std::chrono;
 
@@ -23,7 +24,7 @@ void Crusade::Minigin::Initialize()
 	}
 
 	m_Window = SDL_CreateWindow(
-		"Programming 4 assignment",
+		"Crusade Engine",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		640,
@@ -43,21 +44,31 @@ void Crusade::Minigin::Initialize()
  */
 void Crusade::Minigin::LoadGame() const
 {
-	auto& scene = SceneManager::GetInstance().CreateScene("Demo");
+	auto& scene = SceneManager::GetInstance().CreateScene("Exercise - FPS");
+	
+	auto object1 = std::make_shared<GameObject>();
+	object1->AddComponent<CTexture2DRender>(std::make_shared<CTexture2DRender>(object1.get(), ResourceManager::GetInstance().LoadTexture("background.jpg")));
+	scene.Add(object1);
 
-	auto go = std::make_shared<GameObject>();
-	go->AddComponent( shared_ptr<Component> { new CRender{go.get()} } );
-	scene.Add(go);
+	const auto object2 = std::make_shared<GameObject>();
+	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
+	object2->GetComponent<Transform>()->SetPosition(80, 20,0);
+	object2->AddComponent<CTextRender>(std::make_shared<CTextRender>(object2.get(), "Crusade Engine", font, SDL_Color {255,255,255,255} ));
+	scene.Add(object2);
 
-	//go = std::make_shared<GameObject>();
-	//go->SetTexture("logo.png");
-	//go->SetPosition(216, 180);
-	//scene.Add(go);
+	auto object3 = std::make_shared<GameObject>();
+	object3->AddComponent<CTexture2DRender>( std::make_shared<CTexture2DRender>(object3.get(), ResourceManager::GetInstance().LoadTexture("logo.png") ));
+	object3->AddComponent<CFPS>(std::make_shared<CFPS>(object3.get() ) );
+	object3->GetComponent<Transform>()->SetPosition(216, 180, 0);
+	scene.Add(object3);
 
-	//auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
-	//auto to = std::make_shared<TextObject>("Crusade Engine", font);
-	//to->SetPosition(80, 20);
-	//scene.Add(to);
+	auto font1 = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
+	auto object4 = std::make_shared<GameObject>();
+	object4->AddComponent<CTextRender>(std::make_shared<CTextRender>(object4.get(), "1", font1,SDL_Color{100,255,100,255}));
+	object4->AddComponent<CFPS>(std::make_shared<CFPS>(object4.get()));
+	object4->AddComponent<DisplayFPS>(std::make_shared<DisplayFPS>(object4.get()));
+	object4->GetComponent<Transform>()->SetPosition(0, 0, 0);
+	scene.Add(object4);
 }
 
 void Crusade::Minigin::Cleanup()
