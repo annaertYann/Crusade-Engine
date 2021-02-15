@@ -2,7 +2,6 @@
 #include "InputManager.h"
 #include <SDL.h>
 
-
 bool Crusade::InputManager::ProcessInput()
 {
 	ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));

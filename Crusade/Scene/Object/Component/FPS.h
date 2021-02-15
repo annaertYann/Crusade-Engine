@@ -8,12 +8,14 @@ namespace Crusade
 		void Update()override;
 		int GetCurrentFPS()const;
 		void SetMaxFrames(const float maxFrames) { m_MaxFrames = maxFrames; }
+		void SetDoRenderFPS(const bool doRenderFPS) { m_DoRenderFPS = doRenderFPS; }
 	private:
 		void Reset();
+		bool m_DoRenderFPS = true;
 		float m_LastFPS=0;
 		float m_Frames=0;
 		float m_AccuSec=0;
-		float m_MaxFrames = 100;
+		float m_MaxFrames = 10;
 	};
 	
 }

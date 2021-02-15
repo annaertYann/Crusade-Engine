@@ -12,7 +12,6 @@
 #include "../Scene/Scene.h"
 #include  "Time.h"
 #include "../Scene/Object/Component/FPS.h"
-#include "../Scene/Object/Component/ScriptComponents.h"
 #include "../Scene/Object/Component/Transform.h"
 using namespace std;
 using namespace std::chrono;
@@ -25,7 +24,7 @@ void Crusade::Minigin::Initialize()
 	}
 
 	m_Window = SDL_CreateWindow(
-		"Crusade Engine",
+		"Programming 4 assignment",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		640,
@@ -47,27 +46,30 @@ void Crusade::Minigin::LoadGame() const
 {
 	auto& scene = SceneManager::GetInstance().CreateScene("Exercise - FPS");
 	
+	//BACKGROUND
 	auto object1 = std::make_shared<GameObject>();
 	object1->AddComponent<CTexture2DRender>(std::make_shared<CTexture2DRender>(ResourceManager::GetInstance().LoadTexture("background.jpg")));
 	scene.Add(object1);
 
+	//TEXTRENDER
 	const auto object2 = std::make_shared<GameObject>();
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
 	object2->GetComponent<Transform>()->SetPosition(80, 20,0);
-	object2->AddComponent<CTextRender>(std::make_shared<CTextRender>("Crusade Engine", font, SDL_Color {255,255,255,255} ));
+	object2->AddComponent<CTextRender>(std::make_shared<CTextRender>("Programming 4 Assignment", font, SDL_Color {255,255,255,255} ));
 	scene.Add(object2);
 
+	//LOGO
 	auto object3 = std::make_shared<GameObject>();
 	object3->AddComponent<CTexture2DRender>( std::make_shared<CTexture2DRender>( ResourceManager::GetInstance().LoadTexture("logo.png") ));
 	object3->AddComponent<CFPS>(std::make_shared<CFPS>() );
 	object3->GetComponent<Transform>()->SetPosition(216, 180, 0);
 	scene.Add(object3);
 
-	auto font1 = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
+	//FPS 
+	auto fpsFont = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 	auto object4 = std::make_shared<GameObject>();
-	object4->AddComponent<CTextRender>(std::make_shared<CTextRender>("1", font1,SDL_Color{100,255,100,255}));
+	object4->AddComponent<CTextRender>(std::make_shared<CTextRender>("1", fpsFont,SDL_Color{255,255,100,255}));
 	object4->AddComponent<CFPS>(std::make_shared<CFPS>());
-	object4->AddComponent<DisplayFPS>(std::make_shared<DisplayFPS>());
 	object4->GetComponent<Transform>()->SetPosition(0, 0, 0);
 	scene.Add(object4);
 }

@@ -11,6 +11,7 @@
 #pragma warning(pop)
 #include "../../../Foundation/ResourceManager.h"
 #include "Transform.h"
+#include <glm/gtx/intersect.hpp>
 using namespace Crusade;
 ////////////////////////////////////////////////////////////////////////////////////////////
 //RENDER COMPONENT

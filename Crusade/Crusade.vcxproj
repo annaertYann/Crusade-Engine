@@ -204,13 +204,12 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClInclude Include="Scene\Object\GameObject.h" />
     <ClInclude Include="Foundation\InputManager.h" />
     <ClInclude Include="Foundation\Minigin.h" />
-    <ClInclude Include="MiniginPCH.h" />
+    <ClInclude Include="Foundation\MiniginPCH.h" />
     <ClInclude Include="Scene\Object\Component\RenderComponents.h" />
     <ClInclude Include="Foundation\Renderer.h" />
     <ClInclude Include="Foundation\ResourceManager.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
-    <ClInclude Include="Scene\Object\Component\ScriptComponents.h" />
     <ClInclude Include="Utility\Singleton.h" />
     <ClInclude Include="Wrapper\Texture2D.h" />
     <ClInclude Include="Foundation\Time.h" />
@@ -223,19 +222,25 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClCompile Include="Foundation\InputManager.cpp" />
     <ClCompile Include="Foundation\Main.cpp" />
     <ClCompile Include="Foundation\Minigin.cpp" />
-    <ClCompile Include="MiniginPCH.cpp">
+    <ClCompile Include="Foundation\MiniginPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MiniginPCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Scene\Object\Component\RenderComponents.cpp" />
     <ClCompile Include="Foundation\Renderer.cpp" />
     <ClCompile Include="Foundation\ResourceManager.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
-    <ClCompile Include="Scene\Object\Component\ScriptComponents.cpp" />
     <ClCompile Include="Wrapper\Texture2D.cpp" />
     <ClCompile Include="Foundation\Time.cpp" />
     <ClCompile Include="Scene\Object\Component\Transform.cpp" />
