@@ -9,8 +9,6 @@ namespace Crusade
 	class Transform final : public Component
 	{
 	public:
-		void Init()override;
-		
 		const glm::vec3& GetPosition() const { return m_Position; }
 		void SetPosition(float x, float y, float z);
 
@@ -22,7 +20,7 @@ namespace Crusade
 	private:
 		glm::vec3 m_Position;
 		glm::vec3 m_Rotation;
-		glm::vec3 m_Scale;
+		glm::vec3 m_Scale={1,1,1};
 	
 	};
 }

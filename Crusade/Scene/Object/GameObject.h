@@ -1,7 +1,9 @@
 #pragma once
-#include "Component/FPS.h"
+#include "Component/BaseComponent.h"
+
 namespace Crusade
 {
+	class Component;
 	class GameObject final
 	{
 	public:
@@ -15,7 +17,7 @@ namespace Crusade
 		GameObject& operator=(GameObject&& other) = delete;
 
 		void Update();
-		void SendCommand(const Component::Command& command);
+		void Message(const std::string& message);
 		int GetTag()const { return m_Tag; }
 		//HANDLE CHILDREN
 		void AddChild(const std::shared_ptr<GameObject> &object) { m_Children.push_back(object); }
@@ -27,6 +29,7 @@ namespace Crusade
 		T* GetComponent();
 	
 	private:
+		
 		std::vector<std::shared_ptr<Component>> m_Components{};
 		std::vector<std::shared_ptr<GameObject>> m_Children{};
 		int m_Tag;
@@ -52,7 +55,7 @@ namespace Crusade
 		if (GetComponent<T>()==nullptr)
 		{
 			component->SetOwner(this);
-			component->Init();
+			component->Start();
 			m_Components.push_back(component);
 		}
 	}

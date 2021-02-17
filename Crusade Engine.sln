@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Crusade", "Crusade\Crusade.vcxproj", "{06B5E172-1290-4AC2-8F42-3FEDEC879010}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Command_Assignment", "Command_Assignment\Command_Assignment.vcxproj", "{AD52C822-FCDF-4637-B218-9D5B26EB5EBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{06B5E172-1290-4AC2-8F42-3FEDEC879010}.Release|x64.Build.0 = Release|x64
 		{06B5E172-1290-4AC2-8F42-3FEDEC879010}.Release|x86.ActiveCfg = Release|Win32
 		{06B5E172-1290-4AC2-8F42-3FEDEC879010}.Release|x86.Build.0 = Release|Win32
+		{AD52C822-FCDF-4637-B218-9D5B26EB5EBB}.Debug|x64.ActiveCfg = Debug|x64
+		{AD52C822-FCDF-4637-B218-9D5B26EB5EBB}.Debug|x64.Build.0 = Debug|x64
+		{AD52C822-FCDF-4637-B218-9D5B26EB5EBB}.Debug|x86.ActiveCfg = Debug|Win32
+		{AD52C822-FCDF-4637-B218-9D5B26EB5EBB}.Debug|x86.Build.0 = Debug|Win32
+		{AD52C822-FCDF-4637-B218-9D5B26EB5EBB}.Release|x64.ActiveCfg = Release|x64
+		{AD52C822-FCDF-4637-B218-9D5B26EB5EBB}.Release|x64.Build.0 = Release|x64
+		{AD52C822-FCDF-4637-B218-9D5B26EB5EBB}.Release|x86.ActiveCfg = Release|Win32
+		{AD52C822-FCDF-4637-B218-9D5B26EB5EBB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

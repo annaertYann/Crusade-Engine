@@ -16,7 +16,7 @@ bool Crusade::InputManager::ProcessInput()
 		}
 		if (e.type == SDL_KEYDOWN) 
 		{
-			
+		
 		}
 		if (e.type == SDL_MOUSEBUTTONDOWN) 
 		{

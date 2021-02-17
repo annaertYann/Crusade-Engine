@@ -25,6 +25,8 @@ namespace Crusade
 		SDL_Renderer* GetSDLRenderer() const { return m_Renderer; }
 	private:
 		SDL_Renderer* m_Renderer{};
+		SDL_Window* m_window_{};
+		bool* m_ShowImGUIDemo = new bool{false};
 	};
 }
 

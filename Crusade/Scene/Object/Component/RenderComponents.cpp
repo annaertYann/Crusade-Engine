@@ -30,7 +30,7 @@ CTextRender::CTextRender( const std::string& text, const std::shared_ptr<Font>& 
 	:m_NeedsUpdate(true), m_Text(text), m_Font(font), m_Texture(nullptr),m_Color(color)
 {
 }
-void CTextRender::Init()
+void CTextRender::Start()
 {
 	if (m_Owner->GetComponent<CRender>() == nullptr)
 	{
@@ -83,7 +83,7 @@ CTexture2DRender::CTexture2DRender( const std::shared_ptr<Texture2D>& texture)
 	:m_Texture(texture), m_SourceRect{}, m_Width{},m_Height{}
 {
 }
-void CTexture2DRender::Init()
+void CTexture2DRender::Start()
 {
 	if (m_Owner->GetComponent<CRender>() == nullptr)
 	{

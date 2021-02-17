@@ -12,11 +12,11 @@ GameObject::GameObject()
 	m_NextTag++;
 }
 
-void GameObject::SendCommand(const Component::Command& command)
+void GameObject::Message(const std::string& message)
 {
 	for (const auto& component :m_Components)
 	{
-		component->SendCommand(command);
+		component->Message(message);
 	}
 }
 void GameObject::Update()

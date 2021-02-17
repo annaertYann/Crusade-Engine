@@ -19,9 +19,3 @@ void Transform::SetScale(const float x, const float y, const float z)
 	m_Scale.y = y;
 	m_Scale.z = z;
 }
-void Transform::Init()
-{
-	m_Scale.x = 1;
-	m_Scale.y = 1;
-	m_Scale.z = 1;
-}

@@ -11,6 +11,9 @@
 #include "../Scene/Object/GameObject.h"
 #include "../Scene/Scene.h"
 #include  "Time.h"
+#include "imgui.h"
+#include "../../3rdParty/imgui-1.81/backends/imgui_impl_sdl.h"
+#include "../../3rdParty/imgui-1.81/backends/imgui_impl_opengl2.h"
 #include "../Scene/Object/Component/FPS.h"
 #include "../Scene/Object/Component/Transform.h"
 using namespace std;
@@ -65,13 +68,14 @@ void Crusade::Minigin::LoadGame() const
 	object3->GetComponent<Transform>()->SetPosition(216, 180, 0);
 	scene.Add(object3);
 
-	//FPS 
+	//FPS
 	auto fpsFont = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 	auto object4 = std::make_shared<GameObject>();
 	object4->AddComponent<CTextRender>(std::make_shared<CTextRender>("1", fpsFont,SDL_Color{255,255,100,255}));
 	object4->AddComponent<CFPS>(std::make_shared<CFPS>());
 	object4->GetComponent<Transform>()->SetPosition(0, 0, 0);
 	scene.Add(object4);
+
 }
 
 void Crusade::Minigin::Cleanup()
