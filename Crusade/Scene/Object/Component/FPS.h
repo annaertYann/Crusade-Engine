@@ -17,5 +17,4 @@ namespace Crusade
 		float m_AccuSec=0;
 		float m_MaxFrames = 10;
 	};
-	
 }

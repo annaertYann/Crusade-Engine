@@ -3,6 +3,7 @@
 #include "../../../Wrapper/Font.h"
 #include "../../../Wrapper/Texture2D.h"
 #include "SDL.h"
+
 namespace Crusade
 {
 	class CRender final : public Component
@@ -45,4 +46,5 @@ namespace Crusade
 		std::shared_ptr<Texture2D> m_Texture;
 		SDL_Color m_Color;
 	};
+
 }

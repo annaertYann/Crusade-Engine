@@ -12,6 +12,8 @@
 #include "../../../Foundation/ResourceManager.h"
 #include "Transform.h"
 #include <glm/gtx/intersect.hpp>
+#include "../../3rdParty/imgui-1.81/backends/imgui_impl_sdl.h"
+#include "../../3rdParty/imgui-1.81/backends/imgui_impl_opengl2.h"
 using namespace Crusade;
 ////////////////////////////////////////////////////////////////////////////////////////////
 //RENDER COMPONENT

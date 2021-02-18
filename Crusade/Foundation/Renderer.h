@@ -23,10 +23,10 @@ namespace Crusade
 		void RenderTexture(const Texture2D& texture,  SDL_Rect destRect) const;
 		void RenderTexture(const Texture2D& texture,  SDL_Rect destRect,SDL_Rect sourceRect) const;
 		SDL_Renderer* GetSDLRenderer() const { return m_Renderer; }
+		SDL_Window* GetWindow()const { return m_window; }
 	private:
 		SDL_Renderer* m_Renderer{};
-		SDL_Window* m_window_{};
-		bool* m_ShowImGUIDemo = new bool{false};
+		SDL_Window* m_window{};
 	};
 }
 

@@ -22,7 +22,7 @@ int GetOpenGLDriverIndex()
 
 void Crusade::Renderer::Init(SDL_Window * window)
 {
-	m_window_ = window;
+	m_window = window;
 	m_Renderer = SDL_CreateRenderer(window, GetOpenGLDriverIndex(), SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (m_Renderer == nullptr) 
 	{
@@ -37,15 +37,17 @@ void Crusade::Renderer::Init(SDL_Window * window)
 void Crusade::Renderer::Render() const
 {
 	SDL_RenderClear(m_Renderer);
-	
 	SceneManager::GetInstance().Render();
-
+	
 	ImGui_ImplOpenGL2_NewFrame();
-	ImGui_ImplSDL2_NewFrame(m_window_);
+	ImGui_ImplSDL2_NewFrame(m_window);
 	ImGui::NewFrame();
-	ImGui::ShowDemoWindow(m_ShowImGUIDemo);
+	ImGui::Begin("Demo window");
+	ImGui::Button("Hello!");
+	ImGui::End();
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+	
 	SDL_RenderPresent(m_Renderer);
 }
 
@@ -54,7 +56,6 @@ void Crusade::Renderer::Destroy()
 	ImGui_ImplOpenGL2_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
-	delete m_ShowImGUIDemo;
 	if (m_Renderer != nullptr)
 	{
 		SDL_DestroyRenderer(m_Renderer);

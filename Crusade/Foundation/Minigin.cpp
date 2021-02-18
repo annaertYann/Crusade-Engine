@@ -75,7 +75,6 @@ void Crusade::Minigin::LoadGame() const
 	object4->AddComponent<CFPS>(std::make_shared<CFPS>());
 	object4->GetComponent<Transform>()->SetPosition(0, 0, 0);
 	scene.Add(object4);
-
 }
 
 void Crusade::Minigin::Cleanup()
@@ -97,6 +96,7 @@ void Crusade::Minigin::Run()
 
 	//GAME LOOP
 	{
+		
 		//CREATE SINGLETONS
 		auto& renderer = Renderer::GetInstance();
 		auto& sceneManager = SceneManager::GetInstance();

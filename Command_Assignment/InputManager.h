@@ -20,8 +20,7 @@ namespace Crusade
 	struct InputAction
 	{
 		InputAction(const InputTriggerState& state,std::unique_ptr<Command>&& command, const int& userIndex=0, const int& controllerButtonCode = -1,const int & keyboardCode=-1,const int &mouseButtonCode=-1)
-			:state{state}
-		,command(std::move(command) ), userIndex(userIndex),controllerButtonCode(controllerButtonCode),keyboardCode(keyboardCode),mouseButtonCode(mouseButtonCode),isDown(false)
+			:state{state},command(std::move(command) ), userIndex(userIndex),controllerButtonCode(controllerButtonCode),keyboardCode(keyboardCode),mouseButtonCode(mouseButtonCode),isDown(false)
 		{
 		}
 		InputTriggerState state;
