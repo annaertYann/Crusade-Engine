@@ -16,56 +16,71 @@
     <ClCompile Include="..\3rdParty\imgui-1.81\imgui_widgets.cpp">
       <Filter>3dParty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Wrapper\Font.cpp">
-      <Filter>Crusade\Wrapper</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Object\GameObject.cpp">
-      <Filter>Crusade\Scene\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Object\Component\FPS.cpp">
-      <Filter>Crusade\Scene\GameObject\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Object\Component\Transform.cpp">
-      <Filter>Crusade\Scene\GameObject\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Wrapper\Texture2D.cpp">
-      <Filter>Crusade\Wrapper</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Object\Component\RenderComponents.cpp">
-      <Filter>Crusade\Scene\GameObject\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Scene.cpp">
-      <Filter>Crusade\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\SceneManager.cpp">
-      <Filter>Crusade\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.81\backends\imgui_impl_opengl2.cpp">
       <Filter>3dParty\imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.81\backends\imgui_impl_sdl.cpp">
       <Filter>3dParty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Foundation\InputManager.cpp">
+    <ClCompile Include="Colliders2D.cpp">
+      <Filter>Crusade\Scene\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform.cpp">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Crusade\Wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Crusade\Scene\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
       <Filter>Crusade\Foundation\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Foundation\Renderer.cpp">
+    <ClCompile Include="Main.cpp">
+      <Filter>Crusade\Foundation\GameLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="Minigin.cpp">
+      <Filter>Crusade\Foundation\GameLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniginPCH.cpp">
+      <Filter>Crusade\Foundation\PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponents.cpp">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
       <Filter>Crusade\Foundation\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Foundation\ResourceManager.cpp">
+    <ClCompile Include="ResourceManager.cpp">
       <Filter>Crusade\Foundation\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Foundation\Time.cpp">
-      <Filter>Crusade\Foundation\Resource</Filter>
+    <ClCompile Include="RigidBody2D.cpp">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Foundation\Main.cpp">
-      <Filter>Crusade\Foundation\GameLoop</Filter>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Crusade\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Foundation\Minigin.cpp">
-      <Filter>Crusade\Foundation\GameLoop</Filter>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Crusade\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Foundation\MiniginPCH.cpp">
-      <Filter>Crusade\Foundation\PCH</Filter>
+    <ClCompile Include="Scripts.cpp">
+      <Filter>Crusade\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Crusade\Wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Crusade\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Crusade\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Prefabs.cpp">
+      <Filter>Crusade\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,65 +102,83 @@
     <ClInclude Include="..\3rdParty\imgui-1.81\imstb_truetype.h">
       <Filter>3dParty\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\Object\Component\BaseComponent.h">
-      <Filter>Crusade\Scene\GameObject\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\Delay.h">
-      <Filter>Crusade\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Wrapper\Font.h">
-      <Filter>Crusade\Wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Object\GameObject.h">
-      <Filter>Crusade\Scene\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Object\Component\FPS.h">
-      <Filter>Crusade\Scene\GameObject\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Object\Component\RenderComponents.h">
-      <Filter>Crusade\Scene\GameObject\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Object\Component\Transform.h">
-      <Filter>Crusade\Scene\GameObject\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Wrapper\Texture2D.h">
-      <Filter>Crusade\Wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\Singleton.h">
-      <Filter>Crusade\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Scene.h">
-      <Filter>Crusade\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\SceneManager.h">
-      <Filter>Crusade\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\3rdParty\imgui-1.81\backends\imgui_impl_opengl2.h">
       <Filter>3dParty\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdParty\imgui-1.81\backends\imgui_impl_sdl.h">
       <Filter>3dParty\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Foundation\Command.h">
+    <ClInclude Include="BaseComponent.h">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Colliders2D.h">
+      <Filter>Crusade\Scene\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
       <Filter>Crusade\Foundation\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Foundation\InputManager.h">
+    <ClInclude Include="CTransform.h">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Delay.h">
+      <Filter>Crusade\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Crusade\Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Crusade\Scene\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
       <Filter>Crusade\Foundation\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Foundation\Renderer.h">
-      <Filter>Crusade\Foundation\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Foundation\ResourceManager.h">
-      <Filter>Crusade\Foundation\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Foundation\Time.h">
-      <Filter>Crusade\Foundation\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Foundation\Minigin.h">
+    <ClInclude Include="Minigin.h">
       <Filter>Crusade\Foundation\GameLoop</Filter>
     </ClInclude>
-    <ClInclude Include="Foundation\MiniginPCH.h">
+    <ClInclude Include="MiniginPCH.h">
       <Filter>Crusade\Foundation\PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefab.h">
+      <Filter>Crusade\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponents.h">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Crusade\Foundation\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Crusade\Foundation\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody2D.h">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Crusade\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Crusade\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts.h">
+      <Filter>Crusade\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Crusade\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>Crusade\Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Crusade\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Crusade\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefabs.h">
+      <Filter>Crusade\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +223,9 @@
     </Filter>
     <Filter Include="Crusade\Foundation\PCH">
       <UniqueIdentifier>{3cc3184d-e2cf-48ae-b803-7c1a4459b792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Game">
+      <UniqueIdentifier>{e19c996f-c9b1-40bb-abf0-620ef54dd76f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

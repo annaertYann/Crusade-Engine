@@ -10,10 +10,10 @@ void InputManager::ProcessInput()
 		XInputGetState(input->userIndex, &m_CurrentState);
 		switch (input->state)
 		{
-		case InputTriggerState::pressed:
+		case InputButtonState::pressed:
 			if (!input->isDown)
 			{
-				if (IsPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
+				if (IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
 				{
 					input->isDown = true;
 					input->command->Execute();
@@ -21,23 +21,23 @@ void InputManager::ProcessInput()
 			}
 			else
 			{
-				if (!IsPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
+				if (!IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
 				{
 					input->isDown = false;
 				}
 			}
 			break;
-		case InputTriggerState::released:
+		case InputButtonState::released:
 			if (!input->isDown)
 			{
-				if (IsPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
+				if (IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
 				{
 					input->isDown = true;
 				}
 			}
 			else
 			{
-				if (!IsPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
+				if (!IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
 				{
 					input->isDown = false;
 					input->command->Execute();
@@ -45,9 +45,9 @@ void InputManager::ProcessInput()
 			}
 
 			break;
-		case InputTriggerState::down:
+		case InputButtonState::down:
 
-			if (IsPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
+			if (IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
 			{
 				input->command->Execute();
 			}
@@ -67,12 +67,13 @@ InputManager::~InputManager()
 	}
 }
 
-bool InputManager::IsPressed(const int& button, const int& , const int& ) const
+bool InputManager::IsButtonPressed(const int& button, const int& , const int& ) const
 {
 	if (button >= 0)
 	{
 		return m_CurrentState.Gamepad.wButtons & button;
 	}
+
 	////////////////////////////////////////////////////////////
 	//MOUSE AND KEYBOARD
 	////////////////////////////////////////////////////////////
@@ -96,7 +97,7 @@ bool InputManager::IsPressed(const int& button, const int& , const int& ) const
 	}*/
 	return false;
 }
-void InputManager::AddInput(InputAction* input)
+void InputManager::AddButtonInput(InputButtonAction* input)
 {
 	m_InputCommands.push_back(input);
 }

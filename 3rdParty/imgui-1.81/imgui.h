@@ -34,7 +34,7 @@ Index of this file:
 // [SECTION] Viewports (ImGuiViewportFlags, ImGuiViewport)
 
 */
-
+#pragma warning ( disable:26495)
 #pragma once
 
 // Configuration file with compile-time options (edit imconfig.h or '#define IMGUI_USER_CONFIG "myfilename.h" from your build system')

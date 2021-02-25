@@ -205,24 +205,30 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClInclude Include="..\3rdParty\imgui-1.81\imstb_rectpack.h" />
     <ClInclude Include="..\3rdParty\imgui-1.81\imstb_textedit.h" />
     <ClInclude Include="..\3rdParty\imgui-1.81\imstb_truetype.h" />
-    <ClInclude Include="Foundation\Command.h" />
-    <ClInclude Include="Foundation\InputManager.h" />
-    <ClInclude Include="Scene\Object\Component\BaseComponent.h" />
-    <ClInclude Include="Utility\Delay.h" />
-    <ClInclude Include="Wrapper\Font.h" />
-    <ClInclude Include="Scene\Object\Component\FPS.h" />
-    <ClInclude Include="Scene\Object\GameObject.h" />
-    <ClInclude Include="Foundation\Minigin.h" />
-    <ClInclude Include="Foundation\MiniginPCH.h" />
-    <ClInclude Include="Scene\Object\Component\RenderComponents.h" />
-    <ClInclude Include="Foundation\Renderer.h" />
-    <ClInclude Include="Foundation\ResourceManager.h" />
-    <ClInclude Include="Scene\Scene.h" />
-    <ClInclude Include="Scene\SceneManager.h" />
-    <ClInclude Include="Utility\Singleton.h" />
-    <ClInclude Include="Wrapper\Texture2D.h" />
-    <ClInclude Include="Foundation\Time.h" />
-    <ClInclude Include="Scene\Object\Component\Transform.h" />
+    <ClInclude Include="BaseComponent.h" />
+    <ClInclude Include="Colliders2D.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CTransform.h" />
+    <ClInclude Include="Delay.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Minigin.h" />
+    <ClInclude Include="MiniginPCH.h" />
+    <ClInclude Include="Prefab.h" />
+    <ClInclude Include="Prefabs.h" />
+    <ClInclude Include="RenderComponents.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="RigidBody2D.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Scripts.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Texture2D.h" />
+    <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3rdParty\imgui-1.81\backends\imgui_impl_opengl2.cpp">
@@ -267,34 +273,31 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Foundation\InputManager.cpp" />
-    <ClCompile Include="Wrapper\Font.cpp" />
-    <ClCompile Include="Scene\Object\Component\FPS.cpp" />
-    <ClCompile Include="Scene\Object\GameObject.cpp" />
-    <ClCompile Include="Foundation\Main.cpp" />
-    <ClCompile Include="Foundation\Minigin.cpp" />
-    <ClCompile Include="Foundation\MiniginPCH.cpp">
+    <ClCompile Include="Colliders2D.cpp" />
+    <ClCompile Include="CTransform.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Minigin.cpp" />
+    <ClCompile Include="MiniginPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Scene\Object\Component\RenderComponents.cpp" />
-    <ClCompile Include="Foundation\Renderer.cpp" />
-    <ClCompile Include="Foundation\ResourceManager.cpp" />
-    <ClCompile Include="Scene\Scene.cpp" />
-    <ClCompile Include="Scene\SceneManager.cpp" />
-    <ClCompile Include="Wrapper\Texture2D.cpp" />
-    <ClCompile Include="Foundation\Time.cpp" />
-    <ClCompile Include="Scene\Object\Component\Transform.cpp" />
+    <ClCompile Include="Prefabs.cpp" />
+    <ClCompile Include="RenderComponents.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="RigidBody2D.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Scripts.cpp" />
+    <ClCompile Include="Texture2D.cpp" />
+    <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

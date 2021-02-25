@@ -2,7 +2,8 @@
 /// @file glm/detail/type_vec3.hpp
 
 #pragma once
-
+#pragma warning (disable:26495)
+#pragma warning (disable:4201)
 #include "type_vec.hpp"
 #if GLM_SWIZZLE == GLM_SWIZZLE_ENABLED
 #	if GLM_HAS_UNRESTRICTED_UNIONS

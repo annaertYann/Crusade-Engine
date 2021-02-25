@@ -13,10 +13,11 @@ int main()
 	//CREATE ACTOR
 	GameActor* actor = new GameActor{};
 	//ADD COMMANDS
-	inputManager.AddInput(new InputAction(InputTriggerState::pressed, std::unique_ptr<Fart>{new Fart{actor}}, 0, XINPUT_GAMEPAD_A));
-	inputManager.AddInput(new InputAction(InputTriggerState::down, std::unique_ptr<Fire>{new Fire{ actor }}, 0, XINPUT_GAMEPAD_RIGHT_SHOULDER));
-	inputManager.AddInput(new InputAction(InputTriggerState::released, std::unique_ptr<Duck>{new Duck{ actor }}, 0, XINPUT_GAMEPAD_B));
-	inputManager.AddInput(new InputAction(InputTriggerState::pressed, std::unique_ptr<Jump>{new Jump{ actor }}, 0, XINPUT_GAMEPAD_Y));
+	inputManager.AddButtonInput(new InputButtonAction(InputButtonState::pressed, std::unique_ptr<Fart>{new Fart{actor}}, 0, XINPUT_GAMEPAD_A));
+	inputManager.AddButtonInput(new InputButtonAction(InputButtonState::down, std::unique_ptr<Fire>{new Fire{ actor }}, 0, XINPUT_GAMEPAD_RIGHT_SHOULDER));
+	inputManager.AddButtonInput(new InputButtonAction(InputButtonState::released, std::unique_ptr<Duck>{new Duck{ actor }}, 0, XINPUT_GAMEPAD_B));
+	inputManager.AddButtonInput(new InputButtonAction(InputButtonState::pressed, std::unique_ptr<Jump>{new Jump{ actor }}, 0, XINPUT_GAMEPAD_Y));
+	
 	while (true)
 	{
 		inputManager.ProcessInput();
