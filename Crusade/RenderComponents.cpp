@@ -93,6 +93,7 @@ void CTexture2DRender::Start()
 
 void CTexture2DRender::Render()const
 {
+	auto& renderer = Renderer::GetInstance();
 	const auto transform = m_Owner->GetCTransform();
 	SDL_Rect destRect{};
 	if (transform != nullptr)
@@ -106,22 +107,22 @@ void CTexture2DRender::Render()const
 	{
 		if (length(glm::vec2(m_SourceRect.w, m_SourceRect.h)) > 0)
 		{
-			Renderer::GetInstance().RenderTexture(*m_Texture, m_SourceRect, destRect);
+			renderer.RenderTexture(*m_Texture, destRect, m_SourceRect);
 		}
 		else
 		{
-			Renderer::GetInstance().RenderTexture(*m_Texture,destRect );
+			renderer.RenderTexture(*m_Texture,destRect );
 		}
 	}
 	else
 	{
 		if (length(glm::vec2(m_SourceRect.w, m_SourceRect.h)) > 0)
 		{
-			Renderer::GetInstance().RenderTexture(*m_Texture, float(destRect.x), float(destRect.y),m_SourceRect);
+			renderer.RenderTexture(*m_Texture, float(destRect.x), float(destRect.y),m_SourceRect);
 		}
 		else
 		{
-			Renderer::GetInstance().RenderTexture(*m_Texture, float(destRect.x), float(destRect.y));
+			renderer.RenderTexture(*m_Texture, float(destRect.x), float(destRect.y));
 		}
 	}
 }
@@ -130,7 +131,7 @@ void CTexture2DRender::SetTexture(const std::string& filename)
 {
 	m_Texture = ResourceManager::GetInstance().LoadTexture(filename);
 }
-void CTexture2DRender::SetDimensions(const int& w, const int& h)
+void CTexture2DRender::SetDestDimensions(const int& w, const int& h)
 {
 	m_Width = w;
 	m_Height = h;

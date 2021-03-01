@@ -9,7 +9,7 @@ namespace Crusade
 	class CTransform final : public Component
 	{
 	public:
-		CTransform(){}
+		CTransform() = default;
 		CTransform(const glm::vec3 &position , const glm::vec3& rotation ,const glm::vec3& scale={1,1,1} );
 		
 		const glm::vec3& GetPosition() const { return m_Position; }
@@ -25,7 +25,7 @@ namespace Crusade
 	private:
 		glm::vec3 m_Position{};
 		glm::vec3 m_Rotation{};
-		glm::vec3 m_Scale={1,1,1};
+		glm::vec3 m_Scale= {1,1,1};
 	
 	};
 }

@@ -5,16 +5,16 @@
 #include "Singleton.h"
 namespace Crusade
 {
-	class Observer:public Component
+	class CObserver:public Component
 	{
 	public:
-		Observer();
-		virtual ~Observer()override;
+		CObserver();
+		virtual ~CObserver()override;
 
-		Observer(const Observer& other) = delete;
-		Observer(Observer&& other) = delete;
-		Observer& operator=(const Observer& other) = delete;
-		Observer& operator=(Observer&& other) = delete;
+		CObserver(const CObserver& other) = delete;
+		CObserver(CObserver&& other) = delete;
+		CObserver& operator=(const CObserver& other) = delete;
+		CObserver& operator=(CObserver&& other) = delete;
 		
 		virtual void Notify(GameObject* actor,const  std::string& message) = 0;
 		int GetTag()const { return m_Tag; }
@@ -28,10 +28,10 @@ namespace Crusade
 	{
 	public:
 		void Notify(GameObject* actor, const std::string& message);
-		void AddObserver(Observer* observer);
-		void RemoveObserver(Observer* observer);
+		void AddObserver(CObserver* observer);
+		void RemoveObserver(CObserver* observer);
 	private:
-		std::vector<Observer*> m_observers{};
+		std::vector<CObserver*> m_observers{};
 	};
 
 }

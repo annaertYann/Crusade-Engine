@@ -11,7 +11,7 @@ Scene::Scene(const std::string& name) : m_Name(name) {}
 
 void Scene::Add(const std::shared_ptr<GameObject>& object)
 {
-	object->AddComponent<CTransform>(std::make_shared<CTransform>());
+	if (object->GetCTransform() == nullptr) { object->AddComponent<CTransform>(std::make_shared<CTransform>()); }
 	m_Objects.push_back(object);
 }
 void Scene::FixedUpdate()
@@ -60,3 +60,19 @@ std::shared_ptr<GameObject> Scene::FindObject(const std::string& name)
 	return std::shared_ptr<GameObject>{nullptr};
 }
 
+std::vector<std::shared_ptr<GameObject>> Scene::FindAllObjectsWithTag(const std::string& tag)
+{
+	std::vector<std::shared_ptr<GameObject>> list{};
+	for (auto& object : m_Objects)
+	{
+		for (auto element : object->GetTags())
+		{
+			if (element == tag)
+			{
+				list.push_back(object);
+				break;
+			}
+		}
+	}
+	return list;
+}

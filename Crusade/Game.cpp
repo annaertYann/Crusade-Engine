@@ -6,11 +6,15 @@
 #include "Scripts.h"
 #include "Scene.h"
 #include "Prefabs.h"
+#include "Animator2D.h"
 using namespace Crusade;
 void Game::LoadGame()const
 {
 	auto& scene = SceneManager::GetInstance().CreateScene("Exercise - FPS");
-
+	std::cout << "XX TO Many" << std::endl;
+	std::cout << "PRESS NUMPAD 1 AND 4 TO KILL QBERTS" << std::endl;
+	std::cout << "PRESS NUMPAD 2 AND 5 TO GIVE QBERTS POINTS" << std::endl;
+	
 	//BACKGROUND
 	auto object1 = std::make_shared<GameObject>();
 	object1->AddComponent<CTexture2DRender>(std::make_shared<CTexture2DRender>(ResourceManager::GetInstance().LoadTexture("background.jpg")));
@@ -39,14 +43,30 @@ void Game::LoadGame()const
 	scene.Add(object4);
 
 	//QBERT
-	auto qbert = Qbert::GetInstance().CreateObject({ 200,400,0 });
-	scene.Add(qbert);
+	auto qBert = QBert::GetInstance().CreateObject({ 200,400,0 });
+	scene.Add(qBert);
+
+	auto qBert2 = QBert::GetInstance().CreateObject({ 200,300,0 });
+	qBert2->RemoveComponent<QbertController>();
+	qBert2->AddComponent<QbertController>(std::make_shared<QbertController>(SDL_SCANCODE_KP_4, SDL_SCANCODE_KP_5));
+	scene.Add(qBert2);
+
+	qBert->SetName("Qbert");
+	qBert2->SetName("Qbert");
+	qBert->AddTag("Player");
+	qBert2->AddTag("Player");
+	
 	//LIVESDISPLAY
 	auto livesDisplay = std::make_shared<GameObject>();
 	livesDisplay->AddComponent<CTransform>(std::shared_ptr<CTransform>{new CTransform{ {400,20,0},{} }});
-	livesDisplay->AddComponent<CTextRender>(std::make_shared<CTextRender>("Lives: " + std::to_string(qbert->GetComponent<Lives>()->GetLives() ), font, SDL_Color{ 255,50,50,255 }));
-	livesDisplay->AddComponent<LivesCounter>(std::make_shared<LivesCounter>()); //OBERVER
+	livesDisplay->AddComponent<CTextRender>(std::make_shared<CTextRender>("Lives: ", font, SDL_Color{ 255,50,50,255 }));
+	livesDisplay->AddComponent<LivesCounter>(std::make_shared<LivesCounter>(3)); //OBERVER
 	scene.Add(livesDisplay);
 	
-	
+	//score display
+	auto ScoreDisplay = std::make_shared<GameObject>();
+	ScoreDisplay->AddComponent<CTransform>(std::shared_ptr<CTransform>{new CTransform{ {400,60,0},{} }});
+	ScoreDisplay->AddComponent<CTextRender>(std::make_shared<CTextRender>("Score: 0", font, SDL_Color{ 50,255,50,255 }));
+	ScoreDisplay->AddComponent<PointsCounter>(std::make_shared<PointsCounter>()); //OBERVER
+	scene.Add(ScoreDisplay);
 }

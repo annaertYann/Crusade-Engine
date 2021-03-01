@@ -3,28 +3,28 @@
 using namespace Crusade;
 
 
-int Observer::m_NextTag = 0;
+int CObserver::m_NextTag = 0;
 
-Observer::Observer()
+CObserver::CObserver()
 {
 	m_Tag = m_NextTag;
 	m_NextTag++;
 	Publisher::GetInstance().AddObserver(this);
 }
-Observer::~Observer()
+CObserver::~CObserver()
 {
 	Publisher::GetInstance().RemoveObserver(this);
 }
 
-void Publisher::AddObserver(Observer* observer)
+void Publisher::AddObserver(CObserver* observer)
 {
 	m_observers.push_back(observer);
 }
-void Publisher::RemoveObserver(Observer* observer)
+void Publisher::RemoveObserver(CObserver* observer)
 {
 	if (m_observers.size() > 0)
 	{
-		m_observers.erase(std::remove_if(m_observers.begin(), m_observers.end(), [&](Observer* element)
+		m_observers.erase(std::remove_if(m_observers.begin(), m_observers.end(), [&](CObserver* element)
 		{
 			return observer->GetTag() == element->GetTag();
 		}), m_observers.end());

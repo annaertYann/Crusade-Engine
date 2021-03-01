@@ -3,6 +3,7 @@
 #include "BaseComponent.h"
 #include "Delay.h"
 #include "InputManager.h"
+#include "Time.h"
 class FPSScript final :public Crusade::Component
 {
 	public:
@@ -12,17 +13,19 @@ class FPSScript final :public Crusade::Component
 		void Start() override;
 		float m_CurrentFPS=0;
 		Crusade::Delay m_RenderDelay{0.1f};
-	Crusade::CTextRender* m_CTextRender = nullptr;
+		Crusade::CTextRender* m_CTextRender {};
+		Crusade::Time m_Time;
 };
 
-class Lives final:public Crusade::Component
+class QbertController final :public Crusade::Component
 {
 public:
-	explicit Lives(const int& lives):m_Lives(lives){}
+	QbertController(int dieButton,int GainScoreButton);
 	void Start() override;
-	void AddLifes(const int& lives) { m_Lives += lives; }
-	int GetLives()const { return m_Lives; }
+	void Update() override;
 private:
-	int m_Lives;
-	std::unique_ptr<Crusade::CommandKillSwitch> m_KillSWitch;
+	std::unique_ptr<Crusade::CommandKillSwitch>m_DieSwitch{};
+	std::unique_ptr<Crusade::CommandKillSwitch>m_ScoreSwitch{};
+	int m_DieButton;
+	int m_ScoreButton;
 };

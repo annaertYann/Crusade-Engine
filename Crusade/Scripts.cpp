@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "Time.h"
 #include "Prefabs.h"
+#include "Animator2D.h"
+#include <SDL.h>
 using namespace Crusade;
 void FPSScript::Start()
 {
@@ -25,9 +27,22 @@ void FPSScript::Update()
 		}
 	}
 }
-void Lives::Start()
+QbertController::QbertController(int dieButton, int GainScoreButton)
 {
-	const auto command = new PlayerDied(m_Owner);
-	m_KillSWitch = InputManager::GetInstance().CreateCommandKillSwitch(command);
-	InputManager::GetInstance().AddButtonInput(new InputButtonAction{ InputButtonState::pressed,std::unique_ptr<PlayerDied>{command},0,-1,SDL_SCANCODE_P });
+	m_DieButton = dieButton;
+	m_ScoreButton = GainScoreButton;
 }
+void QbertController::Start()
+{
+	QBertDied* dieCommand = new QBertDied{ m_Owner };
+	QBertGainedPoints* pointCommand = new QBertGainedPoints{ m_Owner };
+	InputManager::GetInstance().AddButtonInput(new InputButtonAction{ InputButtonState::pressed,std::unique_ptr<QBertDied>(dieCommand),0,-1,m_DieButton });
+	InputManager::GetInstance().AddButtonInput(new InputButtonAction{ InputButtonState::pressed,std::unique_ptr<QBertGainedPoints>(pointCommand),0,-1,m_ScoreButton });
+	m_DieSwitch = InputManager::GetInstance().CreateCommandKillSwitch(dieCommand);
+	m_ScoreSwitch = InputManager::GetInstance().CreateCommandKillSwitch(pointCommand);
+}
+void QbertController::Update()
+{
+	
+}
+

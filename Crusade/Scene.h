@@ -23,6 +23,7 @@ namespace Crusade
 		Scene& operator=(Scene&& other) = delete;
 
 		std::shared_ptr<GameObject> FindObject(const std::string& name);
+		std::vector<std::shared_ptr<GameObject>> FindAllObjectsWithTag(const std::string& tag);
 		std::string GetName()const { return m_Name; }
 	
 	private: 

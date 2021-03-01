@@ -217,8 +217,12 @@ void InputManager::RemoveCommand(const int& commandTag)
 		m_InputButtonCommands.erase(std::remove_if(m_InputButtonCommands.begin(), m_InputButtonCommands.end(), [&](InputButtonAction* element)
 		{
 			const auto x = element->command->GetTag() == commandTag;
-			delete element;
+			if (x)
+			{
+				delete element;
+			}
 			return x;
+				
 		}), m_InputButtonCommands.end());
 	}
 }

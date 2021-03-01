@@ -20,8 +20,8 @@ namespace Crusade
 		void Start() override;
 		void Render()const override;
 		void SetTexture(const std::string& filename);
-		
-		void SetDimensions(const int& w, const int& h);
+		glm::vec2 GetTextureDimensions() const{ return m_Texture->GetDimensions(); }
+		void SetDestDimensions(const int& w, const int& h);
 		void SetSourceRect(const SDL_Rect& sourceRect) { m_SourceRect = sourceRect;}
 	private:
 		

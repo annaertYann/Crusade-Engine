@@ -38,7 +38,9 @@ namespace Crusade
 		void AddComponent(const std::shared_ptr<Component>& component);
 		template <typename T>
 		T* GetComponent();
-	
+		template <typename T>
+		void RemoveComponent();
+		
 	private:
 		std::vector<std::shared_ptr<Component>> m_Components{};
 		std::vector<std::shared_ptr<GameObject>> m_Children{};
@@ -76,6 +78,30 @@ namespace Crusade
 			if (dynamic_cast<CRender*>(component.get()) != nullptr) { m_CRender = dynamic_cast<CRender*>(component.get()); }
 			if (dynamic_cast<CTransform*>(component.get()) != nullptr) { m_CTransform = dynamic_cast<CTransform*>(component.get()); }
 			m_Components.push_back(component);
+		}
+		else
+		{
+			std::cout << "CANT ADD COMPONENT,COMPONENT ALREADY IN LIST :ADDCOMPONENT" << std::endl;
+		}
+		
+	}
+
+	template <typename T>
+	void GameObject::RemoveComponent()
+	{
+		//REMOVED COMPONENTS GET ADDED TO REMOVED LIST
+		if (m_Components.size() > 0)
+		{
+			m_Components.erase(std::remove_if(m_Components.begin(), m_Components.end(), [&](const std::shared_ptr<Component>& component)
+			{
+				T* temp = dynamic_cast<T*>(component.get());
+				if (temp != nullptr)
+				{
+					
+					return true;
+				}
+				return false;
+			}), m_Components.end());
 		}
 	}
 }

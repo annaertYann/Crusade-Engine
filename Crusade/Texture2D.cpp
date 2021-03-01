@@ -16,3 +16,11 @@ Crusade::Texture2D::Texture2D(SDL_Texture* texture)
 {
 	m_Texture = texture;
 }
+glm::vec2 Crusade::Texture2D::GetDimensions()const
+{
+	int x{};
+	int y{ };
+	SDL_QueryTexture(m_Texture, nullptr, nullptr, &x, &y);
+	glm::vec2 dimensions{x,y};
+	return dimensions;
+}

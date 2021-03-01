@@ -82,6 +82,9 @@
     <ClCompile Include="Prefabs.cpp">
       <Filter>Crusade\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Animator2D.cpp">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\imgui-1.81\imconfig.h">
@@ -179,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="Prefabs.h">
       <Filter>Crusade\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator2D.h">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

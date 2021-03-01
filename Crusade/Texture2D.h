@@ -1,5 +1,6 @@
 #pragma once
 struct SDL_Texture;
+#include "glm/glm.hpp"
 namespace Crusade
 {
 	/**
@@ -12,6 +13,8 @@ namespace Crusade
 		explicit Texture2D(SDL_Texture* texture);
 		~Texture2D();
 
+		glm::vec2 GetDimensions()const;
+		
 		Texture2D(const Texture2D &) = delete;
 		Texture2D(Texture2D &&) = delete;
 		Texture2D & operator= (const Texture2D &) = delete;
