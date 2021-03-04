@@ -17,8 +17,10 @@ namespace Crusade
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
+		void FixedUpdate();
 		void Update();
-		void Message(const std::string& message);
+		void LateUpdate();
+		
 
 		//CONTROL TAG
 		void SetName(const std::string& name) { m_Name = name; }

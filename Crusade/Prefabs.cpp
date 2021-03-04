@@ -2,10 +2,11 @@
 #include "Prefabs.h"
 #include "InputManager.h"
 #include "Scripts.h"
-#include "ResourceManager.h"
+#include "CRigidBody2D.h"
 #include "Scene.h"
 #include "SceneManager.h"
-#include "Animator2D.h"
+#include "CAnimator2D.h"
+#include "Camera2D.h"
 using namespace Crusade;
 /////////////////////////////////////////////////////////////////////////////////
 //QBERT
@@ -13,7 +14,7 @@ using namespace Crusade;
 void QBertDied::Execute()
 {
 	Publisher::GetInstance().Notify(m_Actor, "QBertDied");
-	m_Actor->GetComponent<Animator2D>()->TriggerTransition("Explosion");
+	m_Actor->GetComponent<CAnimator2D>()->TriggerTransition("Explosion");
 	std::cout << "QBertDied" << std::endl;
 }
 void QBertGainedPoints::Execute()
@@ -52,7 +53,7 @@ std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 ro
 	const auto animBackJump = std::make_shared<Animation>("Qbert/JumpBack.png", 2, 2.f, true);
 	const auto explosion = std::make_shared<Animation>("Qbert/Explosion.png", 1, 8, 10.f, true);
 	//ANIMATOR
-	const auto animator = std::make_shared<Animator2D>(animJump, glm::vec2{ 50, 50 });
+	const auto animator = std::make_shared<CAnimator2D>(animJump, glm::vec2{ 50, 50 });
 	//TRANSITIONS
 	const std::shared_ptr<bool>explosionCondition{new bool{}};
 	animator->AddTransition(new Transition{ animJump,animIdle,"",true });
@@ -67,7 +68,7 @@ std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 ro
 	
 	animator->AddTransition(new Transition{ explosion,animJump,"",true});
 	
-	qBert->AddComponent<Animator2D>(animator);
+	qBert->AddComponent<CAnimator2D>(animator);
 	return qBert;
 }
 
@@ -160,4 +161,13 @@ void PointsCounter::Notify(GameObject*, const std::string& message)
 			text->SetText("Score: "+std::to_string(m_Points));
 		}
 	}
+}
+void Jump::Execute()
+{
+	/*auto x = m_Actor->GetComponent<CRigidBody2D>();
+	if(x)
+	{
+		x->AddForce({ 0, -200 });
+	}*/
+	m_Actor->GetComponent<Camera2D>()->Zoom(1.1f);
 }

@@ -16,7 +16,10 @@ void Scene::Add(const std::shared_ptr<GameObject>& object)
 }
 void Scene::FixedUpdate()
 {
-
+	for (auto& object : m_Objects)
+	{
+		object->FixedUpdate();
+	}
 }
 void Scene::Update()
 {
@@ -27,6 +30,11 @@ void Scene::Update()
 }
 void Scene::LateUpdate( )
 {
+	for (auto& object : m_Objects)
+	{
+		object->LateUpdate();
+	}
+	
 	//REMOVE DEAD OBJECTS FROM OBJECTLIST
 	if (m_Objects.size() > 0)
 	{

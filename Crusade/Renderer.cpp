@@ -39,14 +39,14 @@ void Crusade::Renderer::Render() const
 	SDL_RenderClear(m_Renderer);
 	SceneManager::GetInstance().Render();
 	
-	ImGui_ImplOpenGL2_NewFrame();
+	/*ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame(m_window);
 	ImGui::NewFrame();
 	ImGui::Begin("Demo window");
 	ImGui::Button("Hello!");
 	ImGui::End();
 	ImGui::Render();
-	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());*/
 	
 	SDL_RenderPresent(m_Renderer);
 }
@@ -96,4 +96,13 @@ void Crusade::Renderer::RenderTexture(const Texture2D& texture, float x, float y
 	dst.y = static_cast<int>(y);
 	SDL_QueryTexture(texture.GetSDLTexture(), nullptr, nullptr, &dst.w, &dst.h);
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &sourceRect, &dst);
+}
+Window Crusade::Renderer::GetWindowSize()const
+{
+	Window window{};
+	int x ,y{};
+	SDL_GetWindowSize(m_window, &x, &y);
+	window.width = float(x);
+	window.height = float(y);
+	return window;
 }

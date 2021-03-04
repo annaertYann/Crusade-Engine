@@ -58,9 +58,6 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Crusade\Foundation\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="RigidBody2D.cpp">
-      <Filter>Crusade\Scene\GameObject\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Crusade\Scene</Filter>
     </ClCompile>
@@ -82,7 +79,22 @@
     <ClCompile Include="Prefabs.cpp">
       <Filter>Crusade\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Animator2D.cpp">
+    <ClCompile Include="CRigidBody2D.cpp">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera2D.cpp">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="structs.cpp">
+      <Filter>Crusade\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Crusade\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2f.cpp">
+      <Filter>Crusade\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimator2D.cpp">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClCompile>
   </ItemGroup>
@@ -156,9 +168,6 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Crusade\Foundation\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBody2D.h">
-      <Filter>Crusade\Scene\GameObject\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Crusade\Scene</Filter>
     </ClInclude>
@@ -183,7 +192,22 @@
     <ClInclude Include="Prefabs.h">
       <Filter>Crusade\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Animator2D.h">
+    <ClInclude Include="CRigidBody2D.h">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera2D.h">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.h">
+      <Filter>Crusade\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Crusade\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2f.h">
+      <Filter>Crusade\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimator2D.h">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClInclude>
   </ItemGroup>

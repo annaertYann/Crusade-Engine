@@ -11,6 +11,9 @@ namespace Crusade
 	{
 		public:
 		void RenderObject()const;
+		void SetDimensions(const glm::vec3& dimensions) { m_Dimensions = dimensions; }
+		private:
+			glm::vec3 m_Dimensions{};
 	};
 	
 	class CTexture2DRender final : public Component
@@ -48,6 +51,22 @@ namespace Crusade
 		std::shared_ptr<Font> m_Font;
 		std::shared_ptr<Texture2D> m_Texture;
 		SDL_Color m_Color;
+		glm::vec3 m_Dimensions;
 	};
 
+	class CShape2DRender final : public Component
+	{
+	public:
+		enum class Shape { Rect,Circle };
+		CShape2DRender(Shape shape,glm::vec2 dimensions,bool isHollow, const SDL_Color& color);
+		void Start() override;
+		void Render() const override;
+		void SetLineWidth(const float& width) { m_LineWidht = width; }
+	private:
+		float m_LineWidht = 1;
+		glm::vec2 m_Dimensions;
+		Shape m_Shape;
+		bool m_isHollow;
+		SDL_Color m_Color;
+	};
 }

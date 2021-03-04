@@ -54,10 +54,10 @@ namespace Crusade
 		std::string m_Name{};
 	};
 	
-	class Animator2D final:public Component
+	class CAnimator2D final:public Component
 	{
 	public:
-		explicit Animator2D(const std::shared_ptr<Animation>& startAnimation, const glm::vec2& destDimension = {});
+		explicit CAnimator2D(const std::shared_ptr<Animation>& startAnimation, const glm::vec2& destDimension = {});
 
 		void Start() override;
 		void Update() override;
@@ -67,6 +67,7 @@ namespace Crusade
 		
 		void SetDestDimensions(const int& w, const int& h)const { m_Renderer->SetDestDimensions(w, h); }
 	private:
+		void ResetAllConditions();
 		std::vector<std::shared_ptr<Transition>>m_Transitions{};
 		std::vector<std::shared_ptr<Animation>>m_Animations{};
 		Animation* m_CurrentAnimation{};

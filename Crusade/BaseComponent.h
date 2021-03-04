@@ -13,8 +13,9 @@ namespace Crusade
 		Component& operator=(const Component& other) = delete;
 		Component& operator=(Component&& other) = delete;
 
-		virtual void Message(const std::string&){};
+		virtual void FixedUpdate(){}
 		virtual void Update(){}
+		virtual void LateUpdate(){}
 		virtual void Render()const{}
 		
 		friend class GameObject;

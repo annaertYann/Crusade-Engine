@@ -4,8 +4,11 @@
 #include "GameObject.h"
 #include "Time.h"
 #include "Prefabs.h"
-#include "Animator2D.h"
+#include "CAnimator2D.h"
 #include <SDL.h>
+#include "Camera2D.h"
+#include "Scene.h"
+#include "SceneManager.h"
 using namespace Crusade;
 void FPSScript::Start()
 {
@@ -43,6 +46,9 @@ void QbertController::Start()
 }
 void QbertController::Update()
 {
-	
+	m_Owner->GetCTransform()->Rotate({0,0,100*Time::GetInstance().GetDeltaTime()});
+	/*SceneManager::GetInstance().GetCurrentScene()->FindObject("Camera")->GetComponent<Camera2D>()->Track
+	( Point2f{m_Owner->GetCTransform()->GetPosition().x,m_Owner->GetCTransform()->GetPosition().y}
+		, Time::GetInstance().GetDeltaTime());*/
 }
 

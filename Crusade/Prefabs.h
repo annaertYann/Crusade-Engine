@@ -23,7 +23,12 @@ class QBert final: public Crusade::Prefab<QBert>
 public:
 	 std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position = {}, glm::vec3 rotation = {}, glm::vec3 scale = {1,1,1}) override;
 };
-
+class Jump final :public Crusade::Command
+{
+public:
+	explicit Jump(Crusade::GameObject* actor) :Command(actor) {}
+	void Execute() override;
+};
 /////////////////////////////////////////////////////////////////////////////////
 //LIVES DISPLAY
 /////////////////////////////////////////////////////////////////////////////////

@@ -31,3 +31,14 @@ CTransform::CTransform(const glm::vec3& position,const glm::vec3& rotation,const
 	m_Scale = scale;
 	m_Rotation = rotation;
 }
+void CTransform::Rotate(const glm::vec3& rotation)
+{
+	m_Rotation += rotation;
+}
+void CTransform::Scale(const glm::vec3& scale)
+{
+	m_Scale += scale;
+	m_Position.x -= scale.x / 2;
+	m_Position.y -= scale.y / 2;
+	m_Position.z -= scale.z / 2;
+}

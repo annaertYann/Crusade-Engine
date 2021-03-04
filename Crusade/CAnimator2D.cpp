@@ -1,8 +1,9 @@
 #include "MiniginPCH.h"
-#include "Animator2D.h"
+#include "CAnimator2D.h"
 #include "ResourceManager.h"
 #include "GameObject.h"
 #include "Time.h"
+#pragma warning (disable:26815)
 using namespace Crusade;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///ANIMATION
@@ -106,14 +107,14 @@ void Animation::SetAsMultiSprite(const int& currentRow, const int& maxColloms)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///ANIMATOR
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Animator2D::Animator2D(const std::shared_ptr<Animation>& startAnimation, const glm::vec2& destDimension)
+CAnimator2D::CAnimator2D(const std::shared_ptr<Animation>& startAnimation, const glm::vec2& destDimension)
 {
 	m_CurrentAnimation = startAnimation.get();
 	m_Animations.push_back(startAnimation);
 	m_DestDimensions = destDimension;
 }
 
-void Animator2D::Start()
+void CAnimator2D::Start()
 {
 	m_Renderer = m_Owner->GetComponent<CTexture2DRender>();
 	if (m_Renderer==nullptr)
@@ -127,7 +128,7 @@ void Animator2D::Start()
 }
 
 
-void Animator2D::Update()
+void CAnimator2D::Update()
 {
 	for (const auto& transition : m_Transitions)
 	{
@@ -135,8 +136,8 @@ void Animator2D::Update()
 		{
 			if (transition->ToTransition())
 			{
+				ResetAllConditions();
 				m_CurrentAnimation = transition->GetTo().get();
-				if (transition->GetCondition()){ *transition->GetCondition() = false; }
 				m_CurrentAnimation->Start(m_Renderer);
 				break;
 			}
@@ -144,7 +145,7 @@ void Animator2D::Update()
 	}
 	m_CurrentAnimation->Update(m_Renderer, Time::GetInstance().GetDeltaTime());
 }
-void Animator2D::TriggerTransition(const std::string& name)
+void CAnimator2D::TriggerTransition(const std::string& name)
 {
 	for (const auto& transition : m_Transitions)
 	{
@@ -153,6 +154,13 @@ void Animator2D::TriggerTransition(const std::string& name)
 			*transition->GetCondition() = true;
 			return;
 		}
+	}
+}
+void CAnimator2D::ResetAllConditions()
+{
+	for (const auto& transition : m_Transitions)
+	{
+		if (transition->GetCondition()) { *transition->GetCondition() = false; }
 	}
 }
 

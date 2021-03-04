@@ -11,13 +11,6 @@ GameObject::GameObject()
 	m_NextNameTag++;
 }
 
-void GameObject::Message(const std::string& message)
-{
-	for (const auto& component :m_Components)
-	{
-		component->Message(message);
-	}
-}
 void GameObject::Update()
 {
 	for (const auto& component : m_Components)
@@ -26,3 +19,17 @@ void GameObject::Update()
 	}
 }
 
+void GameObject::FixedUpdate()
+{
+	for (const auto& component : m_Components)
+	{
+		component->FixedUpdate();
+	}
+}
+void GameObject::LateUpdate()
+{
+	for (const auto& component : m_Components)
+	{
+		component->LateUpdate();
+	}
+}

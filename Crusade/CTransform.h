@@ -22,6 +22,8 @@ namespace Crusade
 		void SetScale(float x, float y, float z);
 
 		void Translate(const glm::vec3& translation);
+		void Rotate(const glm::vec3& rotation);
+		void Scale(const glm::vec3& scale);
 	private:
 		glm::vec3 m_Position{};
 		glm::vec3 m_Rotation{};

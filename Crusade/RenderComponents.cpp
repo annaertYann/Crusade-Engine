@@ -8,15 +8,25 @@
 #include "ResourceManager.h"
 #include "CTransform.h"
 #include <glm/gtx/intersect.hpp>
+#include "Camera2D.h"
+#include "Scene.h"
+#include "utils.h"
+#include "SceneManager.h"
 using namespace Crusade;
 ////////////////////////////////////////////////////////////////////////////////////////////
 //RENDER COMPONENT
 ////////////////////////////////////////////////////////////////////////////////////////////
 void CRender::RenderObject()const
 {
+	const auto transform = m_Owner->GetCTransform();
 	for (const auto component :m_Owner->GetAllComponents())
 	{
+		glPushMatrix();
+		glTranslatef(transform->GetPosition().x + m_Dimensions.x/2, transform->GetPosition().y + m_Dimensions.y/2, transform->GetPosition().z + m_Dimensions.z/2);
+		glRotatef(transform->GetRotation().z, 0, 0, 1);
+		glTranslatef(-transform->GetPosition().x - m_Dimensions.x/2, -transform->GetPosition().y-m_Dimensions.y/2, -transform->GetPosition().z-m_Dimensions.z/2);
 		component->Render();
+		glPopMatrix();
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,6 +42,11 @@ void CTextRender::Start()
 	{
 		m_Owner->AddComponent<CRender>(std::make_shared<CRender>());
 	}
+	glm::vec3 dimensions{};
+	dimensions.x = float(m_Text.size() * m_Font->GetSize());
+	dimensions.y = float(m_Font->GetSize());
+	m_Owner->GetComponent<CRender>()->SetDimensions(dimensions);
+	
 }
 
 void CTextRender::Render() const
@@ -71,7 +86,10 @@ void CTextRender::SetText(const std::string& text)
 	{
 		m_Text = " ";
 	}
-	
+	glm::vec3 dimensions{};
+	dimensions.x = float(float(m_Text.size()) * m_Font->GetSize());
+	dimensions.y = float(m_Font->GetSize());
+	m_Owner->GetComponent<CRender>()->SetDimensions(dimensions);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,10 +103,16 @@ CTexture2DRender::CTexture2DRender( const std::shared_ptr<Texture2D>& texture)
 }
 void CTexture2DRender::Start()
 {
-	if (m_Owner->GetComponent<CRender>() == nullptr)
+	CRender* render{};
+	render = m_Owner->GetComponent<CRender>();
+	if (render == nullptr)
 	{
 		m_Owner->AddComponent<CRender>(std::make_shared<CRender>());
+		render = m_Owner->GetComponent<CRender>();
 	}
+	m_Width = int(m_Texture->GetDimensions().x);
+	m_Height = int(m_Texture->GetDimensions().y);
+	render->SetDimensions(glm::vec3{m_Width , m_Height, 0 });
 }
 
 void CTexture2DRender::Render()const
@@ -135,4 +159,60 @@ void CTexture2DRender::SetDestDimensions(const int& w, const int& h)
 {
 	m_Width = w;
 	m_Height = h;
+	m_Owner->GetComponent<CRender>()->SetDimensions(glm::vec3{ m_Width , m_Height, 0 });
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+//Shape Render
+////////////////////////////////////////////////////////////////////////////////////////////
+CShape2DRender::CShape2DRender(Shape shape, glm::vec2 dimensions,bool isHollow, const SDL_Color& color)
+{
+	m_Shape = shape;
+	m_Dimensions = dimensions;
+	m_isHollow = isHollow;
+	m_Color = color;
+}
+void CShape2DRender::Start()
+{
+	CRender* render{};
+	render = m_Owner->GetComponent<CRender>();
+	if (render == nullptr)
+	{
+		m_Owner->AddComponent<CRender>(std::make_shared<CRender>());
+		render = m_Owner->GetComponent<CRender>();
+	}
+	render->SetDimensions(glm::vec3{ m_Dimensions.x , m_Dimensions.y, 0 });
+}
+
+void CShape2DRender::Render() const
+{
+	glm::vec3 position = m_Owner->GetCTransform()->GetPosition();
+	//SDL_RenderCopy(Renderer::GetInstance().GetSDLRenderer(), ResourceManager::GetInstance().LoadTexture("Empty.png")->GetSDLTexture(), nullptr, nullptr);_
+	glColor4f(m_Color.r / 255.f, m_Color.b / 255.f, m_Color.b / 255.f, m_Color.a / 255.f);
+	if (m_isHollow)
+	{
+		switch (m_Shape)
+		{
+		case Shape::Rect:
+			utils::DrawRect(position.x, position.y, m_Dimensions.x, m_Dimensions.y, m_LineWidht);
+			break;
+		case Shape::Circle:
+			utils::DrawEllipse(position.x, position.y, m_Dimensions.x, m_Dimensions.y,m_LineWidht);
+			break;
+		default:;
+		}
+	}
+	else
+	{
+		switch (m_Shape)
+		{
+		case Shape::Rect:
+			utils::FillRect(position.x, position.y, m_Dimensions.x, m_Dimensions.y);
+			break;
+		case Shape::Circle:
+			utils::FillEllipse(position.x,position.y,m_Dimensions.x,m_Dimensions.y);
+			break;
+		default:;
+		}
+	}
+	glColor4f(1.f, 1.f, 1.f, 1.f);
 }
