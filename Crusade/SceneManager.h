@@ -1,6 +1,5 @@
 #pragma once
 #include "Singleton.h"
-
 namespace Crusade
 {
 	class Scene;

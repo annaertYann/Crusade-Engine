@@ -18,17 +18,37 @@ public:
 	explicit QBertGainedPoints(Crusade::GameObject* actor) :Command(actor) {}
 	void Execute() override;
 };
+class MoveUp final :public Crusade::Command
+{
+public:
+	explicit MoveUp(Crusade::GameObject* actor) :Command(actor) {}
+	void Execute() override;
+};
+class MoveDown final :public Crusade::Command
+{
+public:
+	explicit MoveDown(Crusade::GameObject* actor) :Command(actor) {}
+	void Execute() override;
+};
+class MoveRight final :public Crusade::Command
+{
+public:
+	explicit MoveRight(Crusade::GameObject* actor) :Command(actor) {}
+	void Execute() override;
+};
+class MoveLeft final :public Crusade::Command
+{
+public:
+	explicit MoveLeft(Crusade::GameObject* actor) :Command(actor) {}
+	void Execute() override;
+};
+
 class QBert final: public Crusade::Prefab<QBert>
 {
 public:
 	 std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position = {}, glm::vec3 rotation = {}, glm::vec3 scale = {1,1,1}) override;
 };
-class Jump final :public Crusade::Command
-{
-public:
-	explicit Jump(Crusade::GameObject* actor) :Command(actor) {}
-	void Execute() override;
-};
+
 /////////////////////////////////////////////////////////////////////////////////
 //LIVES DISPLAY
 /////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +62,7 @@ public:
 private:
 	int m_Lives=3;
 	Crusade::Delay m_Delay{1};
+	int m_BonkSoundID=0;
 };
 class PointsCounter final :public Crusade::CObserver
 {

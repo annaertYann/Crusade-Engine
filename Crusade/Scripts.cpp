@@ -51,4 +51,19 @@ void QbertController::Update()
 	( Point2f{m_Owner->GetCTransform()->GetPosition().x,m_Owner->GetCTransform()->GetPosition().y}
 		, Time::GetInstance().GetDeltaTime());*/
 }
+void MoveInput::Start()
+{
+	MoveUp* moveUp = new MoveUp{m_Owner};
+	MoveDown* moveDown = new MoveDown{ m_Owner };
+	MoveRight* moveRight = new MoveRight{ m_Owner };
+	MoveLeft* moveLeft = new MoveLeft{ m_Owner };
+	InputManager::GetInstance().AddButtonInput(new InputButtonAction{ InputButtonState::down,std::unique_ptr<MoveUp>(moveUp),0,-1,SDL_SCANCODE_W });
+	InputManager::GetInstance().AddButtonInput(new InputButtonAction{ InputButtonState::down,std::unique_ptr<MoveRight>(moveRight),0,-1,SDL_SCANCODE_D });
+	InputManager::GetInstance().AddButtonInput(new InputButtonAction{ InputButtonState::down,std::unique_ptr<MoveDown>(moveDown),0,-1,SDL_SCANCODE_S });
+	InputManager::GetInstance().AddButtonInput(new InputButtonAction{ InputButtonState::down,std::unique_ptr<MoveLeft>(moveLeft),0,-1,SDL_SCANCODE_A });
+}
+void MoveInput::Update()
+{
+	//SceneManager::GetInstance().GetCurrentScene()->FindObject("Camera")->GetComponent<Camera2D>()->Track(Point2f{ m_Owner->GetCTransform()->GetPosition().x,m_Owner->GetCTransform()->GetPosition().y }, Time::GetInstance().GetDeltaTime());
+}
 

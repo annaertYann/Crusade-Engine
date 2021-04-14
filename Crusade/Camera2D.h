@@ -25,6 +25,7 @@ namespace Crusade
 		//VAR
 		Point2f GetMousePos() const;
 		Window GetScaledWindowSize()const;
+		Window GetOriginalWindow() const{ return m_OriginalWindow; }
 		Point2f GetPosition()const;
 		float GetScaleX()const { return m_ScaleX; }
 		float GetScaleY()const { return m_ScaleY; }

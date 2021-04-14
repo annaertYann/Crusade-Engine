@@ -2,13 +2,14 @@
 #include "BaseComponent.h"
 #include "RenderComponents.h"
 #include "CTransform.h"
+#include "CRigidBody2D.h"
 namespace Crusade
 {
 	class Component;
 	class GameObject final
 	{
+		friend class CRigidBody2D;
 	public:
-
 		GameObject();
 		~GameObject()=default;
 
@@ -21,12 +22,12 @@ namespace Crusade
 		void Update();
 		void LateUpdate();
 		
-
 		//CONTROL TAG
 		void SetName(const std::string& name) { m_Name = name; }
 		std::string GetName()const { return m_Name; }
 		std::vector<std::string>& GetTags() { return m_Tags; }
 		void AddTag(const std::string& tag) { m_Tags.push_back(tag); }
+		int GetObjectNummer()const { return m_ObjectNummer; }
 		//REMOVE FUNCTIONALITY
 		void SetRemove() { m_Remove = true; }
 		bool GetRemove()const { return m_Remove; }
@@ -42,12 +43,16 @@ namespace Crusade
 		T* GetComponent();
 		template <typename T>
 		void RemoveComponent();
-		
 	private:
+		void OnTriggerEnter(CCollider* trigger);
+		void OnCollisionEnter(CCollider* collider);
+		void OnTriggerExit(CCollider* trigger);
+		void OnCollisionExit(CCollider* collider);
 		std::vector<std::shared_ptr<Component>> m_Components{};
 		std::vector<std::shared_ptr<GameObject>> m_Children{};
 		//OBJECT TAG
 		std::string m_Name{};
+		int m_ObjectNummer=-1;
 		static int m_NextNameTag;
 		std::vector<std::string> m_Tags;
 		//REMOVE FUNCTIONALITY
@@ -83,7 +88,7 @@ namespace Crusade
 		}
 		else
 		{
-			std::cout << "CANT ADD COMPONENT,COMPONENT ALREADY IN LIST :ADDCOMPONENT" << std::endl;
+			std::cout << "CANT ADD COMPONENT,COMPONENT ALREADY EXISTS :ADDCOMPONENT" << std::endl;
 		}
 		
 	}

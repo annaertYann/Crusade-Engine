@@ -33,15 +33,16 @@ void Crusade::ResourceManager::Init(const std::string& dataPath)
 std::shared_ptr<Crusade::Texture2D> Crusade::ResourceManager::LoadTexture(const std::string& file) const
 {
 	const auto fullPath = m_DataPath + file;
-	auto texture = IMG_LoadTexture(Renderer::GetInstance().GetSDLRenderer(), fullPath.c_str());
+	/*auto texture = IMG_LoadTexture(Renderer::GetInstance().GetSDLRenderer(), fullPath.c_str());
 	if (texture == nullptr) 
 	{
 		throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());
 	}
-	return std::make_shared<Texture2D>(texture);
+	return std::make_shared<Texture2D>(texture);*/
+	return std::make_shared<Texture2D>(fullPath);
 }
 
-std::shared_ptr<Crusade::Font> Crusade::ResourceManager::LoadFont(const std::string& file, unsigned int size) const
+std::shared_ptr<Crusade::Texture2D> Crusade::ResourceManager::LoadTextTexture(const std::string& file, unsigned int size, const std::string& text,const SDL_Color &color) const
 {
-	return std::make_shared<Font>(m_DataPath + file, size);
+	return std::make_shared<Texture2D>(text, m_DataPath + file, size, Color4f{ float(color.r),float(color.g),float(color.b),float(color.a) });
 }

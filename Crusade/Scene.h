@@ -1,12 +1,11 @@
 #pragma once
 #include "SceneManager.h"
-
 namespace Crusade
 {
 	class GameObject;
 	class Scene
 	{
-		friend Scene& SceneManager::CreateScene(const std::string& name);
+		friend class SceneManager;
 	public:
 		void Add(const std::shared_ptr<GameObject>& object);
 		
@@ -24,14 +23,14 @@ namespace Crusade
 
 		std::shared_ptr<GameObject> FindObject(const std::string& name);
 		std::vector<std::shared_ptr<GameObject>> FindAllObjectsWithTag(const std::string& tag);
+		std::vector<std::shared_ptr<GameObject>> GetCollisionObjects()const { return m_CollisionObjects; }
 		std::string GetName()const { return m_Name; }
 	
-	private: 
+	private:
 		explicit Scene(const std::string& name);
-
 		std::string m_Name;
 		std::vector < std::shared_ptr<GameObject>> m_Objects{};
-
+		std::vector < std::shared_ptr<GameObject>> m_CollisionObjects{};
 		static unsigned int m_IdCounter; 
 	};
 }

@@ -25,6 +25,8 @@ namespace Crusade
 		void Rotate(const glm::vec3& rotation);
 		void Scale(const glm::vec3& scale);
 	private:
+		void OnCollisionEnter(CCollider*) override;
+		void OnCollisionExit(CCollider*) override;
 		glm::vec3 m_Position{};
 		glm::vec3 m_Rotation{};
 		glm::vec3 m_Scale= {1,1,1};

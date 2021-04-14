@@ -22,9 +22,6 @@
     <ClCompile Include="..\3rdParty\imgui-1.81\backends\imgui_impl_sdl.cpp">
       <Filter>3dParty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Colliders2D.cpp">
-      <Filter>Crusade\Scene\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="CTransform.cpp">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClCompile>
@@ -97,6 +94,18 @@
     <ClCompile Include="CAnimator2D.cpp">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Colliders2D.cpp">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound_System.cpp">
+      <Filter>Crusade\Foundation\Services\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="SDL_Sound_System.cpp">
+      <Filter>Crusade\Foundation\Services\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
+      <Filter>Crusade\Foundation\Services</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\imgui-1.81\imconfig.h">
@@ -126,9 +135,6 @@
     <ClInclude Include="BaseComponent.h">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Colliders2D.h">
-      <Filter>Crusade\Scene\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Command.h">
       <Filter>Crusade\Foundation\Input</Filter>
     </ClInclude>
@@ -152,9 +158,6 @@
     </ClInclude>
     <ClInclude Include="Minigin.h">
       <Filter>Crusade\Foundation\GameLoop</Filter>
-    </ClInclude>
-    <ClInclude Include="MiniginPCH.h">
-      <Filter>Crusade\Foundation\PCH</Filter>
     </ClInclude>
     <ClInclude Include="Prefab.h">
       <Filter>Crusade\Utility</Filter>
@@ -210,6 +213,21 @@
     <ClInclude Include="CAnimator2D.h">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Colliders2D.h">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>Crusade\Foundation\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound_System.h">
+      <Filter>Crusade\Foundation\Services\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL_Sound_System.h">
+      <Filter>Crusade\Foundation\Services\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniginPCH.h">
+      <Filter>Crusade\Foundation\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Crusade">
@@ -256,6 +274,12 @@
     </Filter>
     <Filter Include="Crusade\Game">
       <UniqueIdentifier>{e19c996f-c9b1-40bb-abf0-620ef54dd76f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Foundation\Services">
+      <UniqueIdentifier>{f73d6cee-758d-4223-9541-1727da6c0578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Foundation\Services\Sound">
+      <UniqueIdentifier>{c1a4be44-8d89-48ac-9c8b-8e0479ab08b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

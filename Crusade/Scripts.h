@@ -29,3 +29,10 @@ private:
 	int m_DieButton;
 	int m_ScoreButton;
 };
+class MoveInput final :public Crusade::Component
+{
+public:
+	void Start() override;
+	void Update() override;
+private:
+};

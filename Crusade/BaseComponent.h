@@ -2,6 +2,7 @@
 namespace Crusade
 {
 	class GameObject;
+	class CCollider;
 	class Component
 	{
 	public:
@@ -13,6 +14,8 @@ namespace Crusade
 		Component& operator=(const Component& other) = delete;
 		Component& operator=(Component&& other) = delete;
 
+		GameObject* GetOwner()const { return m_Owner; }
+		
 		virtual void FixedUpdate(){}
 		virtual void Update(){}
 		virtual void LateUpdate(){}
@@ -24,6 +27,10 @@ namespace Crusade
 		GameObject* m_Owner = nullptr;
 	
 	private:
+		virtual void OnTriggerEnter(CCollider* ){}
+		virtual void OnCollisionEnter(CCollider*) { }
+		virtual void OnTriggerExit(CCollider*) {}
+		virtual void OnCollisionExit(CCollider*) { }
 		virtual void Start(){};
 		void SetOwner(GameObject* owner) { m_Owner = owner; }
 	};

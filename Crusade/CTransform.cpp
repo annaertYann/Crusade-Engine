@@ -1,5 +1,6 @@
 #include "MiniginPCH.h"
 #include "CTransform.h"
+#include "GameObject.h"
 using namespace Crusade;
 void CTransform::SetPosition(const float x, const float y, const float z)
 {
@@ -41,4 +42,12 @@ void CTransform::Scale(const glm::vec3& scale)
 	m_Position.x -= scale.x / 2;
 	m_Position.y -= scale.y / 2;
 	m_Position.z -= scale.z / 2;
+}
+void CTransform::OnCollisionEnter(CCollider* )
+{
+	std::cout << "ColldingEnter    :name :   " << m_Owner->GetName() << std::endl;
+}
+void CTransform::OnCollisionExit(CCollider*)
+{
+	std::cout << "ColldingExit    :name :   " << m_Owner->GetName() << std::endl;
 }

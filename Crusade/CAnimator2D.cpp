@@ -93,7 +93,6 @@ void Animation::Update(CTexture2DRender* renderer, const float& deltaTime)
 				}
 			}
 		}
-		
 		renderer->SetSourceRect({ m_CurrentCollom * (m_Width / m_Colloms),m_CurrentRow * (m_height / m_Rows),m_Width / m_Colloms,m_height / m_Rows });
 	}
 }
@@ -119,10 +118,11 @@ void CAnimator2D::Start()
 	m_Renderer = m_Owner->GetComponent<CTexture2DRender>();
 	if (m_Renderer==nullptr)
 	{
-		const auto x = std::make_shared<CTexture2DRender>(ResourceManager::GetInstance().LoadTexture(m_CurrentAnimation->GetFilePath()));
+		const auto x = std::make_shared<CTexture2DRender>(m_CurrentAnimation->GetFilePath());
 		m_Owner->AddComponent<CTexture2DRender>(x);
 		m_Renderer = x.get();
 	}
+	
 	m_CurrentAnimation->Start(m_Renderer);
 	SetDestDimensions(int(m_DestDimensions.x), int(m_DestDimensions.y));
 }

@@ -2,6 +2,8 @@
 #include "BaseComponent.h"
 #include "RenderComponents.h"
 #include "Delay.h"
+#include "GameObject.h"
+
 namespace Crusade
 {
 	class Animation final
@@ -58,8 +60,6 @@ namespace Crusade
 	{
 	public:
 		explicit CAnimator2D(const std::shared_ptr<Animation>& startAnimation, const glm::vec2& destDimension = {});
-
-		void Start() override;
 		void Update() override;
 		
 		void AddTransition(Transition* transition) { m_Transitions.push_back(std::shared_ptr<Transition>{transition} ); }
@@ -68,6 +68,7 @@ namespace Crusade
 		void SetDestDimensions(const int& w, const int& h)const { m_Renderer->SetDestDimensions(w, h); }
 	private:
 		void ResetAllConditions();
+		void Start() override;
 		std::vector<std::shared_ptr<Transition>>m_Transitions{};
 		std::vector<std::shared_ptr<Animation>>m_Animations{};
 		Animation* m_CurrentAnimation{};

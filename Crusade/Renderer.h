@@ -18,11 +18,11 @@ namespace Crusade
 		void Render() const;
 		void Destroy();
 
-		void RenderTexture(const Texture2D& texture, float x, float y) const;
+		/*void RenderTexture(const Texture2D& texture, float x, float y) const;
 		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height) const;
 		void RenderTexture(const Texture2D& texture, float x, float y,SDL_Rect sourceRect) const;
 		void RenderTexture(const Texture2D& texture,  SDL_Rect destRect) const;
-		void RenderTexture(const Texture2D& texture,  SDL_Rect destRect,SDL_Rect sourceRect) const;
+		void RenderTexture(const Texture2D& texture,  SDL_Rect destRect,SDL_Rect sourceRect) const;*/
 		SDL_Renderer* GetSDLRenderer() const { return m_Renderer; }
 		SDL_Window* GetWindow()const { return m_window; }
 		Window GetWindowSize()const;

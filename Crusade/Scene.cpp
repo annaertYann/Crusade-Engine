@@ -2,16 +2,16 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "RenderComponents.h"
+#include "CRigidBody2D.h"
 using namespace Crusade;
 
 unsigned int Scene::m_IdCounter = 0;
 
 Scene::Scene(const std::string& name) : m_Name(name) {}
-
-
 void Scene::Add(const std::shared_ptr<GameObject>& object)
 {
 	if (object->GetCTransform() == nullptr) { object->AddComponent<CTransform>(std::make_shared<CTransform>()); }
+	if (object->GetComponent<CCollider>() != nullptr) { m_CollisionObjects.push_back(object); }
 	m_Objects.push_back(object);
 }
 void Scene::FixedUpdate()
@@ -34,6 +34,7 @@ void Scene::LateUpdate( )
 	{
 		object->LateUpdate();
 	}
+
 	
 	//REMOVE DEAD OBJECTS FROM OBJECTLIST
 	if (m_Objects.size() > 0)
@@ -42,6 +43,14 @@ void Scene::LateUpdate( )
 		{
 			return object->GetRemove();
 		}), m_Objects.end());
+	}
+	//REMOVE DEAD OBJECTS FROM CollisionList
+	if (m_CollisionObjects.size() > 0)
+	{
+		m_CollisionObjects.erase(std::remove_if(m_CollisionObjects.begin(), m_CollisionObjects.end(), [&](const std::shared_ptr<GameObject>& object)
+		{
+			return object->GetRemove();
+		}), m_CollisionObjects.end());
 	}
 }
 void Scene::Render() const

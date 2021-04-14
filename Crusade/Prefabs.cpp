@@ -7,6 +7,7 @@
 #include "SceneManager.h"
 #include "CAnimator2D.h"
 #include "Camera2D.h"
+#include "ServiceLocator.h"
 using namespace Crusade;
 /////////////////////////////////////////////////////////////////////////////////
 //QBERT
@@ -41,6 +42,39 @@ void QBertGainedPoints::Execute()
 	}
 	
 }
+void MoveUp::Execute()
+{
+	auto rigid = m_Actor->GetComponent<CRigidBody2D>();
+	if (rigid)
+	{
+		rigid->SetVelocity({0,50});
+	}
+}
+void MoveDown::Execute()
+{
+	auto rigid = m_Actor->GetComponent<CRigidBody2D>();
+	if (rigid)
+	{
+		rigid->SetVelocity({ 0,-50 });
+	}
+}
+void MoveRight::Execute()
+{
+	auto rigid = m_Actor->GetComponent<CRigidBody2D>();
+	if (rigid)
+	{
+		rigid->SetVelocity({ 50,0 });
+	}
+}
+void MoveLeft::Execute()
+{
+	auto rigid = m_Actor->GetComponent<CRigidBody2D>();
+	if (rigid)
+	{
+		rigid->SetVelocity({ -50,0 });
+	}
+}
+
 std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
 	auto qBert = std::make_shared<GameObject>();
@@ -53,7 +87,7 @@ std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 ro
 	const auto animBackJump = std::make_shared<Animation>("Qbert/JumpBack.png", 2, 2.f, true);
 	const auto explosion = std::make_shared<Animation>("Qbert/Explosion.png", 1, 8, 10.f, true);
 	//ANIMATOR
-	const auto animator = std::make_shared<CAnimator2D>(animJump, glm::vec2{ 50, 50 });
+	const auto animator = std::make_shared<CAnimator2D>(animJump, glm::vec2{ 50, 50});
 	//TRANSITIONS
 	const std::shared_ptr<bool>explosionCondition{new bool{}};
 	animator->AddTransition(new Transition{ animJump,animIdle,"",true });
@@ -84,11 +118,13 @@ void LivesCounter::Start()
 		text->SetText("Lives: " + std::to_string(m_Lives));
 	}
 	m_Delay.Stop();
+	m_BonkSoundID = ServiceLocator::GetSoundSystem()->RegisterSound("../Data/Bonk.mp3");
 }
 void LivesCounter::Notify(GameObject*, const std::string& message)
 {
 	if (message=="QBertDied")
 	{
+		ServiceLocator::GetSoundSystem()->play(m_BonkSoundID, 10);
 		m_Lives--;
 		if (m_Lives > 0)
 		{
@@ -161,13 +197,4 @@ void PointsCounter::Notify(GameObject*, const std::string& message)
 			text->SetText("Score: "+std::to_string(m_Points));
 		}
 	}
-}
-void Jump::Execute()
-{
-	/*auto x = m_Actor->GetComponent<CRigidBody2D>();
-	if(x)
-	{
-		x->AddForce({ 0, -200 });
-	}*/
-	m_Actor->GetComponent<Camera2D>()->Zoom(1.1f);
 }

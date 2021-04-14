@@ -20,7 +20,12 @@ struct Point2f
 	float y;
 };
 
-
+struct Ray
+{
+	Ray(const Point2f& point1,const Point2f& point2) { p1 = point1; p2 = point2; }
+	Point2f p1;
+	Point2f p2;
+};
 
 struct Rectf
 {

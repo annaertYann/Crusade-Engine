@@ -1,7 +1,6 @@
 #include "MiniginPCH.h"
 #include "Camera2D.h"
 #include "utils.h"
-#include <cmath>
 using namespace Crusade;
 Camera2D::Camera2D(const Point2f& startPos, const Window& window)
 	:m_Position(startPos)
