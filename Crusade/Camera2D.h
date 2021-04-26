@@ -43,6 +43,7 @@ namespace Crusade
 		float m_Speed = 400;
 		float m_ScaleX = 1;
 		float m_ScaleY = 1;
+		static bool m_IsWindowScaled;
 		Window m_Window{};
 		Window m_OriginalWindow{"Original",640,480};
 	};

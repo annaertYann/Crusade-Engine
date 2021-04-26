@@ -36,6 +36,7 @@ void Crusade::SceneManager::SetCurrentScene(const std::string& sceneName)
 		if (scene->GetName()==sceneName)
 		{
 			m_CurrentScene = scene;
+			return;
 		}
 	}
 }

@@ -7,7 +7,7 @@
 #include "glm/glm.hpp"
 #include "SceneManager.h"
 using namespace Crusade;
-void CRigidBody2D::Start()
+void CRigidBody2D::Awake()
 {
 	m_Transform = m_Owner->GetCTransform();
 	const auto collider = m_Owner->GetComponent<CCollider>();

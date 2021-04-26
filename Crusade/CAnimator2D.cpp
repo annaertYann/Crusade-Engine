@@ -113,7 +113,7 @@ CAnimator2D::CAnimator2D(const std::shared_ptr<Animation>& startAnimation, const
 	m_DestDimensions = destDimension;
 }
 
-void CAnimator2D::Start()
+void CAnimator2D::Awake()
 {
 	m_Renderer = m_Owner->GetComponent<CTexture2DRender>();
 	if (m_Renderer==nullptr)

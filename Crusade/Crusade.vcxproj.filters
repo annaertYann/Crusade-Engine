@@ -61,9 +61,6 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Crusade\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts.cpp">
-      <Filter>Crusade\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Texture2D.cpp">
       <Filter>Crusade\Wrapper</Filter>
     </ClCompile>
@@ -71,9 +68,6 @@
       <Filter>Crusade\Utility</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Crusade\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Prefabs.cpp">
       <Filter>Crusade\Game</Filter>
     </ClCompile>
     <ClCompile Include="CRigidBody2D.cpp">
@@ -105,6 +99,30 @@
     </ClCompile>
     <ClCompile Include="ServiceLocator.cpp">
       <Filter>Crusade\Foundation\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="CSaveLoad.cpp">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Prefabs.cpp">
+      <Filter>Crusade\Game\TestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts.cpp">
+      <Filter>Crusade\Game\TestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="QBertTest.cpp">
+      <Filter>Crusade\Game\TestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Qbert.cpp">
+      <Filter>Crusade\Game\Qbert</Filter>
+    </ClCompile>
+    <ClCompile Include="Hexagon.cpp">
+      <Filter>Crusade\Game\Qbert</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementSteering.cpp">
+      <Filter>Crusade\Game\Qbert</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMovement.cpp">
+      <Filter>Crusade\Game\Qbert</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,9 +195,6 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Crusade\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts.h">
-      <Filter>Crusade\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>Crusade\Utility</Filter>
     </ClInclude>
@@ -190,9 +205,6 @@
       <Filter>Crusade\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Crusade\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs.h">
       <Filter>Crusade\Game</Filter>
     </ClInclude>
     <ClInclude Include="CRigidBody2D.h">
@@ -227,6 +239,30 @@
     </ClInclude>
     <ClInclude Include="MiniginPCH.h">
       <Filter>Crusade\Foundation\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="CSaveLoad.h">
+      <Filter>Crusade\Scene\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefabs.h">
+      <Filter>Crusade\Game\TestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts.h">
+      <Filter>Crusade\Game\TestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="QBertTest.h">
+      <Filter>Crusade\Game\TestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Qbert.h">
+      <Filter>Crusade\Game\Qbert</Filter>
+    </ClInclude>
+    <ClInclude Include="Hexagon.h">
+      <Filter>Crusade\Game\Qbert</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementSteering.h">
+      <Filter>Crusade\Game\Qbert</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMovement.h">
+      <Filter>Crusade\Game\Qbert</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +316,15 @@
     </Filter>
     <Filter Include="Crusade\Foundation\Services\Sound">
       <UniqueIdentifier>{c1a4be44-8d89-48ac-9c8b-8e0479ab08b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Game\TestScene">
+      <UniqueIdentifier>{d9181fca-f799-40f3-933b-47c0068ab53a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Game\Qbert">
+      <UniqueIdentifier>{cc67877c-9bdd-4851-89ab-a24f090009d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Utility\Lua">
+      <UniqueIdentifier>{68401f60-b0ba-43f0-9e25-3555a955db86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

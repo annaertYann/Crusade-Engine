@@ -12,21 +12,24 @@ namespace Crusade
 		public:
 		void RenderObject()const;
 		void SetDimensions(const glm::vec3& dimensions) { m_Dimensions = dimensions; }
+		glm::vec3 GetDimensions()const { return m_Dimensions; }
+		void SetFliphorizontal(const bool& flip) { m_FlipHorizontal = flip; }
 		private:
-			glm::vec3 m_Dimensions{};
+		glm::vec3 m_Dimensions{};
+		bool m_FlipHorizontal = false;
 	};
 	
 	class CTexture2DRender final : public Component
 	{
 	public:
-		explicit CTexture2DRender(const std::string& filePath);
+		explicit CTexture2DRender(const std::string& filePath,glm::vec2 dimensions = glm::vec2{});
 		void Render()const override;
 		void SetTexture(const std::string& filename);
 		glm::vec2 GetTextureDimensions() const { return glm::vec2{ m_Texture->GetWidth(),m_Texture->GetHeight() }; }
 		void SetDestDimensions(const int& w, const int& h);
 		void SetSourceRect(const SDL_Rect& sourceRect) { m_SourceRect = sourceRect;}
 	private:
-		void Start() override;
+		void Awake() override;
 		std::shared_ptr<Texture2D> m_Texture;
 		SDL_Rect m_SourceRect;
 		int m_Width;
@@ -45,7 +48,7 @@ namespace Crusade
 		void SetColor(const SDL_Color& color) { m_Color = color; }
 		void SetDestDimensions(const int& w, const int& h) { m_Dimensions.x = float(w); m_Dimensions.y = float(h); }
 	private:
-		void Start() override;
+		void Awake() override;
 		int m_PTSize=0;
 		bool m_NeedsUpdate;
 		std::string m_Text;
@@ -63,7 +66,7 @@ namespace Crusade
 		void Render() const override;
 		void SetLineWidth(const float& width) { m_LineWidht = width; }
 	private:
-		void Start() override;
+		void Awake() override;
 		float m_LineWidht = 1;
 		glm::vec2 m_Dimensions;
 		Shape m_Shape;

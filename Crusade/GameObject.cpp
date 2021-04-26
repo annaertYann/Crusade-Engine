@@ -11,9 +11,24 @@ GameObject::GameObject()
 	m_ObjectNummer = m_NextNameTag;
 	m_NextNameTag++;
 }
+void GameObject::Notify(const std::string& message)
+{
+	for (const auto& component : m_Components)
+	{
+		component->Notify(message);
+	}
+}
 
 void GameObject::Update()
 {
+	if(!m_Start)
+	{
+		for (const auto& component : m_Components)
+		{
+			component->Start();
+		}
+		m_Start = true;
+	}
 	for (const auto& component : m_Components)
 	{
 		component->Update();

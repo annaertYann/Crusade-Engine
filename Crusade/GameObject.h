@@ -34,6 +34,7 @@ namespace Crusade
 		//HANDLE CHILDREN
 		void AddChild(const std::shared_ptr<GameObject> &object) { m_Children.push_back(object); }
 		//COMPONENT CONTROL
+		void Notify(const std::string& message);
 		std::vector<std::shared_ptr<Component>>& GetAllComponents() { return m_Components; }
 		CRender* GetCRender() const{ return m_CRender; }
 		CTransform* GetCTransform() const { return m_CTransform; }
@@ -57,6 +58,8 @@ namespace Crusade
 		std::vector<std::string> m_Tags;
 		//REMOVE FUNCTIONALITY
 		bool m_Remove=false;
+		//START OBJECT
+		bool m_Start = false;
 		//COMMON COMPONENTS
 		CRender* m_CRender=nullptr;
 		CTransform* m_CTransform=nullptr;
@@ -81,7 +84,7 @@ namespace Crusade
 		if (GetComponent<T>()==nullptr)
 		{
 			component->SetOwner(this);
-			component->Start();
+			component->Awake();
 			if (dynamic_cast<CRender*>(component.get()) != nullptr) { m_CRender = dynamic_cast<CRender*>(component.get()); }
 			if (dynamic_cast<CTransform*>(component.get()) != nullptr) { m_CTransform = dynamic_cast<CTransform*>(component.get()); }
 			m_Components.push_back(component);

@@ -4,7 +4,7 @@
 #include "Event.h"
 #include "Delay.h"
 /////////////////////////////////////////////////////////////////////////////////
-//QBERT
+//Commands
 /////////////////////////////////////////////////////////////////////////////////
 class QBertDied final:public Crusade::Command
 {
@@ -42,20 +42,18 @@ public:
 	explicit MoveLeft(Crusade::GameObject* actor) :Command(actor) {}
 	void Execute() override;
 };
+/////////////////////////////////////////////////////////////////////////////////
+//PREFABS
+/////////////////////////////////////////////////////////////////////////////////
 
-class QBert final: public Crusade::Prefab<QBert>
-{
-public:
-	 std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position = {}, glm::vec3 rotation = {}, glm::vec3 scale = {1,1,1}) override;
-};
 
 /////////////////////////////////////////////////////////////////////////////////
-//LIVES DISPLAY
+//OBSERVERS
 /////////////////////////////////////////////////////////////////////////////////
 class LivesCounter final  :public Crusade::CObserver
 {
 public:
-	void Start() override;
+	void Awake() override;
 	explicit LivesCounter(const int &lives) { m_Lives = lives; }
 	void Notify(Crusade::GameObject* actor, const  std::string& message)override;
 	void Update() override;

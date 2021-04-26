@@ -16,12 +16,31 @@ void CRender::RenderObject()const
 	const auto transform = m_Owner->GetCTransform();
 	for (const auto component :m_Owner->GetAllComponents())
 	{
-		glPushMatrix();
-		glTranslatef(transform->GetPosition().x + m_Dimensions.x/2, transform->GetPosition().y + m_Dimensions.y/2, transform->GetPosition().z + m_Dimensions.z/2);
-		glRotatef(transform->GetRotation().z, 0, 0, 1);
-		glTranslatef(-transform->GetPosition().x - m_Dimensions.x/2, -transform->GetPosition().y-m_Dimensions.y/2, -transform->GetPosition().z-m_Dimensions.z/2);
-		component->Render();
-		glPopMatrix();
+		if (m_FlipHorizontal)
+		{
+			glPushMatrix();
+			glTranslatef(2 * transform->GetPosition().x + m_Dimensions.x, 0, 0);
+			glScalef(-1, 1, 1);
+			{
+				glPushMatrix();
+				glTranslatef(transform->GetPosition().x + m_Dimensions.x / 2, transform->GetPosition().y + m_Dimensions.y / 2, transform->GetPosition().z + m_Dimensions.z / 2);
+				glRotatef(transform->GetRotation().z, 0, 0, 1);
+				glTranslatef(-transform->GetPosition().x - m_Dimensions.x / 2, -transform->GetPosition().y - m_Dimensions.y / 2, -transform->GetPosition().z - m_Dimensions.z / 2);
+				component->Render();
+				glPopMatrix();
+			}
+			glPopMatrix();
+			
+		}
+		else
+		{
+			glPushMatrix();
+			glTranslatef(transform->GetPosition().x + m_Dimensions.x / 2, transform->GetPosition().y + m_Dimensions.y / 2, transform->GetPosition().z + m_Dimensions.z / 2);
+			glRotatef(transform->GetRotation().z, 0, 0, 1);
+			glTranslatef(-transform->GetPosition().x - m_Dimensions.x / 2, -transform->GetPosition().y - m_Dimensions.y / 2, -transform->GetPosition().z - m_Dimensions.z / 2);
+			component->Render();
+			glPopMatrix();
+		}
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +56,7 @@ CTextRender::CTextRender(const std::string& text, const std::string& fontPath, i
 	m_Dimensions.x = dimensions.x;
 	m_Dimensions.y = dimensions.y;
 }
-void CTextRender::Start()
+void CTextRender::Awake()
 {
 	if (m_NeedsUpdate)
 	{
@@ -94,12 +113,12 @@ void CTextRender::SetText(const std::string& text)
 //Texture2D Render
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-CTexture2DRender::CTexture2DRender( const std::string& filePath)
-	:m_Texture(ResourceManager::GetInstance().LoadTexture(filePath)), m_SourceRect{}, m_Width{},m_Height{}
+CTexture2DRender::CTexture2DRender( const std::string& filePath, glm::vec2 dimensions)
+	:m_Texture(ResourceManager::GetInstance().LoadTexture(filePath)), m_SourceRect{}, m_Width{ int(dimensions.x) }, m_Height{ int(dimensions.y) }
 {
 
 }
-void CTexture2DRender::Start()
+void CTexture2DRender::Awake()
 {
 	CRender* render{};
 	render = m_Owner->GetComponent<CRender>();
@@ -107,10 +126,16 @@ void CTexture2DRender::Start()
 	{
 		m_Owner->AddComponent<CRender>(std::make_shared<CRender>());
 		render = m_Owner->GetComponent<CRender>();
+		m_Width = int(m_Texture->GetWidth());
+		m_Height = int(m_Texture->GetHeight());
+		render->SetDimensions(glm::vec3{ m_Width , m_Height, 0 });
 	}
-	m_Width = int(m_Texture->GetWidth());
-	m_Height = int(m_Texture->GetHeight());
-	render->SetDimensions(glm::vec3{m_Width , m_Height, 0 });
+	else
+	{
+		auto dim = render->GetDimensions();
+		m_Width = int(dim.x);
+		m_Height = int(dim.y);
+	}
 }
 
 void CTexture2DRender::Render()const
@@ -174,7 +199,7 @@ CShape2DRender::CShape2DRender(Shape shape, glm::vec2 dimensions,bool isHollow, 
 	m_isHollow = isHollow;
 	m_Color = color;
 }
-void CShape2DRender::Start()
+void CShape2DRender::Awake()
 {
 	CRender* render{};
 	render = m_Owner->GetComponent<CRender>();

@@ -68,7 +68,7 @@ namespace Crusade
 		void SetDestDimensions(const int& w, const int& h)const { m_Renderer->SetDestDimensions(w, h); }
 	private:
 		void ResetAllConditions();
-		void Start() override;
+		void Awake() override;
 		std::vector<std::shared_ptr<Transition>>m_Transitions{};
 		std::vector<std::shared_ptr<Animation>>m_Animations{};
 		Animation* m_CurrentAnimation{};

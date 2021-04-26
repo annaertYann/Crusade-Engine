@@ -20,7 +20,7 @@ namespace Crusade
 		virtual void Update(){}
 		virtual void LateUpdate(){}
 		virtual void Render()const{}
-		
+		virtual void Notify(const std::string&){}
 		friend class GameObject;
 	
 	protected:
@@ -31,7 +31,8 @@ namespace Crusade
 		virtual void OnCollisionEnter(CCollider*) { }
 		virtual void OnTriggerExit(CCollider*) {}
 		virtual void OnCollisionExit(CCollider*) { }
-		virtual void Start(){};
+		virtual void Awake(){}//HAPPENS RIHT AFTER COMPONENTS GETS ADDED TO THE OBJECT // NOT ALL COMPONENTS MAY BE ADDED ALREADY
+		virtual void Start(){}//HAPPENS RIGHT BEFORE THE FIRST UPDATE
 		void SetOwner(GameObject* owner) { m_Owner = owner; }
 	};
 }

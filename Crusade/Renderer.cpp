@@ -49,12 +49,7 @@ void Crusade::Renderer::Render() const
 	//SDL_RenderClear(m_Renderer);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
-	glPushMatrix();
-	//glScalef(1, -1, 1);
-	//glTranslatef(0, -GetWindowSize().height, 0);
 	SceneManager::GetInstance().Render();
-	glPopMatrix();
-	
 	/*ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame(m_window);
 	ImGui::NewFrame();

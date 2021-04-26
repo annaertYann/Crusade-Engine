@@ -2,15 +2,20 @@
 #include "Camera2D.h"
 #include "utils.h"
 using namespace Crusade;
+bool Camera2D::m_IsWindowScaled = false;
 Camera2D::Camera2D(const Point2f& startPos, const Window& window)
 	:m_Position(startPos)
 	,m_Window(window)
 {
-	const Vector2f diffInWindow{ GetScaledWindowSize().width/ window.width  , GetScaledWindowSize().height/ window.height };
-	Zoom(1/diffInWindow.x, 1/diffInWindow.y);
-	for (int i {};i<500;i++)
+	if (!m_IsWindowScaled)
 	{
-		Track(Point2f{ (startPos.x+(m_Window.width/2)*diffInWindow.x) ,(startPos.y+ (m_Window.height/2)*diffInWindow.y )}, 10);
+		const Vector2f diffInWindow{ GetScaledWindowSize().width / window.width  , GetScaledWindowSize().height / window.height };
+		Zoom(1 / diffInWindow.x, 1 / diffInWindow.y);
+		for (int i{}; i < 500; i++)
+		{
+			Track(Point2f{ (startPos.x + (m_Window.width / 2) * diffInWindow.x) ,(startPos.y + (m_Window.height / 2) * diffInWindow.y) }, 10);
+		}
+		m_IsWindowScaled = true;
 	}
 }
 void Camera2D::Track(const Point2f& target,const float& deltaTime)

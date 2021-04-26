@@ -9,6 +9,10 @@
 #include "CRigidBody2D.h"
 #include "Camera2D.h"
 #include "Renderer.h"
+#include "QBertTest.h"
+#include "Qbert.h"
+#include "Hexagon.h"
+#include "MovementSteering.h"
 using namespace Crusade;
 void Game::LoadGame()const
 {
@@ -51,9 +55,9 @@ void Game::LoadGame()const
 		scene.Add(object4);
 
 		//QBERT
-		auto qBert = QBert::GetInstance().CreateObject({ 200,400,0 }, { 0,0,90 });
+		auto qBert = QBertTest::GetInstance().CreateObject({ 200,400,0 }, { 0,0,90 });
 		scene.Add(qBert);
-		auto qBert2 = QBert::GetInstance().CreateObject({ 200,300,0 });
+		auto qBert2 = QBertTest::GetInstance().CreateObject({ 200,300,0 });
 		qBert2->RemoveComponent<QbertController>();
 		qBert2->AddComponent<QbertController>(std::make_shared<QbertController>(SDL_SCANCODE_KP_4, SDL_SCANCODE_KP_5));
 		scene.Add(qBert2);
@@ -88,7 +92,9 @@ void Game::LoadGame()const
 		ball->GetComponent<CTexture2DRender>()->SetDestDimensions(50, 50);
 		ball->GetComponent<CRigidBody2D>()->SetVelocity({ -100,400 });
 		ball->GetComponent<CRigidBody2D>()->SetGravityEnabled(false);
-		ball->AddComponent<MoveInput>(std::make_shared<MoveInput>());
+		ball->AddComponent<TestInput>(std::make_shared<TestInput>());
+		ball->AddComponent<BallSave>(std::make_shared<BallSave>("testFile"));
+		ball->AddComponent<BallLoad>(std::make_shared<BallLoad>("testFile"));
 		ball->SetName("Ball");
 		scene.Add(ball);
 
@@ -114,42 +120,25 @@ void Game::LoadGame()const
 	}
 	//QBERT GAME
 	{
-		auto& scene = SceneManager::GetInstance().CreateScene("Qbert");
+		auto& scene1 = SceneManager::GetInstance().CreateScene("Qbert");
+		//SET CURRENT SCENE
+		SceneManager::GetInstance().SetCurrentScene("Qbert");
 		//CAMERA
+		auto window = Renderer::GetInstance().GetWindowSize();
 		auto camera = std::make_shared<GameObject>();
-		camera->AddComponent<Camera2D>(std::make_shared<Camera2D>(Point2f{ 0,0 }, Renderer::GetInstance().GetWindowSize()));
+		camera->AddComponent<Camera2D>(std::make_shared<Camera2D>(Point2f{ 0,0 },window ));
 		camera->SetName("Camera");
-		scene.Add(camera);
+		scene1.Add(camera);
 
-		const auto render = camera->GetComponent<Camera2D>()->GetOriginalWindow();
-		const float hexaSize{ render.width / 8 };
-		for (int j{}; j < 8; j++)
-		{
-			for (int i{}; i < 8; i++)
-			{
-				if (j % 2 == 0)
-				{
-					//ADD HEXAGON
-					auto HEXAGON = std::make_shared<GameObject>();
-					HEXAGON->AddComponent<CRender>(std::make_shared<CRender>());
-					HEXAGON->AddComponent<CTransform>(std::shared_ptr<CTransform>{new CTransform{ {i * hexaSize,j * hexaSize * 3 / 4,0},{} }});
-					HEXAGON->AddComponent<CShape2DRender>(std::make_shared<CShape2DRender>(CShape2DRender::Shape::Hexagon, glm::vec2{ hexaSize,hexaSize }, false, SDL_Color{ 1,0,0,1 }));
-					HEXAGON->AddComponent<CCollider>(std::make_shared<cHexagonCollider>(Rectf{ 0,0,hexaSize,hexaSize }));
-					scene.Add(HEXAGON);
-				}
-				else
-				{
-					//ADD HEXAGON
-					auto HEXAGON = std::make_shared<GameObject>();
-					HEXAGON->AddComponent<CRender>(std::make_shared<CRender>());
-					HEXAGON->AddComponent<CTransform>(std::shared_ptr<CTransform>{new CTransform{ {i * hexaSize + hexaSize / 2,j * hexaSize * 3 / 4,0},{} }});
-					HEXAGON->AddComponent<CShape2DRender>(std::make_shared<CShape2DRender>(CShape2DRender::Shape::Hexagon, glm::vec2{ hexaSize,hexaSize }, false, SDL_Color{ 1,0,0,1 }));
-					HEXAGON->AddComponent<CCollider>(std::make_shared<cHexagonCollider>(Rectf{ 0,0,hexaSize,hexaSize }));
-					scene.Add(HEXAGON);
-				}
-			}
-		}
+		auto CubePyramid = std::make_shared<GameObject>();
+		CubePyramid->AddComponent<CTransform>(std::make_shared<CTransform>(glm::vec3{320-Cube::GetInstance().GetSize()/2 ,480-100,0},glm::vec3{}));
+		CubePyramid->AddComponent<CubePyramidConstructor>(std::make_shared<CubePyramidConstructor>());
+		scene1.Add(CubePyramid);
+
+		auto qbert = QBert::GetInstance().CreateObject(glm::vec3{320,640,0});
+		//qbert->GetComponent<CTransform>()->SetScale(2, 2, 2);
+		scene1.Add(qbert);
+
+		
 	}
-	//SET CURRENT SCENE
-	SceneManager::GetInstance().SetCurrentScene("Qbert");
 }

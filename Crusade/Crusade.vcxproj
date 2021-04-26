@@ -210,17 +210,23 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Colliders2D.h" />
     <ClInclude Include="Command.h" />
+    <ClInclude Include="CSaveLoad.h" />
     <ClInclude Include="CTransform.h" />
     <ClInclude Include="Delay.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Hexagon.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Minigin.h" />
     <ClInclude Include="MiniginPCH.h" />
+    <ClInclude Include="MovementSteering.h" />
+    <ClInclude Include="PlayerMovement.h" />
     <ClInclude Include="Prefab.h" />
     <ClInclude Include="Prefabs.h" />
+    <ClInclude Include="Qbert.h" />
+    <ClInclude Include="QBertTest.h" />
     <ClInclude Include="RenderComponents.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -284,11 +290,13 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClCompile Include="CAnimator2D.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Colliders2D.cpp" />
+    <ClCompile Include="CSaveLoad.cpp" />
     <ClCompile Include="CTransform.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Hexagon.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Minigin.cpp" />
@@ -298,7 +306,11 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="MovementSteering.cpp" />
+    <ClCompile Include="PlayerMovement.cpp" />
     <ClCompile Include="Prefabs.cpp" />
+    <ClCompile Include="Qbert.cpp" />
+    <ClCompile Include="QBertTest.cpp" />
     <ClCompile Include="RenderComponents.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />

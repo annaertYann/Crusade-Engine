@@ -23,7 +23,7 @@ namespace Crusade
 		CCollider* GetAttachedCollider()const { return m_AttachedCollider; }
 		void SetIsStatic(const bool& x) { m_IsStatic = x; }
 	private:
-		void Start() override;
+		void Awake() override;
 		void DoCollisions();
 		void Bounce(const utils::HitInfo& info,const bool& reverse);
 		void ApplyCollision(const utils::HitInfo& info,CCollider* col);
