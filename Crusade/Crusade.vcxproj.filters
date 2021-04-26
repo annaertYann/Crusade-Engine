@@ -103,15 +103,6 @@
     <ClCompile Include="CSaveLoad.cpp">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Prefabs.cpp">
-      <Filter>Crusade\Game\TestScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts.cpp">
-      <Filter>Crusade\Game\TestScene</Filter>
-    </ClCompile>
-    <ClCompile Include="QBertTest.cpp">
-      <Filter>Crusade\Game\TestScene</Filter>
-    </ClCompile>
     <ClCompile Include="Qbert.cpp">
       <Filter>Crusade\Game\Qbert</Filter>
     </ClCompile>
@@ -122,6 +113,9 @@
       <Filter>Crusade\Game\Qbert</Filter>
     </ClCompile>
     <ClCompile Include="PlayerMovement.cpp">
+      <Filter>Crusade\Game\Qbert</Filter>
+    </ClCompile>
+    <ClCompile Include="FPS.cpp">
       <Filter>Crusade\Game\Qbert</Filter>
     </ClCompile>
   </ItemGroup>
@@ -243,15 +237,6 @@
     <ClInclude Include="CSaveLoad.h">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Prefabs.h">
-      <Filter>Crusade\Game\TestScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts.h">
-      <Filter>Crusade\Game\TestScene</Filter>
-    </ClInclude>
-    <ClInclude Include="QBertTest.h">
-      <Filter>Crusade\Game\TestScene</Filter>
-    </ClInclude>
     <ClInclude Include="Qbert.h">
       <Filter>Crusade\Game\Qbert</Filter>
     </ClInclude>
@@ -262,6 +247,9 @@
       <Filter>Crusade\Game\Qbert</Filter>
     </ClInclude>
     <ClInclude Include="PlayerMovement.h">
+      <Filter>Crusade\Game\Qbert</Filter>
+    </ClInclude>
+    <ClInclude Include="FPS.h">
       <Filter>Crusade\Game\Qbert</Filter>
     </ClInclude>
   </ItemGroup>

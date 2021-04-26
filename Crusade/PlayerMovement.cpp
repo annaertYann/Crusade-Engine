@@ -41,10 +41,7 @@ void PlayerMovementKeyBoard::Start()
 		m_Cubes.push_back(col);
 	}
 	m_CurrentCube = m_Cubes[0];
-	auto target = m_CurrentCube->GetCenter();
-	target.x -= m_ObjectSize/2;
-	target.y += m_ObjectSize / 2;
-	m_MovementSteering->SetTarget(Vector2f{ target});
+	SetTargetToCurrentCube();
 }
 
 void PlayerMovementKeyBoard::Update()
@@ -79,13 +76,10 @@ void PlayerMovementKeyBoard::Update()
 				if (Raycast(cube->GetVertices(), pos1, pos2, info))
 				{
 					m_CurrentCube = cube;
-					auto target = m_CurrentCube->GetCenter();
-					target.x -= m_ObjectSize / 2;
-					target.y += m_ObjectSize / 2;
-					m_MovementSteering->SetTarget(Vector2f{ target });
-					std::cout << "NEW TARGET SELECTED" << std::endl;
+					SetTargetToCurrentCube();
 					NotifyObjectOfJump();
 					m_Direction = Vector2f{};
+					m_CubeIsTriggerd = false;
 					return;
 				}
 			}
@@ -93,6 +87,28 @@ void PlayerMovementKeyBoard::Update()
 		m_Direction = Vector2f{};
 		std::cout << "NO Target Found" << std::endl;
 	}
+	TriggerCurrentCube();
+}
+void PlayerMovementKeyBoard::TriggerCurrentCube()
+{
+	if (!m_CubeIsTriggerd)
+	{
+		const auto pos = m_Owner->GetComponent<CTransform>()->GetPosition();
+		if (abs(m_MovementSteering->GetTarget().x - pos.x) < 5 && abs(m_MovementSteering->GetTarget().y - pos.y) < 5)
+		{
+			m_CurrentCube->GetOwner()->Notify("Triggered");
+			m_CubeIsTriggerd = true;
+		}
+	}
+}
+
+void PlayerMovementKeyBoard::SetTargetToCurrentCube()const
+{
+	auto target = m_CurrentCube->GetCenter();
+	target.x -= m_ObjectSize / 2;
+	target.y += m_ObjectSize / 2;
+	m_MovementSteering->SetTarget(Vector2f{ target });
+	std::cout << "NEW TARGET SELECTED" << std::endl;
 }
 
 void PlayerMovementKeyBoard::NotifyObjectOfJump()const

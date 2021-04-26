@@ -215,6 +215,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClInclude Include="Delay.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="FPS.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Hexagon.h" />
@@ -224,16 +225,13 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClInclude Include="MovementSteering.h" />
     <ClInclude Include="PlayerMovement.h" />
     <ClInclude Include="Prefab.h" />
-    <ClInclude Include="Prefabs.h" />
     <ClInclude Include="Qbert.h" />
-    <ClInclude Include="QBertTest.h" />
     <ClInclude Include="RenderComponents.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="CRigidBody2D.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Scripts.h" />
     <ClInclude Include="SDL_Sound_System.h" />
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="Singleton.h" />
@@ -294,6 +292,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClCompile Include="CTransform.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="FPS.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Hexagon.cpp" />
@@ -308,16 +307,13 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     </ClCompile>
     <ClCompile Include="MovementSteering.cpp" />
     <ClCompile Include="PlayerMovement.cpp" />
-    <ClCompile Include="Prefabs.cpp" />
     <ClCompile Include="Qbert.cpp" />
-    <ClCompile Include="QBertTest.cpp" />
     <ClCompile Include="RenderComponents.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="CRigidBody2D.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Scripts.cpp" />
     <ClCompile Include="SDL_Sound_System.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="Sound_System.cpp" />

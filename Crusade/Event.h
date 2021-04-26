@@ -24,7 +24,7 @@ namespace Crusade
 	};
 
 
-	class Publisher final :public Singleton<Publisher>
+	class Publisher final :public Singleton<Publisher> /////////// MAKE COMP U IDIOTA
 	{
 	public:
 		void Notify(GameObject* actor, const std::string& message);

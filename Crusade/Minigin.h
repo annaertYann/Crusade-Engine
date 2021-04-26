@@ -14,7 +14,7 @@ namespace Crusade
 		static const int MsPerFrame = 16; //16 for 60 fps, 33 for 30 fps
 		SDL_Window* m_Window{};
 		Game* m_Game=nullptr;
-		int m_WindowWidth=640;
-		int m_WindowHeight=480;
+		int m_WindowWidth=1280;
+		int m_WindowHeight=800;
 	};
 }

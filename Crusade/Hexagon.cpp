@@ -17,9 +17,13 @@ void CubePyramidConstructor::Awake()
 		{
 			auto obj = Cube::GetInstance().CreateObject({ pos.x - (j * hexaSize / 2) + (i * hexaSize),pos.y - j * hexaSize * 3 / 4  ,pos.z }, {}, {1,1,1});
 			scene->Add(obj);
+			auto activator = obj->GetComponent<CubeActivator>();
+			activator->SetColors(m_Color1, m_Color2);
+			activator->SetTriggerType(m_TriggerType);
 		}
 		numberOfCubesInRow++;
 	}
+	
 }
 std::shared_ptr<GameObject> Cube::CreateObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
@@ -29,6 +33,44 @@ std::shared_ptr<GameObject> Cube::CreateObject(glm::vec3 position, glm::vec3 rot
 	cube->AddComponent<CShape2DRender>(std::make_shared<CShape2DRender>(CShape2DRender::Shape::Hexagon, glm::vec2{ m_HexaSize,m_HexaSize }, false, SDL_Color{ 1,0,0,1 }));
 	cube->AddComponent<CCollider>(std::make_shared<cHexagonCollider>(Rectf{ 0,0,m_HexaSize,m_HexaSize }));
 	cube->AddComponent<CTexture2DRender>(std::make_shared<CTexture2DRender>("Cube.png"));
+	cube->AddComponent<CubeActivator>(std::make_shared<CubeActivator>());
 	cube->AddTag("Cube");
 	return cube;
 }
+void CubeActivator::Start()
+{
+	m_Renderer = m_Owner->GetComponent<CShape2DRender>();
+}
+void CubeActivator::Notify(const std::string& message)
+{
+	if (message == "Triggered")
+	{
+		switch (m_TriggerType)
+		{
+		case TriggerType::permanent:
+			TriggerPermanent();
+			break;
+		case TriggerType::switching:
+			TriggerSwitching();
+			break;
+		}
+	}
+}
+void CubeActivator::TriggerPermanent()
+{
+	m_IsTrigged = true;
+	m_Renderer->SetColor(m_Color2);
+}
+void CubeActivator::TriggerSwitching()
+{
+	utils::SwitchBoolean(m_IsTrigged);
+	if (m_IsTrigged)
+	{
+		m_Renderer->SetColor(m_Color2);
+	}
+	else
+	{
+		m_Renderer->SetColor(m_Color1);
+	}
+}
+

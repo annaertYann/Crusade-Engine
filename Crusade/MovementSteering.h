@@ -24,6 +24,7 @@ public:
 	SteeringBehavior& operator=(SteeringBehavior&& other) = delete;
 
 	void SetTarget(const Vector2f& target) { m_Target = target; }
+	Vector2f GetTarget()const { return m_Target; }
 	virtual SteeringOutput2D CalculateSteering(Crusade::GameObject* obj,float deltaTime)=0;
 protected:
 	Vector2f m_Target;
@@ -46,6 +47,7 @@ public:
 	
 	void SetMovementBehaviour(const std::shared_ptr<SteeringBehavior>& behaviour) { m_SteeringBehavior = behaviour; }
 	void SetTarget(const Vector2f &target)const { m_SteeringBehavior->SetTarget(target); }
+	Vector2f GetTarget()const { return m_SteeringBehavior->GetTarget(); }
 private:
 	std::shared_ptr<SteeringBehavior>m_SteeringBehavior=nullptr;
 };

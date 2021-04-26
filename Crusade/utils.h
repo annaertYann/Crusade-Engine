@@ -73,5 +73,9 @@ namespace utils
 	bool IntersectRectLine(const Rectf& r, const Point2f& p1, const Point2f& p2, float& intersectMin, float& intersectMax);
 
 #pragma endregion CollisionFunctionality
+	void SwitchBoolean(bool& x);
 
+
+
+	
 }

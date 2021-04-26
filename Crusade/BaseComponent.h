@@ -20,13 +20,13 @@ namespace Crusade
 		virtual void Update(){}
 		virtual void LateUpdate(){}
 		virtual void Render()const{}
-		virtual void Notify(const std::string&){}
 		friend class GameObject;
 	
 	protected:
 		GameObject* m_Owner = nullptr;
 	
 	private:
+		virtual void Notify(const std::string&) {}
 		virtual void OnTriggerEnter(CCollider* ){}
 		virtual void OnCollisionEnter(CCollider*) { }
 		virtual void OnTriggerExit(CCollider*) {}

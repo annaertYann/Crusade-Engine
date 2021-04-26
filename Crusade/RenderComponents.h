@@ -65,6 +65,7 @@ namespace Crusade
 		CShape2DRender(Shape shape,glm::vec2 dimensions,bool isHollow, const SDL_Color& color);
 		void Render() const override;
 		void SetLineWidth(const float& width) { m_LineWidht = width; }
+		void SetColor(const SDL_Color& color) { m_Color = color; }
 	private:
 		void Awake() override;
 		float m_LineWidht = 1;

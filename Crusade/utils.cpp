@@ -633,5 +633,16 @@ bool utils::IntersectRectLine(const Rectf& r, const Point2f& p1, const Point2f& 
 	intersectMax = tMax;
 	return true;
 }
+void utils::SwitchBoolean(bool& x)
+{
+	if (x)
+	{
+		x = false;
+	}
+	else
+	{
+		x = true;
+	}
+}
 
 #pragma endregion CollisionFunctionality

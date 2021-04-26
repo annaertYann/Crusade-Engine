@@ -221,7 +221,7 @@ void CShape2DRender::Render() const
 	
 	
 	std::vector<Point2f>vertices;
-	glColor4f(m_Color.r , m_Color.b, m_Color.b , m_Color.a);
+	glColor4f(m_Color.r , m_Color.g, m_Color.b , m_Color.a);
 	if (m_isHollow)
 	{
 		switch (m_Shape)

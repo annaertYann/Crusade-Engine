@@ -13,7 +13,9 @@ public:
 	void Update() override;
 	void Notify(const std::string& message) override;	
 private:
+	void TriggerCurrentCube();
 	void NotifyObjectOfJump()const;
+	void SetTargetToCurrentCube()const;
 	std::unique_ptr<Crusade::CommandKillSwitch>m_UpSwitch{};
 	std::unique_ptr<Crusade::CommandKillSwitch>m_DownSwitch{};
 	std::unique_ptr<Crusade::CommandKillSwitch>m_LeftSwitch{};
@@ -24,11 +26,12 @@ private:
 	int m_RightButton;
 	float m_ObjectSize;
 	bool m_IsLeftSelected = false;
+	bool m_CubeIsTriggerd = false;
 	MovementSteering* m_MovementSteering=nullptr;
 	Vector2f m_Direction{};
 	Crusade::Delay m_DirectionChoiceDelay{0.3f};
 	std::vector<Crusade::CCollider*>m_Cubes;
-	Crusade::CCollider* m_CurrentCube=nullptr;
+	Crusade::CCollider* m_CurrentCube = nullptr;
 };
 class UpMovementKey final :public Crusade::Command
 {
