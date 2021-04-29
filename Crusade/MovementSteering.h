@@ -37,7 +37,12 @@ public:
 	explicit Seek(const float& speed = 0, const Vector2f& target = Vector2f{}):SteeringBehavior(speed,target){}
 	SteeringOutput2D CalculateSteering(Crusade::GameObject* obj, float deltaTime) override;
 };
-
+class NullSteering final :public SteeringBehavior
+{
+public:
+	explicit NullSteering() :SteeringBehavior(0, Vector2f{}) {}
+	SteeringOutput2D CalculateSteering(Crusade::GameObject* obj, float deltaTime) override;
+};
 class MovementSteering final:public Crusade::Component
 {
 public:

@@ -103,20 +103,29 @@
     <ClCompile Include="CSaveLoad.cpp">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Lives.cpp">
+      <Filter>Crusade\Game\Qbert\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Crusade\Game\Qbert\Observers</Filter>
+    </ClCompile>
     <ClCompile Include="Qbert.cpp">
-      <Filter>Crusade\Game\Qbert</Filter>
+      <Filter>Crusade\Game\Qbert\Player</Filter>
     </ClCompile>
     <ClCompile Include="Hexagon.cpp">
-      <Filter>Crusade\Game\Qbert</Filter>
-    </ClCompile>
-    <ClCompile Include="MovementSteering.cpp">
-      <Filter>Crusade\Game\Qbert</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerMovement.cpp">
-      <Filter>Crusade\Game\Qbert</Filter>
+      <Filter>Crusade\Game\Qbert\Level</Filter>
     </ClCompile>
     <ClCompile Include="FPS.cpp">
-      <Filter>Crusade\Game\Qbert</Filter>
+      <Filter>Crusade\Game\Qbert\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementSteering.cpp">
+      <Filter>Crusade\Game\Qbert\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathBox.cpp">
+      <Filter>Crusade\Game\Qbert\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Crusade\Game\Qbert\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,20 +246,29 @@
     <ClInclude Include="CSaveLoad.h">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Lives.h">
+      <Filter>Crusade\Game\Qbert\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Crusade\Game\Qbert\Observers</Filter>
+    </ClInclude>
     <ClInclude Include="Qbert.h">
-      <Filter>Crusade\Game\Qbert</Filter>
+      <Filter>Crusade\Game\Qbert\Player</Filter>
     </ClInclude>
     <ClInclude Include="Hexagon.h">
-      <Filter>Crusade\Game\Qbert</Filter>
-    </ClInclude>
-    <ClInclude Include="MovementSteering.h">
-      <Filter>Crusade\Game\Qbert</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerMovement.h">
-      <Filter>Crusade\Game\Qbert</Filter>
+      <Filter>Crusade\Game\Qbert\Level</Filter>
     </ClInclude>
     <ClInclude Include="FPS.h">
-      <Filter>Crusade\Game\Qbert</Filter>
+      <Filter>Crusade\Game\Qbert\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementSteering.h">
+      <Filter>Crusade\Game\Qbert\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathBox.h">
+      <Filter>Crusade\Game\Qbert\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Crusade\Game\Qbert\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +331,18 @@
     </Filter>
     <Filter Include="Crusade\Utility\Lua">
       <UniqueIdentifier>{68401f60-b0ba-43f0-9e25-3555a955db86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Game\Qbert\Observers">
+      <UniqueIdentifier>{c1576fe2-e326-4369-83f2-09e29a7b15e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Game\Qbert\Player">
+      <UniqueIdentifier>{a3ebaeb3-7245-4945-b235-ca074589805b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Game\Qbert\AI">
+      <UniqueIdentifier>{3efc7f99-4d69-4d87-870b-c8e156d0c6b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Game\Qbert\Level">
+      <UniqueIdentifier>{371904f3-b3b2-476f-aee8-313f14c76928}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

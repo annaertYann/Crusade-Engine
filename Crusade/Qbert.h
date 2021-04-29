@@ -7,6 +7,9 @@ class QBert final : public Crusade::Prefab<QBert>
 {
 public:
 	std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position = {}, glm::vec3 rotation = {}, glm::vec3 scale = { 1,1,1 }) override;
+	float GetSpeed()const { return m_Speed; }
+private:
+	float m_Speed = 200;
 };
 class QbertAnimationTriggerer final :public Crusade::Component
 {

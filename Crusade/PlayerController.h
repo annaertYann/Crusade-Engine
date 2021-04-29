@@ -4,18 +4,22 @@
 #include "Delay.h"
 #include "MovementSteering.h"
 #include "Colliders2D.h"
-class PlayerMovementKeyBoard final:public Crusade::Component
+#include "Event.h"
+class PlayerControllerKeyBoard final:public Crusade::Component
 {
 public:
-	PlayerMovementKeyBoard(int UpButton, int DownButton,int LeftButton,int RightButton,float objectSize);
+	PlayerControllerKeyBoard(int UpButton, int DownButton,int LeftButton,int RightButton,float objectSize);
 	void Awake() override;
 	void Start() override;
 	void Update() override;
 	void Notify(const std::string& message) override;	
 private:
+	void ResetToStart();
 	void TriggerCurrentCube();
 	void NotifyObjectOfJump()const;
 	void SetTargetToCurrentCube()const;
+	void SetTargetWhenNoCubeFound();
+	bool Move();
 	std::unique_ptr<Crusade::CommandKillSwitch>m_UpSwitch{};
 	std::unique_ptr<Crusade::CommandKillSwitch>m_DownSwitch{};
 	std::unique_ptr<Crusade::CommandKillSwitch>m_LeftSwitch{};
@@ -27,11 +31,17 @@ private:
 	float m_ObjectSize;
 	bool m_IsLeftSelected = false;
 	bool m_CubeIsTriggerd = false;
+	bool m_IsEnabled = true;
 	MovementSteering* m_MovementSteering=nullptr;
 	Vector2f m_Direction{};
 	Crusade::Delay m_DirectionChoiceDelay{0.3f};
+	Crusade::Delay m_DieDelay{0.4f};
 	std::vector<Crusade::CCollider*>m_Cubes;
+
+	Crusade::CRigidBody2D* m_RigidBody = nullptr;
 	Crusade::CCollider* m_CurrentCube = nullptr;
+	Crusade::Publisher* m_Publisher=nullptr;
+	glm::vec3 m_StartPos={};
 };
 class UpMovementKey final :public Crusade::Command
 {

@@ -2,6 +2,7 @@
 #include "Hexagon.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "Event.h"
 using namespace Crusade;
 void CubePyramidConstructor::Awake()
 {
@@ -31,15 +32,21 @@ std::shared_ptr<GameObject> Cube::CreateObject(glm::vec3 position, glm::vec3 rot
 	cube->AddComponent<CTransform>(std::make_shared<CTransform>(position, rotation, scale));
 	cube->AddComponent<CRender>(std::make_shared<CRender>());
 	cube->AddComponent<CShape2DRender>(std::make_shared<CShape2DRender>(CShape2DRender::Shape::Hexagon, glm::vec2{ m_HexaSize,m_HexaSize }, false, SDL_Color{ 1,0,0,1 }));
-	cube->AddComponent<CCollider>(std::make_shared<cHexagonCollider>(Rectf{ 0,0,m_HexaSize,m_HexaSize }));
+	auto col = std::make_shared<cHexagonCollider>(Rectf{ 0,0,m_HexaSize,m_HexaSize });
+	col->SetIsTrigger(true);
+	cube->AddComponent<CCollider>(col);
 	cube->AddComponent<CTexture2DRender>(std::make_shared<CTexture2DRender>("Cube.png"));
 	cube->AddComponent<CubeActivator>(std::make_shared<CubeActivator>());
+	cube->AddComponent<Publisher>(std::make_shared<Publisher>());
 	cube->AddTag("Cube");
+	cube->SetName("Cube");
 	return cube;
 }
 void CubeActivator::Start()
 {
 	m_Renderer = m_Owner->GetComponent<CShape2DRender>();
+	m_Publisher = m_Owner->GetComponent<Publisher>();
+	m_Publisher->AddObserver( SceneManager::GetInstance().GetCurrentScene()->FindObject("ScoreDisplay").get());
 }
 void CubeActivator::Notify(const std::string& message)
 {
@@ -60,6 +67,7 @@ void CubeActivator::TriggerPermanent()
 {
 	m_IsTrigged = true;
 	m_Renderer->SetColor(m_Color2);
+	if (m_Publisher) { m_Publisher->SendNotification("ColorChange"); }
 }
 void CubeActivator::TriggerSwitching()
 {
@@ -72,5 +80,6 @@ void CubeActivator::TriggerSwitching()
 	{
 		m_Renderer->SetColor(m_Color1);
 	}
+	if (m_Publisher) {m_Publisher->SendNotification("ColorChange");}
 }
 

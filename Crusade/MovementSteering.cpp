@@ -15,6 +15,11 @@ SteeringOutput2D Seek::CalculateSteering(GameObject* obj, float deltaTime)
 	steering.LinearVelocity *= m_Speed;
 	return steering;
 }
+SteeringOutput2D NullSteering::CalculateSteering(GameObject*, float )
+{
+	const SteeringOutput2D steering = {};
+	return steering;
+}
 void MovementSteering::FixedUpdate()
 {
 	auto& time = Time::GetInstance();

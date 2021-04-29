@@ -1,40 +1,33 @@
 #include "MiniginPCH.h"
 #include "Event.h"
 using namespace Crusade;
-
-
-int CObserver::m_NextTag = 0;
-
-CObserver::CObserver()
+void Publisher::AddObserver(GameObject* observer)
 {
-	m_Tag = m_NextTag;
-	m_NextTag++;
-	Publisher::GetInstance().AddObserver(this);
+	auto comps = observer->GetAllComponents();
+	for (auto comp:comps)
+	{
+		auto casted = dynamic_cast<CObserver*>(comp.get());
+		if (casted !=nullptr)
+		{
+			m_observers.push_back(casted);
+		}
+	}
 }
-CObserver::~CObserver()
-{
-	Publisher::GetInstance().RemoveObserver(this);
-}
-
-void Publisher::AddObserver(CObserver* observer)
-{
-	m_observers.push_back(observer);
-}
-void Publisher::RemoveObserver(CObserver* observer)
+void Publisher::RemoveObserver(GameObject* observer)
 {
 	if (m_observers.size() > 0)
 	{
 		m_observers.erase(std::remove_if(m_observers.begin(), m_observers.end(), [&](CObserver* element)
 		{
-			return observer->GetTag() == element->GetTag();
+			return observer->GetObjectNummer() == element->GetOwner()->GetObjectNummer();
 		}), m_observers.end());
 	}
 }
 
-void Publisher::Notify(GameObject* actor, const std::string& message)
+void Publisher::SendNotification(const std::string& message)
 {
 	for (const auto& element:m_observers)
 	{
-		element->Notify(actor, message);
+		element->RecieveNotification(m_Owner, message);
 	}
 }

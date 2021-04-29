@@ -20,7 +20,7 @@ namespace Crusade
 		glm::vec2 GetDimensions()const { return m_Dimensions; }
 	protected:
 		bool m_IsTrigger = false;
-		bool m_IsDebugEnabled = false;
+		bool m_IsDebugEnabled = true;
 		void UpdateVertices();
 		std::vector<Point2f> m_WorldVertices{};
 		std::vector<Point2f>m_LocalVertices{};

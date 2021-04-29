@@ -3,7 +3,7 @@
 #include "CAnimator2D.h"
 #include "CTransform.h"
 #include "MovementSteering.h"
-#include "PlayerMovement.h"
+#include "PlayerController.h"
 using namespace Crusade;
 std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
@@ -29,9 +29,14 @@ std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 ro
 	qbert->AddComponent<CAnimator2D>(animator);
 	//MOVEMENT
 	qbert->AddComponent<MovementSteering>(std::make_shared<MovementSteering>(std::make_shared<Seek>(200.f,Vector2f{0,300.f})));
-	qbert->AddComponent<PlayerMovementKeyBoard>(std::make_shared<PlayerMovementKeyBoard>(SDL_SCANCODE_UP,SDL_SCANCODE_DOWN,SDL_SCANCODE_LEFT,SDL_SCANCODE_RIGHT,40.f));
+	qbert->AddComponent<PlayerControllerKeyBoard>(std::make_shared<PlayerControllerKeyBoard>(SDL_SCANCODE_UP,SDL_SCANCODE_DOWN,SDL_SCANCODE_LEFT,SDL_SCANCODE_RIGHT,40.f));
 	//col
-	qbert->AddComponent<CCollider>(std::make_shared<CRectCollider>(Rectf{0,0,40,40}));
+	auto rigid  = std::make_shared<CRigidBody2D>();
+	rigid->SetGravityEnabled(false);
+	qbert->AddComponent<CRigidBody2D>(rigid);
+	auto col =  std::make_shared<CRectCollider>(Rectf{ 0,0,40,40 });
+	col->SetIsTrigger(true);
+	qbert->AddComponent<CCollider>(col);
 	return qbert;
 }
 void QbertAnimationTriggerer::Start()

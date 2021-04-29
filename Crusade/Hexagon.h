@@ -2,6 +2,7 @@
 #include "BaseComponent.h"
 #include "RenderComponents.h"
 #include "Prefab.h"
+#include "Event.h"
 class Cube final : public Crusade::Prefab<Cube>
 {
 public:
@@ -32,6 +33,7 @@ private:
 	SDL_Color m_Color2;
 	TriggerType m_TriggerType;
 	bool m_IsTrigged = false;
+	Crusade::Publisher* m_Publisher=nullptr;
 };
 class CubePyramidConstructor final :public Crusade::Component
 {
