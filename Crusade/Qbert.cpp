@@ -9,6 +9,9 @@ std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 ro
 {
 	std::shared_ptr<GameObject> qbert{ std::make_shared<GameObject>()};
 	qbert->AddComponent<CTransform>(std::make_shared<CTransform>(position, rotation, scale));
+	auto render = std::make_shared<CRender>();
+	qbert->AddComponent<CRender>(render);
+	render->SetCurrentLayer("Front");
 	//ANIMATIONS
 	const auto animIdle = std::make_shared<Animation>("Qbert/Idle.png", 1, 10.f, false);
 	const auto animJump = std::make_shared<Animation>("Qbert/Jump.png", 2, 8.f,true);

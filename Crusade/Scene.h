@@ -24,6 +24,7 @@ namespace Crusade
 		std::shared_ptr<GameObject> FindObject(const std::string& name);
 		std::vector<std::shared_ptr<GameObject>> FindAllObjectsWithTag(const std::string& tag);
 		std::vector<std::shared_ptr<GameObject>> GetCollisionObjects()const { return m_CollisionObjects; }
+		std::vector < std::shared_ptr<GameObject>> GetAllObjects()const { return m_Objects; }
 		std::string GetName()const { return m_Name; }
 	
 	private:

@@ -3,7 +3,6 @@
 #include "Singleton.h"
 #include <vector>
 #include "Command.h"
-#include "glm/geometric.hpp"
 namespace Crusade
 {
 	enum class InputButtonState

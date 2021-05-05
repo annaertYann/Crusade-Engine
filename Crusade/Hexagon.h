@@ -3,6 +3,7 @@
 #include "RenderComponents.h"
 #include "Prefab.h"
 #include "Event.h"
+#include "CSaveLoad.h"
 class Cube final : public Crusade::Prefab<Cube>
 {
 public:
@@ -17,16 +18,18 @@ class CubeActivator final:public Crusade::Component
 public:
 	enum class TriggerType
 	{
-		permanent,switching
+		permanent,halfPermanent,switching
 	};
 	explicit CubeActivator(const TriggerType& triggerType = TriggerType::permanent,const SDL_Color& color1 = SDL_Color{ 1,0,0,1 }, const SDL_Color& color2 = SDL_Color{ 0,1,0,1 })
 	:m_Color1(color1), m_Color2(color2),m_TriggerType(triggerType) {}
 	void Start() override;
+	void Awake() override;
 	void Notify(const std::string& message) override;
-	void SetColors(const SDL_Color& color1, const SDL_Color& color2) { m_Color1 = color1; m_Color2 = color2; }
+	void SetColors(const SDL_Color& color1, const SDL_Color& color2);
 	void SetTriggerType(const TriggerType& type) { m_TriggerType = type; }
 private:
 	void TriggerPermanent();
+	void TriggerHalfPermanent();
 	void TriggerSwitching();
 	Crusade::CShape2DRender* m_Renderer=nullptr;
 	SDL_Color m_Color1;
@@ -42,8 +45,34 @@ public:
 		const SDL_Color& color1 = SDL_Color{ 1,0,0,1 }, const SDL_Color& color2 = SDL_Color{ 0,1,0,1 })
 		:m_Color1(color1), m_Color2(color2),m_TriggerType(triggerType) {}
 	void Awake() override;
+	SDL_Color GetColor1()const { return m_Color1; }
+	SDL_Color GetColor2()const { return m_Color2; }
+	CubeActivator::TriggerType GetType()const { return m_TriggerType; }
 private:
 	SDL_Color m_Color1;
 	SDL_Color m_Color2;
 	CubeActivator::TriggerType m_TriggerType;
+};
+class HexagonSave final:public Crusade::CTextSave
+{
+public:
+	void Start() override { Save(); }
+	HexagonSave(const std::string& filename):CTextSave(filename){}
+	void SaveFromFile(std::ofstream& file) override;
+};
+class HexagonLoad final :public Crusade::CTextLoad
+{
+public:
+	struct saveInfo
+	{
+		glm::vec3 pos;
+		SDL_Color color1;
+		SDL_Color color2;
+		int TriggerType;
+	};
+	explicit  HexagonLoad(const std::string& filename) :CTextLoad(filename) {}
+	saveInfo GetInfo()const { return m_Info; }
+private:
+	void LoadFromFile(std::ifstream& file) override;
+	saveInfo m_Info{};
 };

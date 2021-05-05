@@ -55,15 +55,20 @@ void Scene::LateUpdate( )
 }
 void Scene::Render() const
 {
-	for (auto& object : m_Objects)
+	for (auto layer : CRender::GetLayers())
 	{
-		const auto cRender = object->GetCRender();
-		if (cRender !=nullptr)
+		for (auto& object : m_Objects)
 		{
-			cRender->RenderObject();
+			const auto cRender = object->GetCRender();
+			if (cRender != nullptr)
+			{
+				if (cRender->GetCurrentLayer() == layer.GetLayerNumber())
+				{
+					cRender->RenderObject();
+				}
+			}
 		}
 	}
-	
 }
 std::shared_ptr<GameObject> Scene::FindObject(const std::string& name)
 {

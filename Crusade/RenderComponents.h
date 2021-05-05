@@ -1,22 +1,38 @@
 #pragma once
 #include "BaseComponent.h"
-#include "Font.h"
 #include "Texture2D.h"
 #include "SDL.h"
-
 namespace Crusade
 {
 	class CTransform;
 	class CRender final : public Component
 	{
-		public:
+	public:
+		struct Layer
+		{
+			explicit Layer(const std::string& name);
+			std::string GetName()const { return name; }
+			int GetLayerNumber()const { return layerNumber; }
+		private:
+			std::string name = "Default";
+			int layerNumber = 0;
+			static int nextLayerNumber;
+		};
+		CRender();
 		void RenderObject()const;
 		void SetDimensions(const glm::vec3& dimensions) { m_Dimensions = dimensions; }
 		glm::vec3 GetDimensions()const { return m_Dimensions; }
 		void SetFliphorizontal(const bool& flip) { m_FlipHorizontal = flip; }
-		private:
+		static bool AddNewLayer(const std::string& layerName);
+		bool SetCurrentLayer(const std::string& layerName);
+		static const std::vector<Layer>& GetLayers() { return m_Layers; }
+		int GetCurrentLayer()const { return m_CurrentLayerNumber; }
+	private:
+		static bool m_LayerCreated;
 		glm::vec3 m_Dimensions{};
 		bool m_FlipHorizontal = false;
+		int m_CurrentLayerNumber=0;
+		static std::vector<Layer> m_Layers;
 	};
 	
 	class CTexture2DRender final : public Component

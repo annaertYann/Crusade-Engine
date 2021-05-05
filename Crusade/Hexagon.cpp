@@ -8,10 +8,22 @@ void CubePyramidConstructor::Awake()
 {
 	auto scene = SceneManager::GetInstance().GetCurrentScene();
 	//const auto window = scene->FindObject("Camera")->GetComponent<Camera2D>()->GetOriginalWindow();
-	const auto pos = m_Owner->GetCTransform()->GetPosition();
+	 auto pos = m_Owner->GetCTransform()->GetPosition();
 	auto HEXAGON = Cube::GetInstance().CreateObject({ pos.x,pos.y,pos.z }, {}, {1,1,1});
 	const auto hexaSize = HEXAGON->GetComponent<CRender>()->GetDimensions().x;
 	auto numberOfCubesInRow = 1;
+	auto loader = m_Owner->GetComponent<HexagonLoad>();
+	if (loader)
+	{
+		if (loader->Load())
+		{
+			auto info = loader->GetInfo();
+			m_Color1 = info.color1;
+			m_Color2 = info.color2;
+			m_TriggerType = CubeActivator::TriggerType(info.TriggerType);
+			pos = info.pos;
+		}
+	}
 	for (int j{}; j < 7; j++)
 	{
 		for (int i{}; i < numberOfCubesInRow; i++)
@@ -30,23 +42,36 @@ std::shared_ptr<GameObject> Cube::CreateObject(glm::vec3 position, glm::vec3 rot
 {
 	auto cube = std::make_shared<GameObject>();
 	cube->AddComponent<CTransform>(std::make_shared<CTransform>(position, rotation, scale));
-	cube->AddComponent<CRender>(std::make_shared<CRender>());
+	auto render = std::make_shared<CRender>();
+	cube->AddComponent<CRender>(render);
+	render->SetCurrentLayer("Middle");
 	cube->AddComponent<CShape2DRender>(std::make_shared<CShape2DRender>(CShape2DRender::Shape::Hexagon, glm::vec2{ m_HexaSize,m_HexaSize }, false, SDL_Color{ 1,0,0,1 }));
 	auto col = std::make_shared<cHexagonCollider>(Rectf{ 0,0,m_HexaSize,m_HexaSize });
 	col->SetIsTrigger(true);
 	cube->AddComponent<CCollider>(col);
 	cube->AddComponent<CTexture2DRender>(std::make_shared<CTexture2DRender>("Cube.png"));
-	cube->AddComponent<CubeActivator>(std::make_shared<CubeActivator>());
 	cube->AddComponent<Publisher>(std::make_shared<Publisher>());
+	cube->AddComponent<CubeActivator>(std::make_shared<CubeActivator>());
 	cube->AddTag("Cube");
 	cube->SetName("Cube");
 	return cube;
 }
-void CubeActivator::Start()
+void CubeActivator::Awake()
 {
 	m_Renderer = m_Owner->GetComponent<CShape2DRender>();
 	m_Publisher = m_Owner->GetComponent<Publisher>();
+}
+
+void CubeActivator::Start()
+{
 	m_Publisher->AddObserver( SceneManager::GetInstance().GetCurrentScene()->FindObject("ScoreDisplay").get());
+	if (m_TriggerType == TriggerType::halfPermanent)
+	{
+		m_Color2.r = uint8_t(float(m_Color2.r)/ 2.f);
+		m_Color2.g = uint8_t(float(m_Color2.g) / 2.f);
+		m_Color2.b = uint8_t(float(m_Color2.b) / 2.f);
+		SetColors(m_Color1, m_Color2);
+	}
 }
 void CubeActivator::Notify(const std::string& message)
 {
@@ -60,14 +85,32 @@ void CubeActivator::Notify(const std::string& message)
 		case TriggerType::switching:
 			TriggerSwitching();
 			break;
+		case TriggerType::halfPermanent:
+			TriggerHalfPermanent();
+			break;
 		}
 	}
 }
+void CubeActivator::SetColors(const SDL_Color& color1, const SDL_Color& color2)
+{
+	
+	m_Color1 = color1; m_Color2 = color2;
+	m_Renderer->SetColor(m_Color2);
+	if (!m_IsTrigged)
+	{
+		m_Renderer->SetColor(m_Color1);
+	}
+	
+}
+
 void CubeActivator::TriggerPermanent()
 {
+	if (m_Publisher && !m_IsTrigged)
+	{
+		m_Publisher->SendNotification("ColorChange");
+	}
 	m_IsTrigged = true;
 	m_Renderer->SetColor(m_Color2);
-	if (m_Publisher) { m_Publisher->SendNotification("ColorChange"); }
 }
 void CubeActivator::TriggerSwitching()
 {
@@ -75,11 +118,86 @@ void CubeActivator::TriggerSwitching()
 	if (m_IsTrigged)
 	{
 		m_Renderer->SetColor(m_Color2);
+		if (m_Publisher) { m_Publisher->SendNotification("ColorChange"); }
 	}
 	else
 	{
 		m_Renderer->SetColor(m_Color1);
 	}
-	if (m_Publisher) {m_Publisher->SendNotification("ColorChange");}
+}
+void CubeActivator::TriggerHalfPermanent()
+{
+	if (m_Publisher && !m_IsTrigged) { m_Publisher->SendNotification("ColorChange"); }
+	m_Renderer->SetColor(m_Color2);
+	m_Color2.r *= 2;
+	m_Color2.g *= 2;
+	m_Color2.b *= 2;
+	m_TriggerType = TriggerType::permanent;
+}
+
+void HexagonSave::SaveFromFile(std::ofstream& file)
+{
+	auto pos = m_Owner->GetCTransform()->GetPosition();
+	auto cubePyramid = m_Owner->GetComponent<CubePyramidConstructor>();
+	file << "Position" << std::endl;
+	file << pos.x << std::endl;
+	file << pos.y << std::endl;
+	file << pos.z << std::endl;
+	file << "Color1" << std::endl;
+	file << int(cubePyramid->GetColor1().r)<< std::endl;
+	file << int(cubePyramid->GetColor1().g )<< std::endl;
+	file << int(cubePyramid->GetColor1().b )<< std::endl;
+	file << int(cubePyramid->GetColor1().a )<< std::endl;
+	file << "Color2" << std::endl;
+	file << int(cubePyramid->GetColor2().r )<< std::endl;
+	file << int(cubePyramid->GetColor2().g) << std::endl;
+	file << int(cubePyramid->GetColor2().b) << std::endl;
+	file << int(cubePyramid->GetColor2().a )<< std::endl;
+	file << "TriggerType" << std::endl;
+	file <<int( cubePyramid->GetType()) << std::endl;
+}
+void HexagonLoad::LoadFromFile(std::ifstream& file)
+{
+	std::string line{};
+	while (file)
+	{
+		std::getline(file, line);
+		if(line=="Position")
+		{
+			std::getline(file, line);
+			m_Info.pos.x = std::stof(line );
+			std::getline(file, line);
+			m_Info.pos.y = std::stof(line);
+			std::getline(file, line);
+			m_Info.pos.z = std::stof(line);
+		}
+		if (line == "Color1")
+		{
+			std::getline(file, line);
+			m_Info.color1.r = Uint8(std::stof(line));
+			std::getline(file, line);
+			m_Info.color1.g = Uint8( std::stof(line));
+			std::getline(file, line);
+			m_Info.color1.b = Uint8(std::stof(line));
+			std::getline(file, line);
+			m_Info.color1.a = Uint8(std::stof(line));
+		}
+		if (line == "Color2")
+		{
+			std::getline(file, line);
+			m_Info.color2.r = Uint8(std::stof(line));
+			std::getline(file, line);
+			m_Info.color2.g = Uint8(std::stof(line));
+			std::getline(file, line);
+			m_Info.color2.b = Uint8(std::stof(line));
+			std::getline(file, line);
+			m_Info.color2.a = Uint8(std::stof(line));
+		}
+		if(line=="TriggerType")
+		{
+			std::getline(file, line);
+			m_Info.TriggerType = std::stoi(line);
+		}
+	}
 }
 

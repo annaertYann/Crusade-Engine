@@ -132,7 +132,6 @@ void CRigidBody2D::RemoveFromIsCollidingList(const int& tag)
 		}), m_CollidingObjectTags.end());
 	}
 }
-
 void CRigidBody2D::ApplyCollision(const utils::HitInfo& info, CCollider* col)
 {
 	auto pos = m_Transform->GetPosition();
@@ -274,7 +273,6 @@ void CRigidBody2D::ApplyCollision(const utils::HitInfo& info, CCollider* col)
 		}
 	}
 }
-
 void CRigidBody2D::Bounce(const utils::HitInfo& info,const bool& reverse)
 {
 	if (!m_BounceDelay.GetIsActive())

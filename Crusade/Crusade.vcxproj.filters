@@ -31,9 +31,6 @@
     <ClCompile Include="Font.cpp">
       <Filter>Crusade\Wrapper</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Crusade\Scene\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Crusade\Foundation\Input</Filter>
     </ClCompile>
@@ -66,9 +63,6 @@
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>Crusade\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Crusade\Game</Filter>
     </ClCompile>
     <ClCompile Include="CRigidBody2D.cpp">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
@@ -126,6 +120,12 @@
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Crusade\Game\Qbert\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Crusade\Scene\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="QbertGame.cpp">
+      <Filter>Crusade\Game\Qbert</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -207,9 +207,6 @@
     <ClInclude Include="Time.h">
       <Filter>Crusade\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Crusade\Game</Filter>
-    </ClInclude>
     <ClInclude Include="CRigidBody2D.h">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClInclude>
@@ -240,9 +237,6 @@
     <ClInclude Include="SDL_Sound_System.h">
       <Filter>Crusade\Foundation\Services\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="MiniginPCH.h">
-      <Filter>Crusade\Foundation\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="CSaveLoad.h">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClInclude>
@@ -269,6 +263,15 @@
     </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>Crusade\Game\Qbert\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniginPCH.h">
+      <Filter>Crusade\Foundation\PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Crusade\Foundation\GameLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="QbertGame.h">
+      <Filter>Crusade\Game\Qbert</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

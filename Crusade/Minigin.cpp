@@ -14,12 +14,8 @@
 #include <thread>
 using namespace std;
 using namespace std::chrono;
-
 void Crusade::Minigin::Initialize()
 {
-
-
-	
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
 	{
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
@@ -80,15 +76,13 @@ void Crusade::Minigin::Initialize()
 		return;
 	}
 	Renderer::GetInstance().Init(m_Window);
-	m_Game = new Game();
 }
-
-/**
- * Code constructing the scene world starts here
- */
 void Crusade::Minigin::LoadGame() const
 {
-	m_Game->LoadGame();
+	SceneManager::GetInstance().CreateScene("DefaultScene");
+	if (!m_Game){std::cout << "No game found : Crusade Engine" << std::endl;}
+	else
+	{m_Game->LoadGame();}
 }
 void Crusade::Minigin::Cleanup()
 {

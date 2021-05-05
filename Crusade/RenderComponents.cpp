@@ -11,10 +11,54 @@ using namespace Crusade;
 ////////////////////////////////////////////////////////////////////////////////////////////
 //RENDER COMPONENT
 ////////////////////////////////////////////////////////////////////////////////////////////
+bool CRender::m_LayerCreated = false;
+std::vector<CRender::Layer> CRender::m_Layers{};
+int CRender::Layer::nextLayerNumber = 0;
+CRender::Layer::Layer(const std::string& name)
+	:name(name)
+	,layerNumber(nextLayerNumber)
+{
+	nextLayerNumber++;
+}
+CRender::CRender()
+{
+	if (!m_LayerCreated)
+	{
+		AddNewLayer("Default");
+		m_LayerCreated = true;
+	}
+}
+bool CRender::AddNewLayer(const std::string& layerName)
+{
+	for (auto lay :m_Layers)
+	{
+		if (lay.GetName() == layerName )
+		{
+			std::cout << "Layer already exists ,"+layerName+ ":addnewlayer" << std::endl;
+			return false;
+		}
+	}
+	
+	m_Layers.push_back(Layer{ layerName });
+	return true;
+}
+bool CRender::SetCurrentLayer(const std::string& layerName)
+{
+	for (auto lay : m_Layers)
+	{
+		if (lay.GetName() == layerName)
+		{
+			m_CurrentLayerNumber = lay.GetLayerNumber();
+			return true;
+		}
+	}
+	return false;
+}
+
 void CRender::RenderObject()const
 {
 	const auto transform = m_Owner->GetCTransform();
-	for (const auto component :m_Owner->GetAllComponents())
+	for (const auto component : m_Owner->GetAllComponents())
 	{
 		if (m_FlipHorizontal)
 		{
@@ -30,7 +74,7 @@ void CRender::RenderObject()const
 				glPopMatrix();
 			}
 			glPopMatrix();
-			
+
 		}
 		else
 		{
@@ -75,7 +119,6 @@ void CTextRender::Awake()
 	m_Owner->GetComponent<CRender>()->SetDimensions(dimensions);
 	
 }
-
 void CTextRender::Render() const
 {
 	if (m_Texture != nullptr)
@@ -94,7 +137,6 @@ void CTextRender::Update()
 		m_NeedsUpdate = false;
 	}
 }
-
 void CTextRender::SetText(const std::string& text)
 {
 	m_Text = text;
@@ -108,16 +150,12 @@ void CTextRender::SetText(const std::string& text)
 	dimensions.y = m_Texture->GetHeight();
 	m_Owner->GetComponent<CRender>()->SetDimensions(dimensions);
 }
-
 ////////////////////////////////////////////////////////////////////////////////////////////
 //Texture2D Render
 ////////////////////////////////////////////////////////////////////////////////////////////
-
 CTexture2DRender::CTexture2DRender( const std::string& filePath, glm::vec2 dimensions)
 	:m_Texture(ResourceManager::GetInstance().LoadTexture(filePath)), m_SourceRect{}, m_Width{ int(dimensions.x) }, m_Height{ int(dimensions.y) }
-{
-
-}
+{}
 void CTexture2DRender::Awake()
 {
 	CRender* render{};
@@ -137,7 +175,6 @@ void CTexture2DRender::Awake()
 		m_Height = int(dim.y);
 	}
 }
-
 void CTexture2DRender::Render()const
 {
 	const auto transform = m_Owner->GetCTransform();
@@ -178,7 +215,6 @@ void CTexture2DRender::Render()const
 		}
 	}
 }
-
 void CTexture2DRender::SetTexture(const std::string& filename)
 {
 	m_Texture = ResourceManager::GetInstance().LoadTexture(filename);
@@ -210,7 +246,6 @@ void CShape2DRender::Awake()
 	}
 	render->SetDimensions(glm::vec3{ m_Dimensions.x , m_Dimensions.y, 0 });
 }
-
 void CShape2DRender::Render() const
 {
 	

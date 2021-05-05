@@ -46,6 +46,7 @@ void PlayerControllerKeyBoard::Start()
 	}
 	m_CurrentCube = m_Cubes[0];
 	SetTargetToCurrentCube();
+	m_Renderer = m_Owner->GetComponent<CRender>();
 	m_RigidBody = m_Owner->GetComponent<CRigidBody2D>();
 	m_Publisher->AddObserver(SceneManager::GetInstance().GetCurrentScene()->FindObject("LivesDisplay").get());
 	m_StartPos = m_Owner->GetCTransform()->GetPosition();
@@ -53,7 +54,7 @@ void PlayerControllerKeyBoard::Start()
 void PlayerControllerKeyBoard::Update()
 {
 	auto& time = Time::GetInstance();
-	if(m_DirectionChoiceDelay.Update(time.GetDeltaTime())&&m_IsEnabled)
+	if(m_DirectionChoiceDelay.Update(time.GetDeltaTime())&&m_IsEnabled&&m_CubeIsTriggerd)
 	{
 		if (!Move())
 		{
@@ -65,6 +66,11 @@ void PlayerControllerKeyBoard::Update()
 	{
 		m_MovementSteering->SetMovementBehaviour(std::make_shared<NullSteering>());
 		m_RigidBody->SetGravityEnabled("true");
+		if (m_JumpedToBack)
+		{
+			m_Renderer->SetCurrentLayer("Back");
+		}
+		
 	}
 	TriggerCurrentCube();
 }
@@ -117,8 +123,12 @@ void PlayerControllerKeyBoard::SetTargetWhenNoCubeFound()
 		m_MovementSteering->SetTarget(Vector2f{ target });
 		NotifyObjectOfJump();
 		m_IsEnabled = false;
-
 		m_DieDelay.Start();
+		m_JumpedToBack = false;
+		if(m_Direction.y>0)
+		{
+			m_JumpedToBack = true;
+		}
 	}
 	std::cout << "NO Target Found" << std::endl;
 }
@@ -214,6 +224,8 @@ void PlayerControllerKeyBoard::ResetToStart()
 	m_MovementSteering->SetMovementBehaviour(std::make_shared<Seek>(QBert::GetInstance().GetSpeed(), Vector2f{ }));
 	m_DieDelay.Stop();
 	m_DieDelay.Reset();
+	m_CubeIsTriggerd = false;
+	m_Renderer->SetCurrentLayer("Front");
 	SetTargetToCurrentCube();
 	m_RigidBody->SetGravityEnabled(false);
 }

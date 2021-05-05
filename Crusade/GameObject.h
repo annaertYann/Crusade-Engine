@@ -27,6 +27,7 @@ namespace Crusade
 		std::string GetName()const { return m_Name; }
 		std::vector<std::string>& GetTags() { return m_Tags; }
 		void AddTag(const std::string& tag) { m_Tags.push_back(tag); }
+		
 		int GetObjectNummer()const { return m_ObjectNummer; }
 		//REMOVE FUNCTIONALITY
 		void SetRemove() { m_Remove = true; }

@@ -32,15 +32,16 @@ private:
 	bool m_IsLeftSelected = false;
 	bool m_CubeIsTriggerd = false;
 	bool m_IsEnabled = true;
+	bool m_JumpedToBack = true;
 	MovementSteering* m_MovementSteering=nullptr;
 	Vector2f m_Direction{};
 	Crusade::Delay m_DirectionChoiceDelay{0.3f};
 	Crusade::Delay m_DieDelay{0.4f};
 	std::vector<Crusade::CCollider*>m_Cubes;
-
 	Crusade::CRigidBody2D* m_RigidBody = nullptr;
 	Crusade::CCollider* m_CurrentCube = nullptr;
 	Crusade::Publisher* m_Publisher=nullptr;
+	Crusade::CRender* m_Renderer = nullptr;
 	glm::vec3 m_StartPos={};
 };
 class UpMovementKey final :public Crusade::Command

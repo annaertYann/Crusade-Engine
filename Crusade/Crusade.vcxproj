@@ -228,6 +228,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Prefab.h" />
     <ClInclude Include="Qbert.h" />
+    <ClInclude Include="QbertGame.h" />
     <ClInclude Include="RenderComponents.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -297,7 +298,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPS.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Hexagon.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -313,6 +313,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClCompile Include="MovementSteering.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="Qbert.cpp" />
+    <ClCompile Include="QbertGame.cpp" />
     <ClCompile Include="RenderComponents.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />

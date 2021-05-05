@@ -2,7 +2,7 @@
 class Game
 {
 public:
-	void LoadGame()const;
-private:
+	virtual ~Game() = default;
+	virtual void LoadGame()const=0;
 };
 

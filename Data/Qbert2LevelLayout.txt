@@ -1,0 +1,16 @@
+Position
+285
+380
+0
+Color1
+0
+0
+1
+1
+Color2
+1
+1
+0
+1
+TriggerType
+1
