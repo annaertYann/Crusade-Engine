@@ -214,6 +214,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClInclude Include="CTransform.h" />
     <ClInclude Include="DeathBox.h" />
     <ClInclude Include="Delay.h" />
+    <ClInclude Include="Disk.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPS.h" />
@@ -221,6 +222,8 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Hexagon.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LevelFinisher.h" />
+    <ClInclude Include="Levels.h" />
     <ClInclude Include="Lives.h" />
     <ClInclude Include="Minigin.h" />
     <ClInclude Include="MiniginPCH.h" />
@@ -295,12 +298,15 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClCompile Include="CSaveLoad.cpp" />
     <ClCompile Include="CTransform.cpp" />
     <ClCompile Include="DeathBox.cpp" />
+    <ClCompile Include="Disk.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Hexagon.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LevelFinisher.cpp" />
+    <ClCompile Include="Levels.cpp" />
     <ClCompile Include="Lives.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Minigin.cpp" />

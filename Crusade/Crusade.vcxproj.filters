@@ -127,6 +127,15 @@
     <ClCompile Include="QbertGame.cpp">
       <Filter>Crusade\Game\Qbert</Filter>
     </ClCompile>
+    <ClCompile Include="LevelFinisher.cpp">
+      <Filter>Crusade\Game\Qbert\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels.cpp">
+      <Filter>Crusade\Game\Qbert\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Disk.cpp">
+      <Filter>Crusade\Game\Qbert\Interatable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\imgui-1.81\imconfig.h">
@@ -273,6 +282,15 @@
     <ClInclude Include="QbertGame.h">
       <Filter>Crusade\Game\Qbert</Filter>
     </ClInclude>
+    <ClInclude Include="LevelFinisher.h">
+      <Filter>Crusade\Game\Qbert\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels.h">
+      <Filter>Crusade\Game\Qbert\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Disk.h">
+      <Filter>Crusade\Game\Qbert\Interatable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Crusade">
@@ -346,6 +364,9 @@
     </Filter>
     <Filter Include="Crusade\Game\Qbert\Level">
       <UniqueIdentifier>{371904f3-b3b2-476f-aee8-313f14c76928}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Game\Qbert\Interatable">
+      <UniqueIdentifier>{61be26b6-6906-4b1d-b54c-64912b55a67d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

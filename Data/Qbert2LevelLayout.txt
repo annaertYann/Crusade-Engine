@@ -5,12 +5,12 @@ Position
 Color1
 0
 0
-1
-1
+255
+255
 Color2
-1
-1
+255
+255
 0
-1
+255
 TriggerType
 1

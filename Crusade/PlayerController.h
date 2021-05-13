@@ -12,9 +12,10 @@ public:
 	void Awake() override;
 	void Start() override;
 	void Update() override;
-	void Notify(const std::string& message) override;	
-private:
+	void Notify(const std::string& message) override;
+	void SetOffMapTarget(const Vector2f& pos,const float& speed);//This disables normal movement
 	void ResetToStart();
+private:
 	void TriggerCurrentCube();
 	void NotifyObjectOfJump()const;
 	void SetTargetToCurrentCube()const;

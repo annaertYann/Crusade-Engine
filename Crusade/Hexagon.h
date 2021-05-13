@@ -52,6 +52,7 @@ private:
 	SDL_Color m_Color1;
 	SDL_Color m_Color2;
 	CubeActivator::TriggerType m_TriggerType;
+	std::vector<CubeActivator*>m_Cubes{};
 };
 class HexagonSave final:public Crusade::CTextSave
 {

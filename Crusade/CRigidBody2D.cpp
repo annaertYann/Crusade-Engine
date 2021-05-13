@@ -78,13 +78,16 @@ void CRigidBody2D::DoCollisions()
 					{
 						if (!col->GetIsTrigger())
 						{
-							m_IsColliding = true;
-							ApplyCollision(info, col);
-							//TRIGGER ON COLLISION
-							if (!isInCollidingList)
+							if (!m_AttachedCollider->GetIsTrigger())
 							{
-								m_Owner->OnCollisionEnter(col);
-								m_CollidingObjectTags.push_back(object->GetObjectNummer());
+								m_IsColliding = true;
+								ApplyCollision(info, col);
+								//TRIGGER ON COLLISION
+								if (!isInCollidingList)
+								{
+									m_Owner->OnCollisionEnter(col);
+									m_CollidingObjectTags.push_back(object->GetObjectNummer());
+								}
 							}
 						}
 						else

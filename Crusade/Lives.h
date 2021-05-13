@@ -6,9 +6,13 @@ class Lives final :public Crusade::CObserver
 {
 public:
 	void RecieveNotification(Crusade::GameObject* actor, const std::string& message) override;
+	void SetLives(int lives);
+	int GetLives()const { return m_Lives; }
+	void Update() override;
 private:
 	void Start() override;
 	int m_Lives = 3;
+	bool m_NeedsUpdate = false;
 	std::vector<Crusade::GameObject*>m_LifeIndicators;
 	Crusade::CTransform* m_Transform=nullptr;
 };

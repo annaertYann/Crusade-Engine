@@ -40,6 +40,7 @@ std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 ro
 	auto col =  std::make_shared<CRectCollider>(Rectf{ 0,0,40,40 });
 	col->SetIsTrigger(true);
 	qbert->AddComponent<CCollider>(col);
+	qbert->SetName("Qbert");
 	return qbert;
 }
 void QbertAnimationTriggerer::Start()

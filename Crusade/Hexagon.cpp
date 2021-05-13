@@ -33,11 +33,15 @@ void CubePyramidConstructor::Awake()
 			auto activator = obj->GetComponent<CubeActivator>();
 			activator->SetColors(m_Color1, m_Color2);
 			activator->SetTriggerType(m_TriggerType);
+			m_Cubes.push_back(activator);
 		}
 		numberOfCubesInRow++;
 	}
 	
 }
+
+
+
 std::shared_ptr<GameObject> Cube::CreateObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
 	auto cube = std::make_shared<GameObject>();
@@ -56,20 +60,21 @@ std::shared_ptr<GameObject> Cube::CreateObject(glm::vec3 position, glm::vec3 rot
 	cube->SetName("Cube");
 	return cube;
 }
+
 void CubeActivator::Awake()
 {
 	m_Renderer = m_Owner->GetComponent<CShape2DRender>();
 	m_Publisher = m_Owner->GetComponent<Publisher>();
 }
-
 void CubeActivator::Start()
 {
 	m_Publisher->AddObserver( SceneManager::GetInstance().GetCurrentScene()->FindObject("ScoreDisplay").get());
+	m_Publisher->AddObserver(SceneManager::GetInstance().GetCurrentScene()->FindObject("LevelFinisher").get());
 	if (m_TriggerType == TriggerType::halfPermanent)
 	{
-		m_Color2.r = uint8_t(float(m_Color2.r)/ 2.f);
-		m_Color2.g = uint8_t(float(m_Color2.g) / 2.f);
-		m_Color2.b = uint8_t(float(m_Color2.b) / 2.f);
+		m_Color2.r = uint8_t(float(m_Color2.r)/ 2.f  );
+		m_Color2.g = uint8_t(float(m_Color2.g) / 2.f );
+		m_Color2.b = uint8_t(float(m_Color2.b) / 2.f );
 		SetColors(m_Color1, m_Color2);
 	}
 }
@@ -108,6 +113,7 @@ void CubeActivator::TriggerPermanent()
 	if (m_Publisher && !m_IsTrigged)
 	{
 		m_Publisher->SendNotification("ColorChange");
+		m_Publisher->SendNotification("Triggered");
 	}
 	m_IsTrigged = true;
 	m_Renderer->SetColor(m_Color2);
@@ -119,9 +125,12 @@ void CubeActivator::TriggerSwitching()
 	{
 		m_Renderer->SetColor(m_Color2);
 		if (m_Publisher) { m_Publisher->SendNotification("ColorChange"); }
+		m_Publisher->SendNotification("Triggered");
 	}
 	else
 	{
+		if (m_Publisher) { m_Publisher->SendNotification("ColorChange"); }
+		m_Publisher->SendNotification("DeTriggered");
 		m_Renderer->SetColor(m_Color1);
 	}
 }

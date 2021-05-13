@@ -44,5 +44,5 @@ std::shared_ptr<Crusade::Texture2D> Crusade::ResourceManager::LoadTexture(const 
 
 std::shared_ptr<Crusade::Texture2D> Crusade::ResourceManager::LoadTextTexture(const std::string& file, unsigned int size, const std::string& text,const SDL_Color &color) const
 {
-	return std::make_shared<Texture2D>(text, m_DataPath + file, size, Color4f{ float(color.r),float(color.g),float(color.b),float(color.a) });
+	return std::make_shared<Texture2D>(text, m_DataPath + file, size, Color4f{ float(color.r)/255.f,float(color.g)/255.f,float(color.b)/255.f,float(color.a)/255.f });
 }

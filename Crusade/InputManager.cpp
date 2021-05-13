@@ -106,6 +106,7 @@ void InputManager::ProcessTriggers()
 		if (IsTriggerActive(input->triggerType))
 		{
 			input->command->Execute();
+			
 		}
 	}
 }

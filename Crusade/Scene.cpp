@@ -6,14 +6,19 @@
 using namespace Crusade;
 
 unsigned int Scene::m_IdCounter = 0;
-
-Scene::Scene(const std::string& name) : m_Name(name) {}
+Scene::Scene() : m_Name("Default") {}
 void Scene::Add(const std::shared_ptr<GameObject>& object)
 {
-	if (object->GetCTransform() == nullptr) { object->AddComponent<CTransform>(std::make_shared<CTransform>()); }
-	if (object->GetComponent<CCollider>() != nullptr) { m_CollisionObjects.push_back(object); }
-	m_Objects.push_back(object);
+	m_ObjectsToBeAdded.push_back(object);
 }
+void Scene::Add(const std::vector<std::shared_ptr<GameObject>>& objects)
+{
+	for (auto object : objects)
+	{
+		m_ObjectsToBeAdded.push_back(object);
+	}
+}
+
 void Scene::FixedUpdate()
 {
 	for (auto& object : m_Objects)
@@ -23,10 +28,21 @@ void Scene::FixedUpdate()
 }
 void Scene::Update()
 {
+	if (m_ObjectsToBeAdded.size() > 0)
+	{
+		for (auto object : m_ObjectsToBeAdded)
+		{
+			if (object->GetCTransform() == nullptr) { object->AddComponent<CTransform>(std::make_shared<CTransform>()); }
+			if (object->GetComponent<CCollider>() != nullptr) { m_CollisionObjects.push_back(object); }
+			m_Objects.push_back(object);
+		}
+		m_ObjectsToBeAdded.clear();
+	}
 	for(auto& object : m_Objects)
 	{
 		object->Update();
 	}
+	
 }
 void Scene::LateUpdate( )
 {
@@ -41,6 +57,10 @@ void Scene::LateUpdate( )
 	{
 		m_Objects.erase(std::remove_if(m_Objects.begin(), m_Objects.end(), [&](const std::shared_ptr<GameObject>& object)
 		{
+			if(object->GetRemove())
+			{
+				std::cout << "niceman" << std::endl;
+			}
 			return object->GetRemove();
 		}), m_Objects.end());
 	}
@@ -74,12 +94,24 @@ std::shared_ptr<GameObject> Scene::FindObject(const std::string& name)
 {
 	for (auto& object : m_Objects)
 	{
-		if (object->GetName()==name)
+		if (object->GetName()==name && !object->GetRemove())
 		{
 			return object;
 		}
 	}
 	return std::shared_ptr<GameObject>{nullptr};
+}
+std::vector<std::shared_ptr<GameObject>> Scene::FindAllObjects(const std::string& name)
+{
+	std::vector<std::shared_ptr<GameObject>> list;
+	for (auto& object : m_Objects)
+	{
+		if (object->GetName() == name && !object->GetRemove())
+		{
+			list.push_back(object);
+		}
+	}
+	return list;
 }
 
 std::vector<std::shared_ptr<GameObject>> Scene::FindAllObjectsWithTag(const std::string& tag)
@@ -87,12 +119,15 @@ std::vector<std::shared_ptr<GameObject>> Scene::FindAllObjectsWithTag(const std:
 	std::vector<std::shared_ptr<GameObject>> list{};
 	for (auto& object : m_Objects)
 	{
-		for (auto element : object->GetTags())
+		if (!object->GetRemove())
 		{
-			if (element == tag)
+			for (auto element : object->GetTags())
 			{
-				list.push_back(object);
-				break;
+				if (element == tag)
+				{
+					list.push_back(object);
+					break;
+				}
 			}
 		}
 	}

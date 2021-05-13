@@ -12,7 +12,7 @@ namespace Crusade
 		void AddVertex(const Point2f& vertex) { m_LocalVertices.push_back(vertex); }
 		bool IsColliding(CCollider* other,utils::HitInfo& info);
 		Point2f GetCenter();
-		std::vector<Point2f> GetVertices()const { return m_WorldVertices; }
+		std::vector<Point2f>& GetVertices() { return m_WorldVertices; }
 		Point2f GetPosition()const { return m_WorldPosition; }
 		bool GetIsTrigger()const { return m_IsTrigger; }
 		void SetIsTrigger(const bool x) { m_IsTrigger = x; }

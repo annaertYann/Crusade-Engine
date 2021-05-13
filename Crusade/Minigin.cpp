@@ -79,7 +79,7 @@ void Crusade::Minigin::Initialize()
 }
 void Crusade::Minigin::LoadGame() const
 {
-	SceneManager::GetInstance().CreateScene("DefaultScene");
+	SceneManager::GetInstance().CreateScene<DefaultScene>("DefaultScene");
 	if (!m_Game){std::cout << "No game found : Crusade Engine" << std::endl;}
 	else
 	{m_Game->LoadGame();}

@@ -65,7 +65,7 @@ void PlayerControllerKeyBoard::Update()
 	if(m_DieDelay.Update(time.GetDeltaTime()))
 	{
 		m_MovementSteering->SetMovementBehaviour(std::make_shared<NullSteering>());
-		m_RigidBody->SetGravityEnabled("true");
+		m_RigidBody->SetGravityEnabled(true);
 		if (m_JumpedToBack)
 		{
 			m_Renderer->SetCurrentLayer("Back");
@@ -74,6 +74,18 @@ void PlayerControllerKeyBoard::Update()
 	}
 	TriggerCurrentCube();
 }
+void PlayerControllerKeyBoard::SetOffMapTarget(const Vector2f& pos, const float& speed)
+{
+	m_IsEnabled = false;
+	m_MovementSteering->SetMovementBehaviour(std::make_shared<Seek>(speed, Vector2f{ }));
+	m_MovementSteering->SetTarget(pos);
+	m_Renderer->SetCurrentLayer("Front");
+	m_DieDelay.Stop();
+	m_DieDelay.Reset();
+	m_RigidBody->SetGravityEnabled(false);
+	m_RigidBody->SetVelocity(glm::vec2{});
+}
+
 bool PlayerControllerKeyBoard::Move()
 {
 	utils::HitInfo info{};
@@ -118,8 +130,8 @@ void PlayerControllerKeyBoard::SetTargetWhenNoCubeFound()
 	if (!(abs(m_Direction.x) < 0.1f))
 	{
 		auto target = m_CurrentCube->GetCenter();
-		target.x += m_Direction.x * m_ObjectSize;
-		target.y += m_Direction.y * m_ObjectSize;
+		target.x += m_Direction.x * m_ObjectSize*2;
+		target.y += m_Direction.y * m_ObjectSize*2;
 		m_MovementSteering->SetTarget(Vector2f{ target });
 		NotifyObjectOfJump();
 		m_IsEnabled = false;
@@ -130,7 +142,6 @@ void PlayerControllerKeyBoard::SetTargetWhenNoCubeFound()
 			m_JumpedToBack = true;
 		}
 	}
-	std::cout << "NO Target Found" << std::endl;
 }
 void PlayerControllerKeyBoard::TriggerCurrentCube()
 {
@@ -150,7 +161,6 @@ void PlayerControllerKeyBoard::SetTargetToCurrentCube()const
 	target.x -= m_ObjectSize / 2;
 	target.y += m_ObjectSize / 2;
 	m_MovementSteering->SetTarget(Vector2f{ target });
-	std::cout << "NEW TARGET SELECTED" << std::endl;
 }
 void PlayerControllerKeyBoard::NotifyObjectOfJump()const
 {
@@ -220,6 +230,7 @@ void PlayerControllerKeyBoard::ResetToStart()
 {
 	m_IsEnabled = true;
 	m_RigidBody->SetGravityEnabled(false);
+	m_RigidBody->SetVelocity(glm::vec2{});
 	m_CurrentCube = m_Cubes[0];
 	m_MovementSteering->SetMovementBehaviour(std::make_shared<Seek>(QBert::GetInstance().GetSpeed(), Vector2f{ }));
 	m_DieDelay.Stop();
@@ -229,6 +240,9 @@ void PlayerControllerKeyBoard::ResetToStart()
 	SetTargetToCurrentCube();
 	m_RigidBody->SetGravityEnabled(false);
 }
+
+
+
 //COMMANDS
 void UpMovementKey::Execute()
 {

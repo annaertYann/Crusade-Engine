@@ -124,7 +124,6 @@ void CTextRender::Render() const
 	if (m_Texture != nullptr)
 	{
 		const auto& pos = m_Owner->GetCTransform()->GetPosition();
-		glColor4f(m_Color.r, m_Color.g, m_Color.b, m_Color.a);
 		m_Texture->Draw(Rectf{pos.x,pos.y,m_Dimensions.x,m_Dimensions.y});
 	}
 }
@@ -256,7 +255,7 @@ void CShape2DRender::Render() const
 	
 	
 	std::vector<Point2f>vertices;
-	glColor4f(m_Color.r , m_Color.g, m_Color.b , m_Color.a);
+	glColor4f(m_Color.r / 255.f , m_Color.g / 255.f, m_Color.b / 255.f , m_Color.a / 255.f);
 	if (m_isHollow)
 	{
 		switch (m_Shape)

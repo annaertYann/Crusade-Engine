@@ -7,15 +7,7 @@ using namespace Crusade;
 void Lives::Start()
 {
 	m_Transform = m_Owner->GetCTransform();
-	auto pos = m_Transform->GetPosition();
-	auto &indicator = LifeIndicator::GetInstance();
-	for (int i {};i<m_Lives;i++)
-	{
-		pos.y -= indicator.GetSize();
-		auto obj = indicator.CreateObject(pos, m_Transform->GetRotation(), m_Transform->GetScale());
-		SceneManager::GetInstance().GetCurrentScene()->Add(obj);
-		m_LifeIndicators.push_back(obj.get());
-	}
+	m_NeedsUpdate = true;
 }
 void Lives::RecieveNotification(GameObject*, const std::string& message)
 {
@@ -39,6 +31,32 @@ void Lives::RecieveNotification(GameObject*, const std::string& message)
 		m_Lives++;
 	}
 }
+void Lives::Update()
+{
+	if(m_NeedsUpdate)
+	{
+		m_NeedsUpdate = false;
+		for (auto ind : m_LifeIndicators)
+		{
+			ind->SetRemove();
+		}
+		m_LifeIndicators.clear();
+		auto pos = m_Transform->GetPosition();
+		auto& indicator = LifeIndicator::GetInstance();
+		for (int i{}; i < m_Lives; i++)
+		{
+			pos.y -= indicator.GetSize();
+			auto obj = indicator.CreateObject(pos, m_Transform->GetRotation(), m_Transform->GetScale());
+			SceneManager::GetInstance().GetCurrentScene()->Add(obj);
+			m_LifeIndicators.push_back(obj.get());
+		}
+	}
+}
+void Lives::SetLives(int lives)
+{
+	m_Lives = lives;
+	m_NeedsUpdate = true;
+}
 
 std::shared_ptr<GameObject> LifeIndicator::CreateObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
@@ -51,7 +69,7 @@ std::shared_ptr<GameObject> LivesDisplay::CreateObject(glm::vec3 position, glm::
 {
 	auto obj = std::make_shared<GameObject>();
 	obj->AddComponent<CTransform>(std::make_shared<CTransform>(position, rotation, scale));
-	obj->AddComponent<CTextRender>(std::make_shared<CTextRender>("Lives:", "Lingua.otf", 15, SDL_Color{ 1,1,1,1 }));
+	obj->AddComponent<CTextRender>(std::make_shared<CTextRender>("Lives:", "Lingua.otf", 15, SDL_Color{ 255,255,255,255 }));
 	obj->AddComponent<Lives>(std::make_shared<Lives>());
 	obj->SetName("LivesDisplay");
 	return obj;

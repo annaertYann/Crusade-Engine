@@ -1,5 +1,7 @@
 #include "MiniginPCH.h"
 #include "SceneManager.h"
+
+#include "GameObject.h"
 #include "Scene.h"
 #pragma warning( disable : 26816)
 void Crusade::SceneManager::FixedUpdate()
@@ -19,16 +21,23 @@ void Crusade::SceneManager::Render()
 	m_CurrentScene->Render();
 }
 
-Crusade::Scene& Crusade::SceneManager::CreateScene(const std::string& name)
+void Crusade::SceneManager::LoadScene(const std::string& sceneName)
 {
-	const auto scene = std::shared_ptr<Scene>(new Scene(name));
-	m_Scenes.push_back(scene);
-	if(m_CurrentScene.get()==nullptr)
+	for (const auto& scene : m_Scenes)
 	{
-		m_CurrentScene = scene;
+		if (scene->GetName() == sceneName)
+		{
+			m_CurrentScene = scene;
+			for (auto obj : m_CurrentScene->GetAllObjects())
+			{
+				obj->SetRemove();
+			}
+			m_CurrentScene->Load();
+			return;
+		}
 	}
-	return *scene;
 }
+
 void Crusade::SceneManager::SetCurrentScene(const std::string& sceneName)
 {
 	for (const auto& scene : m_Scenes)

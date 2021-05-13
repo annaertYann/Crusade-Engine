@@ -37,43 +37,61 @@ void GameObject::Update()
 
 void GameObject::FixedUpdate()
 {
-	for (const auto& component : m_Components)
+	if (m_Start)
 	{
-		component->FixedUpdate();
+		for (const auto& component : m_Components)
+		{
+			component->FixedUpdate();
+		}
 	}
 }
 void GameObject::LateUpdate()
 {
-	for (const auto& component : m_Components)
+	if (m_Start)
 	{
-		component->LateUpdate();
+		for (const auto& component : m_Components)
+		{
+			component->LateUpdate();
+		}
 	}
 }
 void GameObject::OnCollisionEnter(CCollider* collider)
 {
-	for (const auto& component : m_Components)
+	if (m_Start)
 	{
-		component->OnCollisionEnter(collider);
+		for (const auto& component : m_Components)
+		{
+			component->OnCollisionEnter(collider);
+		}
 	}
 }
 void GameObject::OnTriggerEnter(CCollider* trigger)
 {
-	for (const auto& component : m_Components)
+	if (m_Start)
 	{
-		component->OnTriggerEnter(trigger);
+		for (const auto& component : m_Components)
+		{
+			component->OnTriggerEnter(trigger);
+		}
 	}
 }
 void GameObject::OnCollisionExit(CCollider* collider)
 {
-	for (const auto& component : m_Components)
+	if (m_Start)
 	{
-		component->OnCollisionExit(collider);
+		for (const auto& component : m_Components)
+		{
+			component->OnCollisionExit(collider);
+		}
 	}
 }
 void GameObject::OnTriggerExit(CCollider* trigger)
 {
-	for (const auto& component : m_Components)
+	if (m_Start)
 	{
-		component->OnTriggerExit(trigger);
+		for (const auto& component : m_Components)
+		{
+			component->OnTriggerExit(trigger);
+		}
 	}
 }

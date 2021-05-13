@@ -8,8 +8,12 @@ class Score final:public Crusade::CObserver
 public:
 	void Start() override;
 	void RecieveNotification(Crusade::GameObject* actor, const std::string& message) override;
+	void SetScore(int score);
+	void Update() override;
+	int GetScore()const { return m_Score; }
 private:
 	int m_Score=0;
+	bool m_NeedsUpdate = false;
 	Crusade::CTextRender* m_Renderer=nullptr;
 };
 class ScoreDisplay final : public Crusade::Prefab<ScoreDisplay>
