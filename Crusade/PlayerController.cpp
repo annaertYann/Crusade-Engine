@@ -20,8 +20,7 @@ void CharacterMovement::Start()
 		auto col = cube->GetComponent<CCollider>();
 		m_Cubes.push_back(col);
 	}
-	m_CurrentCube = m_Cubes[0];
-	SetTargetToCurrentCube();
+	SetTargetToClosestCube();
 	m_Renderer = m_Owner->GetComponent<CRender>();
 	m_RigidBody = m_Owner->GetComponent<CRigidBody2D>();
 	m_StartPos = m_Owner->GetCTransform()->GetPosition();
@@ -223,6 +222,20 @@ void CharacterMovement::Notify(const std::string& message)
 		m_Direction.x = 1;
 	}
 }
+void CharacterMovement::SetTargetToClosestCube()
+{
+	m_CurrentCube = m_Cubes[0];
+	Point2f currentPos{m_Owner->GetCTransform()->GetPosition().x,m_Owner->GetCTransform()->GetPosition().y};
+	for(auto cubes :m_Cubes)
+	{
+		if( (m_CurrentCube->GetPosition() - currentPos ).Length()  > (cubes->GetPosition() - currentPos).Length() )
+		{
+			m_CurrentCube = cubes;
+		}
+	}
+	SetTargetToCurrentCube();
+}
+
 
 //COMMANDS
 void UpMovementKey::Execute()

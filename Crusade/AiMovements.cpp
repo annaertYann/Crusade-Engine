@@ -114,6 +114,7 @@ void UggMovement::Update()
 	const auto deltaTime = Time::GetInstance().GetDeltaTime();
 	if (m_MoveDelay.Update(deltaTime))
 	{
+		m_MoveDelay.Start();
 		m_Movement->Notify("Up");
 		m_Movement->Notify("Right");
 	}
@@ -144,6 +145,7 @@ void WrongWayMovement::Update()
 	const auto deltaTime = Time::GetInstance().GetDeltaTime();
 	if (m_MoveDelay.Update(deltaTime))
 	{
+		m_MoveDelay.Start();
 		m_Movement->Notify("Up");
 		m_Movement->Notify("Left");
 	}

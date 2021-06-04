@@ -3,6 +3,7 @@
 #include "Time.h"
 #include "SceneManager.h"
 #include "Ai.h"
+#include "PlayerController.h"
 using namespace Crusade;
 void AiSpawner::Update()
 {
@@ -11,7 +12,7 @@ void AiSpawner::Update()
 	{
 		m_SpawnDelay.Start();
 		int number = rand() % int(Monsters::END);
-		number = int(Monsters::coily);
+		number = int(Monsters::wrongway);
 		switch (Monsters(number))
 		{
 		case Monsters::coily:
@@ -23,8 +24,23 @@ void AiSpawner::Update()
 			}
 			break;
 		case Monsters::ugg:
+			if (!IsMonsterInList("Ugg"))
+			{
+				auto pos = m_Owner->GetCTransform()->GetPosition();
+				const auto obj = Ugg::GetInstance().CreateObject({0,pos.y / 4,pos.z});
+				SceneManager::GetInstance().GetCurrentScene()->Add(obj);
+				obj->GetComponent<CharacterMovement>()->SetTargetToClosestCube();
+				m_Ai.push_back(obj.get());
+			}
 			break;
-		case Monsters::wrongway: 
+		case Monsters::wrongway:
+			if (!IsMonsterInList("WrongWay"))
+			{
+				auto pos = m_Owner->GetCTransform()->GetPosition();
+				const auto obj = WrongWay::GetInstance().CreateObject({ pos.x*2,pos.y/4,pos.z });
+				SceneManager::GetInstance().GetCurrentScene()->Add(obj);
+				m_Ai.push_back(obj.get());
+			}
 			break;
 		case Monsters::slick:
 			break;

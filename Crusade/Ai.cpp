@@ -90,7 +90,7 @@ std::shared_ptr<Crusade::GameObject> Ugg::CreateObject(glm::vec3 position, glm::
 	//MOVEMENT
 	ugg->AddComponent<MovementSteering>(std::make_shared<MovementSteering>(std::make_shared<Seek>(200.f, Vector2f{ 0,300.f })));
 	ugg->AddComponent<CharacterMovement>(std::make_shared<CharacterMovement>(40.f));
-	ugg->AddComponent<UggMovement>(std::make_shared<CoilyMovment>());
+	ugg->AddComponent<UggMovement>(std::make_shared<UggMovement>());
 	//col
 	auto rigid = std::make_shared<CRigidBody2D>();
 	rigid->SetGravityEnabled(false);
@@ -132,7 +132,7 @@ std::shared_ptr<Crusade::GameObject> WrongWay::CreateObject(glm::vec3 position, 
 	//MOVEMENT
 	wrongWay->AddComponent<MovementSteering>(std::make_shared<MovementSteering>(std::make_shared<Seek>(200.f, Vector2f{ 0,300.f })));
 	wrongWay->AddComponent<CharacterMovement>(std::make_shared<CharacterMovement>(40.f));
-	wrongWay->AddComponent<WrongWayMovement>(std::make_shared<CoilyMovment>());
+	wrongWay->AddComponent<WrongWayMovement>(std::make_shared<WrongWayMovement>());
 	//col
 	auto rigid = std::make_shared<CRigidBody2D>();
 	rigid->SetGravityEnabled(false);
