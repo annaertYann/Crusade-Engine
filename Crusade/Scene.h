@@ -31,6 +31,7 @@ namespace Crusade
 	protected:
 		explicit Scene();
 	private:
+		void DeleteObjectsToBeAdded() { m_ObjectsToBeAdded.clear(); }
 		void SetName(const std::string& name) { m_Name = name; }
 		virtual void Load() = 0;
 		std::string m_Name;

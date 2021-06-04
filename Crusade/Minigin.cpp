@@ -75,6 +75,8 @@ void Crusade::Minigin::Initialize()
 		std::cerr << "Core::Initialize( ), error when calling IMG_Init: " << IMG_GetError() << std::endl;
 		return;
 	}
+	// INIT RAND
+	srand(unsigned (time(NULL)));
 	Renderer::GetInstance().Init(m_Window);
 }
 void Crusade::Minigin::LoadGame() const

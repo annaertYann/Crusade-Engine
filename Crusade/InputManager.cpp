@@ -54,7 +54,7 @@ void InputManager::ProcessButtons()
 		case InputButtonState::pressed:
 			if (!input->isDown)
 			{
-				if (IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
+				if (IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode, input->userIndex))
 				{
 					input->isDown = true;
 					input->command->Execute();
@@ -62,7 +62,7 @@ void InputManager::ProcessButtons()
 			}
 			else
 			{
-				if (!IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
+				if (!IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode, input->userIndex))
 				{
 					input->isDown = false;
 				}
@@ -71,14 +71,14 @@ void InputManager::ProcessButtons()
 		case InputButtonState::released:
 			if (!input->isDown)
 			{
-				if (IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
+				if (IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode, input->userIndex))
 				{
 					input->isDown = true;
 				}
 			}
 			else
 			{
-				if (!IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
+				if (!IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode, input->userIndex))
 				{
 					input->isDown = false;
 					input->command->Execute();
@@ -88,7 +88,7 @@ void InputManager::ProcessButtons()
 			break;
 		case InputButtonState::down:
 
-			if (IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode))
+			if (IsButtonPressed(input->controllerButtonCode, input->mouseButtonCode, input->keyboardCode,input->userIndex))
 			{
 				input->command->Execute();
 			}
@@ -103,7 +103,7 @@ void InputManager::ProcessTriggers()
 		ZeroMemory(&m_CurrentControllerState, sizeof(XINPUT_STATE));
 		XInputGetState(input->userIndex, &m_CurrentControllerState);
 
-		if (IsTriggerActive(input->triggerType))
+		if (IsTriggerActive(input->triggerType,input->userIndex))
 		{
 			input->command->Execute();
 			
@@ -122,7 +122,7 @@ bool InputManager::ProcessQuit()
 	return true;
 }
 
-bool InputManager::IsButtonPressed(const int& button, const int& mouseButtonCode, const int& keyboardCode) const
+bool InputManager::IsButtonPressed(const int& button, const int& mouseButtonCode, const int& keyboardCode, const int& userIndex) const
 {
 	////////////////////////////////////////////////////////////
 	//CONTROLLER
@@ -134,32 +134,37 @@ bool InputManager::IsButtonPressed(const int& button, const int& mouseButtonCode
 	////////////////////////////////////////////////////////////
 	//MOUSE AND KEYBOARD
 	////////////////////////////////////////////////////////////
-	if (keyboardCode >= 0)
+	if (userIndex == 0)
 	{
-		const auto& pStates = SDL_GetKeyboardState(nullptr);
-		if (pStates[keyboardCode])
+		if (keyboardCode >= 0)
 		{
-			return true;
+			const auto& pStates = SDL_GetKeyboardState(nullptr);
+			if (pStates[keyboardCode])
+			{
+				return true;
+			}
 		}
-	}
-	if (mouseButtonCode>=0)
-	{
-		int x{};
-		int y{};
-		if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(mouseButtonCode) )
+		if (mouseButtonCode >= 0)
 		{
-			return true;
+			int x{};
+			int y{};
+			if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(mouseButtonCode))
+			{
+				return true;
+			}
 		}
 	}
 	return false;
 }
-bool InputManager::IsTriggerActive(const TriggerType& trigger ) const
+bool InputManager::IsTriggerActive(const TriggerType& trigger, const int& userIndex) const
 {
 	switch (trigger)
 	{
 	case TriggerType::mouseMovement:
-		return m_MouseMotionEvent;
-		break;
+		if (userIndex == 0)
+		{
+			return m_MouseMotionEvent;
+		}
 	case TriggerType::controllerLeftTrigger:
 		return m_CurrentControllerState.Gamepad.bLeftTrigger > 0.01f;
 	case TriggerType::controllerRightTrigger:
@@ -225,6 +230,19 @@ void InputManager::RemoveCommand(const int& commandTag)
 			return x;
 				
 		}), m_InputButtonCommands.end());
+	}
+	if (m_InputTriggerCommands.size() > 0)
+	{
+		m_InputTriggerCommands.erase(std::remove_if(m_InputTriggerCommands.begin(), m_InputTriggerCommands.end(), [&](InputTriggerAction* element)
+		{
+			const auto x = element->command->GetTag() == commandTag;
+			if (x)
+			{
+				delete element;
+			}
+			return x;
+
+		}), m_InputTriggerCommands.end());
 	}
 }
 

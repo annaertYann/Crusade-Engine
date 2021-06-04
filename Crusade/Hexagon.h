@@ -49,6 +49,8 @@ public:
 	SDL_Color GetColor2()const { return m_Color2; }
 	CubeActivator::TriggerType GetType()const { return m_TriggerType; }
 private:
+	float DiskSpawnRate = float(1.f/5.f);
+	void CreateDisk(const glm::vec3& pos,bool left,float size);
 	SDL_Color m_Color1;
 	SDL_Color m_Color2;
 	CubeActivator::TriggerType m_TriggerType;

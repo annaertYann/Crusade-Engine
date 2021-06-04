@@ -32,8 +32,11 @@ void Level1::Load()
 	objects.push_back(CubePyramid);
 	//ADD QBERT
 	auto qbert = QBert::GetInstance().CreateObject(glm::vec3{ 320,640,0 });
-	//qbert->GetComponent<CTransform>()->SetScale(2, 2, 2);
+	qbert->GetComponent<QbertController>()->AddKeyBoardControls();
 	objects.push_back(qbert);
+	auto qbert2 = QBert::GetInstance().CreateObject(glm::vec3{ 320,640,0 });
+	qbert2->GetComponent<QbertController>()->AddJoystickControls();
+	objects.push_back(qbert2);
 	//ADD FPS
 	auto fps = std::make_shared<GameObject>();
 	fps->AddComponent<CTransform>(std::make_shared<CTransform>(glm::vec3{ 0,465,0 }, glm::vec3{}));
@@ -60,9 +63,6 @@ void Level1::Load()
 	name->AddComponent<CTransform>(std::make_shared<CTransform>(glm::vec3{ 30,425,0 }, glm::vec3{}));
 	name->AddComponent<CTextRender>(std::make_shared<CTextRender>("Level1", "Lingua.otf", 20, SDL_Color{ 255 ,0,0,255 }));
 	objects.push_back(name);
-	//ADD LEVEL NAME
-	auto Disk = Disk::GetInstance().CreateObject(glm::vec3{ 50,100,0 }, glm::vec3{}, glm::vec3{ 1,1,1 });
-	objects.push_back(Disk);
 	Add(objects);
 }
 void Level2::Load()
@@ -83,8 +83,11 @@ void Level2::Load()
 	objects.push_back(CubePyramid);
 	//ADD QBERT
 	auto qbert = QBert::GetInstance().CreateObject(glm::vec3{ 320,640,0 });
-	//qbert->GetComponent<CTransform>()->SetScale(2, 2, 2);
+	qbert->GetComponent<QbertController>()->AddKeyBoardControls();
 	objects.push_back(qbert);
+	auto qbert2 = QBert::GetInstance().CreateObject(glm::vec3{ 320,640,0 });
+	qbert2->GetComponent<QbertController>()->AddJoystickControls();
+	objects.push_back(qbert2);
 	//ADD FPS
 	auto fps = std::make_shared<GameObject>();
 	fps->AddComponent<CTransform>(std::make_shared<CTransform>(glm::vec3{ 0,465,0 }, glm::vec3{}));
@@ -132,8 +135,11 @@ void Level3::Load()
 		objects.push_back(CubePyramid);
 		//ADD QBERT
 		auto qbert = QBert::GetInstance().CreateObject(glm::vec3{ 320,640,0 });
-		//qbert->GetComponent<CTransform>()->SetScale(2, 2, 2);
+		qbert->GetComponent<QbertController>()->AddKeyBoardControls();
 		objects.push_back(qbert);
+		auto qbert2 = QBert::GetInstance().CreateObject(glm::vec3{ 320,640,0 });
+		qbert2->GetComponent<QbertController>()->AddJoystickControls();
+		objects.push_back(qbert2);
 		//ADD FPS
 		auto fps = std::make_shared<GameObject>();
 		fps->AddComponent<CTransform>(std::make_shared<CTransform>(glm::vec3{ 0,465,0 }, glm::vec3{}));

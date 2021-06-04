@@ -5,39 +5,15 @@
 #include "Scene.h"
 #include "Qbert.h"
 using namespace Crusade;
-PlayerControllerKeyBoard::PlayerControllerKeyBoard(int UpButton, int DownButton, int LeftButton, int RightButton,float objectSize)
+CharacterMovement::CharacterMovement(float objectSize)
 {
-	m_UpButton = UpButton;
-	m_DownButton = DownButton;
-	m_RightButton = RightButton;
-	m_LeftButton = LeftButton;
 	m_ObjectSize = objectSize;
 }
-void PlayerControllerKeyBoard::Awake()
+void CharacterMovement::Start()
 {
 	m_DirectionChoiceDelay.Stop();
 	m_DieDelay.Stop();
 	m_MovementSteering = m_Owner->GetComponent<MovementSteering>();
-	const auto publisher = std::make_shared<Publisher>();
-	m_Owner->AddComponent<Publisher>(publisher);
-	m_Publisher = publisher.get();
-	//INPUT
-	auto upMovementKey = new UpMovementKey{ m_Owner };
-	auto downMovementKey = new DownMovementKey{ m_Owner };
-	auto rightMovementKey = new RightMovementKey{ m_Owner };
-	auto leftMovementKey = new LeftMovementKey{ m_Owner };
-	InputManager::GetInstance().AddButtonInput(new InputButtonAction{ InputButtonState::pressed,std::unique_ptr<UpMovementKey>(upMovementKey),0,-1,m_UpButton });
-	InputManager::GetInstance().AddButtonInput(new InputButtonAction{ InputButtonState::pressed,std::unique_ptr<DownMovementKey>(downMovementKey),0,-1,m_DownButton });
-	InputManager::GetInstance().AddButtonInput(new InputButtonAction{ InputButtonState::pressed,std::unique_ptr<RightMovementKey>(rightMovementKey),0,-1,m_RightButton });
-	InputManager::GetInstance().AddButtonInput(new InputButtonAction{ InputButtonState::pressed,std::unique_ptr<LeftMovementKey>(leftMovementKey),0,-1,m_LeftButton });
-	m_UpSwitch = InputManager::GetInstance().CreateCommandKillSwitch(upMovementKey);
-	m_DownSwitch = InputManager::GetInstance().CreateCommandKillSwitch(downMovementKey);
-	m_RightSwitch = InputManager::GetInstance().CreateCommandKillSwitch(rightMovementKey);
-	m_LeftSwitch = InputManager::GetInstance().CreateCommandKillSwitch(leftMovementKey);
-	
-}
-void PlayerControllerKeyBoard::Start()
-{
 	auto cubes  = SceneManager::GetInstance().GetCurrentScene()->FindAllObjectsWithTag("Cube");
 	for (auto cube:cubes)
 	{
@@ -48,10 +24,9 @@ void PlayerControllerKeyBoard::Start()
 	SetTargetToCurrentCube();
 	m_Renderer = m_Owner->GetComponent<CRender>();
 	m_RigidBody = m_Owner->GetComponent<CRigidBody2D>();
-	m_Publisher->AddObserver(SceneManager::GetInstance().GetCurrentScene()->FindObject("LivesDisplay").get());
 	m_StartPos = m_Owner->GetCTransform()->GetPosition();
 }
-void PlayerControllerKeyBoard::Update()
+void CharacterMovement::Update()
 {
 	auto& time = Time::GetInstance();
 	if(m_DirectionChoiceDelay.Update(time.GetDeltaTime())&&m_IsEnabled&&m_CubeIsTriggerd)
@@ -72,9 +47,9 @@ void PlayerControllerKeyBoard::Update()
 		}
 		
 	}
-	TriggerCurrentCube();
 }
-void PlayerControllerKeyBoard::SetOffMapTarget(const Vector2f& pos, const float& speed)
+
+void CharacterMovement::SetOffMapTarget(const Vector2f& pos, const float& speed)
 {
 	m_IsEnabled = false;
 	m_MovementSteering->SetMovementBehaviour(std::make_shared<Seek>(speed, Vector2f{ }));
@@ -85,8 +60,7 @@ void PlayerControllerKeyBoard::SetOffMapTarget(const Vector2f& pos, const float&
 	m_RigidBody->SetGravityEnabled(false);
 	m_RigidBody->SetVelocity(glm::vec2{});
 }
-
-bool PlayerControllerKeyBoard::Move()
+bool CharacterMovement::Move()
 {
 	utils::HitInfo info{};
 	Point2f pos1{ m_CurrentCube->GetCenter() };
@@ -125,7 +99,7 @@ bool PlayerControllerKeyBoard::Move()
 	}
 	return false;
 }
-void PlayerControllerKeyBoard::SetTargetWhenNoCubeFound()
+void CharacterMovement::SetTargetWhenNoCubeFound()
 {
 	if (!(abs(m_Direction.x) < 0.1f))
 	{
@@ -143,7 +117,7 @@ void PlayerControllerKeyBoard::SetTargetWhenNoCubeFound()
 		}
 	}
 }
-void PlayerControllerKeyBoard::TriggerCurrentCube()
+void CharacterMovement::TriggerCurrentCube()
 {
 	if (!m_CubeIsTriggerd)
 	{
@@ -155,14 +129,27 @@ void PlayerControllerKeyBoard::TriggerCurrentCube()
 		}
 	}
 }
-void PlayerControllerKeyBoard::SetTargetToCurrentCube()const
+void CharacterMovement::ResetCurrentCube()
+{
+	if (!m_CubeIsTriggerd)
+	{
+		const auto pos = m_Owner->GetComponent<CTransform>()->GetPosition();
+		if (abs(m_MovementSteering->GetTarget().x - pos.x) < 5 && abs(m_MovementSteering->GetTarget().y - pos.y) < 5)
+		{
+			m_CurrentCube->GetOwner()->Notify("Reset");
+			m_CubeIsTriggerd = true;
+		}
+	}
+}
+
+void CharacterMovement::SetTargetToCurrentCube()const
 {
 	auto target = m_CurrentCube->GetCenter();
 	target.x -= m_ObjectSize / 2;
 	target.y += m_ObjectSize / 2;
 	m_MovementSteering->SetTarget(Vector2f{ target });
 }
-void PlayerControllerKeyBoard::NotifyObjectOfJump()const
+void CharacterMovement::NotifyObjectOfJump()const
 {
 	//NOTIFY OBJECT THAT JUMP OCCURS
 	if (abs(m_Direction.y) > 0.1f)
@@ -186,9 +173,34 @@ void PlayerControllerKeyBoard::NotifyObjectOfJump()const
 		m_Owner->Notify("LookRight");
 	}
 }
-void PlayerControllerKeyBoard::Notify(const std::string& message)
+void CharacterMovement::ResetToStart()
 {
-	if(message == "Up")
+	m_IsEnabled = true;
+	m_RigidBody->SetGravityEnabled(false);
+	m_RigidBody->SetVelocity(glm::vec2{});
+	m_CurrentCube = m_Cubes[0];
+	m_MovementSteering->SetMovementBehaviour(std::make_shared<Seek>(QBert::GetInstance().GetSpeed(), Vector2f{ }));
+	m_DieDelay.Stop();
+	m_DieDelay.Reset();
+	m_CubeIsTriggerd = false;
+	m_Renderer->SetCurrentLayer("Front");
+	SetTargetToCurrentCube();
+	m_RigidBody->SetGravityEnabled(false);
+}
+void CharacterMovement::ResetDeathAnim()
+{
+	m_DieDelay.Reset();
+	m_DieDelay.Stop();
+}
+void CharacterMovement::Die()
+{
+	m_Owner->GetCTransform()->SetPosition(m_StartPos.x, m_StartPos.y, m_StartPos.z);
+	ResetToStart();
+}
+
+void CharacterMovement::Notify(const std::string& message)
+{
+	if (message == "Up")
 	{
 		m_DirectionChoiceDelay.Start();
 		m_Direction.y = 1;
@@ -210,43 +222,13 @@ void PlayerControllerKeyBoard::Notify(const std::string& message)
 		m_DirectionChoiceDelay.Start();
 		m_Direction.x = 1;
 	}
-	else if (message == "DiscStart")
-	{
-		m_DieDelay.Reset();
-		m_DieDelay.Stop();
-	}
-	else if (message == "DiscEnd")
-	{
-		ResetToStart();
-	}
-	else if (message == "Death")
-	{
-		m_Publisher->SendNotification("Death");
-		m_Owner->GetCTransform()->SetPosition(m_StartPos.x, m_StartPos.y, m_StartPos.z);
-		ResetToStart();
-	}
 }
-void PlayerControllerKeyBoard::ResetToStart()
-{
-	m_IsEnabled = true;
-	m_RigidBody->SetGravityEnabled(false);
-	m_RigidBody->SetVelocity(glm::vec2{});
-	m_CurrentCube = m_Cubes[0];
-	m_MovementSteering->SetMovementBehaviour(std::make_shared<Seek>(QBert::GetInstance().GetSpeed(), Vector2f{ }));
-	m_DieDelay.Stop();
-	m_DieDelay.Reset();
-	m_CubeIsTriggerd = false;
-	m_Renderer->SetCurrentLayer("Front");
-	SetTargetToCurrentCube();
-	m_RigidBody->SetGravityEnabled(false);
-}
-
-
 
 //COMMANDS
 void UpMovementKey::Execute()
 {
 	m_Actor->Notify("Up");
+	std::cout << "yes" << std::endl;
 }
 void DownMovementKey::Execute()
 {
@@ -260,3 +242,36 @@ void LeftMovementKey::Execute()
 {
 	m_Actor->Notify("Left");
 }
+void UpMovementTrigger::Execute()
+{
+	auto joy = InputManager::GetInstance().GetControllerJoyStickTrigger(true);
+	if (joy.y > 10000)
+	{
+		m_Actor->Notify("Up");
+	}
+}
+void DownMovementTrigger::Execute()
+{
+	auto joy = InputManager::GetInstance().GetControllerJoyStickTrigger(true);
+	if (joy.y < -10000)
+	{
+		m_Actor->Notify("Down");
+	}
+}
+void RightMovementTrigger::Execute()
+{
+	auto joy = InputManager::GetInstance().GetControllerJoyStickTrigger(true);
+	if (joy.x > 10000)
+	{
+		m_Actor->Notify("Right");
+	}
+}
+void LeftMovementTrigger::Execute()
+{
+	auto joy = InputManager::GetInstance().GetControllerJoyStickTrigger(true);
+	if (joy.x < -10000)
+	{
+		m_Actor->Notify("Left");
+	}
+}
+

@@ -1,6 +1,5 @@
 #include "MiniginPCH.h"
 #include "SceneManager.h"
-
 #include "GameObject.h"
 #include "Scene.h"
 #pragma warning( disable : 26816)
@@ -27,6 +26,14 @@ void Crusade::SceneManager::LoadScene(const std::string& sceneName)
 	{
 		if (scene->GetName() == sceneName)
 		{
+			if (m_CurrentScene)
+			{
+				m_CurrentScene->DeleteObjectsToBeAdded();
+				for (auto obj : m_CurrentScene->GetAllObjects())
+				{
+					obj->SetRemove();
+				}
+			}
 			m_CurrentScene = scene;
 			for (auto obj : m_CurrentScene->GetAllObjects())
 			{

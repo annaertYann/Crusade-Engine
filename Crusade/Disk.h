@@ -14,7 +14,7 @@ public:
 private:
 	void OnTriggerEnter(Crusade::CCollider*) override;
 	Crusade::CTransform* m_Transform = nullptr;
-	PlayerControllerKeyBoard* m_Player=nullptr;
+	CharacterMovement* m_Player=nullptr;
 	Vector2f m_EndPosition{0,0};
 	MovementSteering* m_Movement=nullptr;
 	float m_Speed=200;
@@ -24,6 +24,7 @@ class Disk final :public Crusade::Prefab<Disk>
 {
 public :
 	std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) override;
+	float GetSize()const { return m_DiskSize; }
 private:
 	float m_DiskSize = 20;
 };

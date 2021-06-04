@@ -3,6 +3,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "Event.h"
+#include "Disk.h"
 using namespace Crusade;
 void CubePyramidConstructor::Awake()
 {
@@ -24,13 +25,19 @@ void CubePyramidConstructor::Awake()
 			pos = info.pos;
 		}
 	}
-	for (int j{}; j < 7; j++)
+	int rows = 7;
+	for (int j{}; j < rows; j++)
 	{
 		for (int i{}; i < numberOfCubesInRow; i++)
 		{
 			auto obj = Cube::GetInstance().CreateObject({ pos.x - (j * hexaSize / 2) + (i * hexaSize),pos.y - j * hexaSize * 3 / 4  ,pos.z }, {}, {1,1,1});
 			scene->Add(obj);
 			auto activator = obj->GetComponent<CubeActivator>();
+			if (j < rows - 1)
+			{
+				if (i == 0) { CreateDisk({ pos.x - (j * hexaSize / 2) + (i * hexaSize), pos.y - j * hexaSize * 3 / 4, pos.z }, true, hexaSize); }
+				if (i == numberOfCubesInRow - 1) { CreateDisk({ pos.x - (j * hexaSize / 2) + (i * hexaSize), pos.y - j * hexaSize * 3 / 4, pos.z }, false, hexaSize); }
+			}
 			activator->SetColors(m_Color1, m_Color2);
 			activator->SetTriggerType(m_TriggerType);
 			m_Cubes.push_back(activator);
@@ -38,6 +45,22 @@ void CubePyramidConstructor::Awake()
 		numberOfCubesInRow++;
 	}
 	
+}
+void CubePyramidConstructor::CreateDisk(const glm::vec3& pos,bool left,float size)
+{
+	int x = rand();
+	int chance = int(1 / DiskSpawnRate);
+	auto diskPos = pos;
+	if (left) { diskPos.x -= size; }
+	else { diskPos.x += size; }
+	diskPos.x += size / 2;
+	diskPos.y += size / 2;
+	float diskSize=Disk::GetInstance().GetSize();
+	diskPos -= diskSize / 2;
+	if(x%chance==0)
+	{
+		SceneManager::GetInstance().GetCurrentScene()->Add( Disk::GetInstance().CreateObject(diskPos, {}, { 1,1,1 }));
+	}
 }
 
 
@@ -93,6 +116,15 @@ void CubeActivator::Notify(const std::string& message)
 		case TriggerType::halfPermanent:
 			TriggerHalfPermanent();
 			break;
+		}
+	}
+	else if(message=="Reset")
+	{
+		if (m_IsTrigged)
+		{
+			m_Renderer->SetColor(m_Color1);
+			m_IsTrigged = false;
+			m_Publisher->SendNotification("DeTriggered");
 		}
 	}
 }

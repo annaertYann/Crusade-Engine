@@ -14,11 +14,19 @@ void DiskController::OnTriggerEnter(CCollider* col)
 {
 	if (!m_Player)
 	{
-		const auto player = col->GetOwner()->GetComponent<PlayerControllerKeyBoard>();
+		const auto player = col->GetOwner()->GetComponent<CharacterMovement>();
 		if (player)
 		{
-			m_Player = player;
-			m_Movement->SetTarget(m_EndPosition);
+			if (player->IsJumpingOffEdge())
+			{
+				m_Player = player;
+				auto trans = player->GetOwner()->GetComponent<CTransform>();
+				auto pos = trans->GetPosition();
+				pos.x = m_Owner->GetCTransform()->GetPosition().x;
+				pos.y = m_Owner->GetCTransform()->GetPosition().y;
+				trans->SetPosition(pos.x, pos.y, pos.z);
+				m_Movement->SetTarget(m_EndPosition);
+			}
 		}
 	}
 }
@@ -58,6 +66,7 @@ std::shared_ptr<GameObject> Disk::CreateObject(glm::vec3 position, glm::vec3 rot
 	obj->AddComponent<CRectCollider>(std::make_shared<CRectCollider>(Rectf{ 0,0,m_DiskSize,m_DiskSize }));
 	obj->AddComponent<CRigidBody2D>(std::make_shared<CRigidBody2D>());
 	obj->GetComponent<CRigidBody2D>()->SetGravityEnabled(false);
+	obj->GetComponent<CCollider>()->SetIsTrigger(true);
 	obj->GetComponent<DiskController>()->SetEndPosition(Vector2f{320,480});
 	obj->GetComponent<CRender>()->SetCurrentLayer("Front");
 	obj->SetName("Disk");

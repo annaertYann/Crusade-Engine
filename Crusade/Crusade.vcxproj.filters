@@ -136,6 +136,12 @@
     <ClCompile Include="Disk.cpp">
       <Filter>Crusade\Game\Qbert\Interatable</Filter>
     </ClCompile>
+    <ClCompile Include="Ai.cpp">
+      <Filter>Crusade\Game\Qbert\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AiMovements.cpp">
+      <Filter>Crusade\Game\Qbert\AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\imgui-1.81\imconfig.h">
@@ -290,6 +296,12 @@
     </ClInclude>
     <ClInclude Include="Disk.h">
       <Filter>Crusade\Game\Qbert\Interatable</Filter>
+    </ClInclude>
+    <ClInclude Include="Ai.h">
+      <Filter>Crusade\Game\Qbert\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AIMovements.h">
+      <Filter>Crusade\Game\Qbert\AI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

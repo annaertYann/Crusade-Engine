@@ -93,8 +93,8 @@ namespace Crusade
 		void ProcessTriggers();
 		bool ProcessQuit();
 		void CalculateMousePos();
-		bool IsButtonPressed(const int& button,const int& mouseButtonCode,const int& keyboardCode) const;
-		bool IsTriggerActive(const TriggerType& trigger) const;
+		bool IsButtonPressed(const int& button,const int& mouseButtonCode,const int& keyboardCode,const int& userIndex) const;
+		bool IsTriggerActive(const TriggerType& trigger, const int& userIndex) const;
 		XINPUT_STATE m_CurrentControllerState{};
 		std::vector<InputButtonAction*> m_InputButtonCommands{};
 		std::vector<InputTriggerAction*> m_InputTriggerCommands{};
