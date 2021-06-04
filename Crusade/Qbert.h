@@ -12,16 +12,7 @@ public:
 private:
 	float m_Speed = 200;
 };
-class QbertAnimationTriggerer final :public Crusade::Component
-{
-public:
-	void Start() override;
-	void Notify(const std::string& message) override;
-private:
-	Crusade::CAnimator2D* m_Animator=nullptr;
-	Crusade::CRender* m_Render = nullptr;
-	bool m_IsBack = false;
-};
+
 
 class QbertController final : public Crusade::Component
 {

@@ -57,10 +57,6 @@ void Scene::LateUpdate( )
 	{
 		m_Objects.erase(std::remove_if(m_Objects.begin(), m_Objects.end(), [&](const std::shared_ptr<GameObject>& object)
 		{
-			if(object->GetRemove())
-			{
-				std::cout << "niceman" << std::endl;
-			}
 			return object->GetRemove();
 		}), m_Objects.end());
 	}

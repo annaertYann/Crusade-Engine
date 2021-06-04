@@ -228,7 +228,6 @@ void CharacterMovement::Notify(const std::string& message)
 void UpMovementKey::Execute()
 {
 	m_Actor->Notify("Up");
-	std::cout << "yes" << std::endl;
 }
 void DownMovementKey::Execute()
 {

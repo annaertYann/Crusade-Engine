@@ -13,6 +13,7 @@
 #include "DeathBox.h"
 #include "LevelFinisher.h"
 #include "Disk.h"
+#include "Ai.h"
 using namespace Crusade;
 void Level1::Load()
 {
@@ -63,6 +64,9 @@ void Level1::Load()
 	name->AddComponent<CTransform>(std::make_shared<CTransform>(glm::vec3{ 30,425,0 }, glm::vec3{}));
 	name->AddComponent<CTextRender>(std::make_shared<CTextRender>("Level1", "Lingua.otf", 20, SDL_Color{ 255 ,0,0,255 }));
 	objects.push_back(name);
+	//ADD AI
+	auto AISpawner = AISpawnerPrefab::GetInstance().CreateObject(glm::vec3{ 320,640,0 });
+	objects.push_back(AISpawner);
 	Add(objects);
 }
 void Level2::Load()

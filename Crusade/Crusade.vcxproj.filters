@@ -142,6 +142,12 @@
     <ClCompile Include="AiMovements.cpp">
       <Filter>Crusade\Game\Qbert\AI</Filter>
     </ClCompile>
+    <ClCompile Include="CharacterAnimationTrigger.cpp">
+      <Filter>Crusade\Game\Qbert\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="AiSpawner.cpp">
+      <Filter>Crusade\Game\Qbert\AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\imgui-1.81\imconfig.h">
@@ -303,6 +309,12 @@
     <ClInclude Include="AIMovements.h">
       <Filter>Crusade\Game\Qbert\AI</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterAnimationTrigger.h">
+      <Filter>Crusade\Game\Qbert\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="AiSpawner.h">
+      <Filter>Crusade\Game\Qbert\AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Crusade">
@@ -356,14 +368,8 @@
     <Filter Include="Crusade\Foundation\Services\Sound">
       <UniqueIdentifier>{c1a4be44-8d89-48ac-9c8b-8e0479ab08b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Crusade\Game\TestScene">
-      <UniqueIdentifier>{d9181fca-f799-40f3-933b-47c0068ab53a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Crusade\Game\Qbert">
       <UniqueIdentifier>{cc67877c-9bdd-4851-89ab-a24f090009d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Crusade\Utility\Lua">
-      <UniqueIdentifier>{68401f60-b0ba-43f0-9e25-3555a955db86}</UniqueIdentifier>
     </Filter>
     <Filter Include="Crusade\Game\Qbert\Observers">
       <UniqueIdentifier>{c1576fe2-e326-4369-83f2-09e29a7b15e7}</UniqueIdentifier>

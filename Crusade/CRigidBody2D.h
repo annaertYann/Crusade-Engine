@@ -10,7 +10,7 @@ namespace Crusade
 	{
 	public:
 		void FixedUpdate() override;
-
+		void Update() override;
 		void AddForce(const glm::vec2& force) { m_Velocity += force; }
 
 		void SetVelocity(const glm::vec2& velocity) { m_Velocity = velocity; }

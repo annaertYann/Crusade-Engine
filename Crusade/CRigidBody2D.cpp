@@ -18,35 +18,33 @@ void CRigidBody2D::Start()
 }
 void CRigidBody2D::FixedUpdate()
 {
-	auto& time = Time::GetInstance();
-
-
+	auto time = Time::GetInstance().GetFixedDeltaTime();
 	//COLLISION
-	m_BounceDelay.Update(time.GetFixedDeltaTime());
+	m_BounceDelay.Update(time);
 	DoCollisions();
 	//ADD GRAVITY TO VELOCITY
-	if (m_IsGravityEnabled&&!m_IsColliding)
+	if (m_IsGravityEnabled && !m_IsColliding)
 	{
-		m_Velocity.x += m_Gravity.x * time.GetFixedDeltaTime();
-		m_Velocity.y += m_Gravity.y * time.GetFixedDeltaTime();
+		m_Velocity.x += m_Gravity.x * time;
+		m_Velocity.y += m_Gravity.y * time;
 	}
 	//ADD AIR FRICTION
-	if (abs(m_Velocity.x) > m_AirFriction.x * time.GetFixedDeltaTime())
+	if (abs(m_Velocity.x) > m_AirFriction.x * time)
 	{
-		if (m_Velocity.x > 0) { m_Velocity.x += -1 * m_AirFriction.x * time.GetFixedDeltaTime(); }
-		if (m_Velocity.x < 0) { m_Velocity.x += m_AirFriction.x * time.GetFixedDeltaTime(); }
+		if (m_Velocity.x > 0) { m_Velocity.x += -1 * m_AirFriction.x * time; }
+		if (m_Velocity.x < 0) { m_Velocity.x += m_AirFriction.x * time; }
 	}
-	if (abs(m_Velocity.y) > m_AirFriction.y * time.GetFixedDeltaTime())
+	if (abs(m_Velocity.y) > m_AirFriction.y * time)
 	{
-		if (m_Velocity.y > 0) { m_Velocity.y += -1 * m_AirFriction.y * time.GetFixedDeltaTime(); }
-		if (m_Velocity.y < 0) { m_Velocity.y += m_AirFriction.y * time.GetFixedDeltaTime(); }
+		if (m_Velocity.y > 0) { m_Velocity.y += -1 * m_AirFriction.y * time; }
+		if (m_Velocity.y < 0) { m_Velocity.y += m_AirFriction.y * time; }
 	}
 	//STOP IF VELOCITY IS TOO LOW
-	if (abs(m_Velocity.x) < m_AirFriction.x*time.GetFixedDeltaTime() )
+	if (abs(m_Velocity.x) < m_AirFriction.x * time)
 	{
 		m_Velocity.x = 0;
 	}
-	if (abs(m_Velocity.y) < m_AirFriction.y * time.GetFixedDeltaTime())
+	if (abs(m_Velocity.y) < m_AirFriction.y * time)
 	{
 		m_Velocity.y = 0;
 	}
@@ -54,10 +52,13 @@ void CRigidBody2D::FixedUpdate()
 	//ADD VELOCITY TO POSITION
 	if (!m_IsStatic)
 	{
-		position.x += m_Velocity.x * time.GetFixedDeltaTime();
-		position.y += m_Velocity.y * time.GetFixedDeltaTime();
+		position.x += m_Velocity.x * time;
+		position.y += m_Velocity.y * time;
 		m_Transform->SetPosition(float(position.x), float(position.y), float(position.y));
 	}
+}
+void CRigidBody2D::Update()
+{
 }
 void CRigidBody2D::DoCollisions()
 {

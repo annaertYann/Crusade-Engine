@@ -1,6 +1,7 @@
 #include "MiniginPCH.h"
 #include "Qbert.h"
 #include "CAnimator2D.h"
+#include "CharacterAnimationTrigger.h"
 #include "CTransform.h"
 #include "MovementSteering.h"
 #include "PlayerController.h"
@@ -20,7 +21,7 @@ std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 ro
 	const auto animBackJump = std::make_shared<Animation>("Qbert/JumpBack.png",2, 8.f, true);
 	//ANIMATOR
 	const auto animator = std::make_shared<CAnimator2D>(animJump, glm::vec2{ 40, 40 });
-	qbert->AddComponent<QbertAnimationTriggerer>(std::make_shared<QbertAnimationTriggerer>());
+	qbert->AddComponent<CharacterAnimationTrigger>(std::make_shared<CharacterAnimationTrigger>());
 	//TRANSITIONS
 	const std::shared_ptr<bool>jumpFrontCondition{ new bool{} };
 	const std::shared_ptr<bool>jumpBackCondition{ new bool{} };
@@ -44,32 +45,6 @@ std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 ro
 	qbert->AddComponent<CCollider>(col);
 	qbert->SetName("Qbert");
 	return qbert;
-}
-void QbertAnimationTriggerer::Start()
-{
-	m_Animator = m_Owner->GetComponent<CAnimator2D>();
-	m_Render = m_Owner->GetComponent<CRender>();
-}
-void QbertAnimationTriggerer::Notify(const std::string& message)
-{
-	if (message=="JumpFront")
-	{
-		m_IsBack = false;
-		m_Animator->TriggerTransition(message);
-	}
-	else if(message == "JumpBack")
-	{
-		m_IsBack = true;
-		m_Animator->TriggerTransition(message);
-	}
-	else if (message == "LookLeft")
-	{
-		m_Render->SetFliphorizontal(true);
-	}
-	else if (message == "LookRight")
-	{
-		m_Render->SetFliphorizontal(false);
-	}
 }
 
 void QbertController::Start()

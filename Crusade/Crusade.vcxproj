@@ -207,9 +207,11 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClInclude Include="..\3rdParty\imgui-1.81\imstb_truetype.h" />
     <ClInclude Include="Ai.h" />
     <ClInclude Include="AIMovements.h" />
+    <ClInclude Include="AiSpawner.h" />
     <ClInclude Include="CAnimator2D.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="Camera2D.h" />
+    <ClInclude Include="CharacterAnimationTrigger.h" />
     <ClInclude Include="Colliders2D.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CSaveLoad.h" />
@@ -296,8 +298,10 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     </ClCompile>
     <ClCompile Include="Ai.cpp" />
     <ClCompile Include="AiMovements.cpp" />
+    <ClCompile Include="AiSpawner.cpp" />
     <ClCompile Include="CAnimator2D.cpp" />
     <ClCompile Include="Camera2D.cpp" />
+    <ClCompile Include="CharacterAnimationTrigger.cpp" />
     <ClCompile Include="Colliders2D.cpp" />
     <ClCompile Include="CSaveLoad.cpp" />
     <ClCompile Include="CTransform.cpp" />

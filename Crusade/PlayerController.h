@@ -17,8 +17,12 @@ public:
 	bool IsJumpingOffEdge()const { return m_DieDelay.GetIsActive(); }
 	void ResetDeathAnim();
 	void Die();
+
+
+	
 	void TriggerCurrentCube();
 	void ResetCurrentCube();
+	void IgnoreCurrentCube() { m_CubeIsTriggerd = true; }
 private:
 	void NotifyObjectOfJump()const;
 	void SetTargetToCurrentCube()const;
