@@ -19,5 +19,4 @@ std::shared_ptr<GameObject> DeathBox::CreateObject(glm::vec3 position, glm::vec3
 void Eraser::OnTriggerEnter(CCollider* col)
 {
 	col->GetOwner()->Notify("Death");
-	std::cout << "Object Notified of death : DeathBox" << std::endl;
 }

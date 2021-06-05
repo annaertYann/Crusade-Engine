@@ -12,21 +12,25 @@ void Score::RecieveNotification(GameObject*, const std::string& message)
 	{
 		m_Score += 25;
 		m_NeedsUpdate = true;
+		std::cout << "Color Cube Changed : score+25" << std::endl;
 	}
 	else if (message == "CoilyDeath")
 	{
 		m_Score += 500;
 		m_NeedsUpdate = true;
+		std::cout << "Coily died : score+500" << std::endl;
 	}
 	else if (message == "DiscRemain")
 	{
 		m_Score += 50;
 		m_NeedsUpdate = true;
+		std::cout << "Dick remained unused : score+50" << std::endl;
 	}
 	else if (message == "SamCatch")
 	{
 		m_Score += 300;
 		m_NeedsUpdate = true;
+		std::cout << "Green Monster Caught : score+300" << std::endl;
 	}
 }
 void Score::SetScore(int score)

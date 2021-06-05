@@ -18,6 +18,7 @@ void Lives::RecieveNotification(GameObject*, const std::string& message)
 			m_LifeIndicators.back()->SetRemove();
 			m_LifeIndicators.pop_back();
 			m_Lives--;
+			std::cout << "Qbert Died : lives-1" << std::endl;
 		}
 	}
 	else if (message=="GainLife")
@@ -29,6 +30,7 @@ void Lives::RecieveNotification(GameObject*, const std::string& message)
 		SceneManager::GetInstance().GetCurrentScene()->Add(obj);
 		m_LifeIndicators.push_back(obj.get());
 		m_Lives++;
+		std::cout << "Qbert gained a life" << std::endl;
 	}
 }
 void Lives::Update()
