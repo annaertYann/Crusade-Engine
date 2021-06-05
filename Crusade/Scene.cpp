@@ -1,12 +1,17 @@
 #include "MiniginPCH.h"
 #include "Scene.h"
+
+#include "Camera2D.h"
 #include "GameObject.h"
 #include "RenderComponents.h"
 #include "CRigidBody2D.h"
+#include "Renderer.h"
 using namespace Crusade;
 
 unsigned int Scene::m_IdCounter = 0;
-Scene::Scene() : m_Name("Default") {}
+Scene::Scene() : m_Name("Default")
+{
+}
 void Scene::Add(const std::shared_ptr<GameObject>& object)
 {
 	m_ObjectsToBeAdded.push_back(object);
@@ -17,6 +22,15 @@ void Scene::Add(const std::vector<std::shared_ptr<GameObject>>& objects)
 	{
 		m_ObjectsToBeAdded.push_back(object);
 	}
+}
+void Scene::AddCamera()
+{
+	//CAMERA
+	auto window = Renderer::GetInstance().GetWindowSize();
+	auto camera = std::make_shared<GameObject>();
+	camera->AddComponent<Camera2D>(std::make_shared<Camera2D>(Point2f{ 0,0 }, window));
+	camera->SetName("Camera");
+	m_Objects.push_back(camera);
 }
 
 void Scene::FixedUpdate()

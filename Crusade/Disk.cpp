@@ -1,7 +1,10 @@
 #include "MiniginPCH.h"
 #include "Disk.h"
+#include "AiSpawner.h"
+#include "CAnimator2D.h"
 #include "GameObject.h"
 #include "RenderComponents.h"
+#include "Qbert.h"
 using namespace Crusade;
 void DiskController::Start()
 {
@@ -24,6 +27,8 @@ void DiskController::OnTriggerEnter(CCollider* col)
 				auto pos = trans->GetPosition();
 				pos.x = m_Owner->GetCTransform()->GetPosition().x;
 				pos.y = m_Owner->GetCTransform()->GetPosition().y;
+				pos.x += Disk::GetInstance().GetSize() / 2 - QBert::GetInstance().GetSize()/2;
+				pos.y += Disk::GetInstance().GetSize() / 3;
 				trans->SetPosition(pos.x, pos.y, pos.z);
 				m_Movement->SetTarget(m_EndPosition);
 			}
@@ -62,8 +67,14 @@ std::shared_ptr<GameObject> Disk::CreateObject(glm::vec3 position, glm::vec3 rot
 	obj->AddComponent<CTransform>(std::make_shared<CTransform>(position, rotation, scale));
 	obj->AddComponent<DiskController>(std::make_shared<DiskController>());
 	obj->AddComponent<MovementSteering>(std::make_shared<MovementSteering>(std::make_shared<Seek>()));
-	obj->AddComponent<CShape2DRender>(std::make_shared<CShape2DRender>(CShape2DRender::Shape::Rect, glm::vec2{ m_DiskSize,m_DiskSize }, false, SDL_Color{255,0,0,255}));
-	obj->AddComponent<CRectCollider>(std::make_shared<CRectCollider>(Rectf{ 0,0,m_DiskSize,m_DiskSize }));
+	//obj->AddComponent<CShape2DRender>(std::make_shared<CShape2DRender>(CShape2DRender::Shape::Rect, glm::vec2{ m_DiskSize,m_DiskSize }, false, SDL_Color{255,0,0,255}));
+	//ANIMATIONS
+	const auto animIdle = std::make_shared<Animation>("Disk.png", 45, 12.f,true);
+	//ANIMATOR
+	const auto animator = std::make_shared<CAnimator2D>(animIdle, glm::vec2{ m_DiskSize, m_DiskSize });
+	obj->AddComponent<CAnimator2D>(animator);
+	
+	obj->AddComponent<CRectCollider>(std::make_shared<CRectCollider>(Rectf{ m_DiskSize/4,m_DiskSize/4,m_DiskSize/2,m_DiskSize/2 }));
 	obj->AddComponent<CRigidBody2D>(std::make_shared<CRigidBody2D>());
 	obj->GetComponent<CRigidBody2D>()->SetGravityEnabled(false);
 	obj->GetComponent<CCollider>()->SetIsTrigger(true);

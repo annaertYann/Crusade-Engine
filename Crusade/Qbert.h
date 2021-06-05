@@ -9,8 +9,10 @@ class QBert final : public Crusade::Prefab<QBert>
 public:
 	std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position = {}, glm::vec3 rotation = {}, glm::vec3 scale = { 1,1,1 }) override;
 	float GetSpeed()const { return m_Speed; }
+	float GetSize()const { return m_Size; }
 private:
 	float m_Speed = 200;
+	float m_Size = 40;
 };
 
 

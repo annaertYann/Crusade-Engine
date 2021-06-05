@@ -3,6 +3,7 @@
 #include "Delay.h"
 #include "CTransform.h"
 #include "Event.h"
+#include "InputManager.h"
 class CharacterMovement;
 class CoilyMovment final:public Crusade::Component
 {
@@ -11,13 +12,18 @@ public:
 	{
 		egg,
 		chase
+		,manualWaiting
+		,manual
 	};
 	void Start() override;
 	void Notify(const std::string& message) override;
 	void Update() override;
+	void SetToManualControl() { if (m_CurrentState == State::egg) { m_CurrentState = State::manualWaiting; } }
 private:
+	void AddPlayerControls();
 	void EggUpdate();
 	void ChaseUpdate();
+	void Transform();
 	void OnTriggerEnter(Crusade::CCollider*) override;
 	std::vector<Crusade::CTransform*>m_QbertTransforms;
 	Crusade::CTransform* m_QbertChoice = nullptr;
@@ -28,6 +34,11 @@ private:
 	int m_JumpCounter = 0;
 	int m_maxJumpsBeforeTransform = 6;
 	Crusade::Publisher* m_Publisher=nullptr;
+
+	std::unique_ptr<Crusade::CommandKillSwitch>m_UpSwitchTrigger{};
+	std::unique_ptr<Crusade::CommandKillSwitch>m_DownSwitchTrigger{};
+	std::unique_ptr<Crusade::CommandKillSwitch>m_LeftSwitchTrigger{};
+	std::unique_ptr<Crusade::CommandKillSwitch>m_RightSwitchTrigger{};
 };
 class UggMovement final :public Crusade::Component
 {

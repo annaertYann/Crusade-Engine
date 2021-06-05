@@ -111,9 +111,9 @@ std::shared_ptr<Crusade::GameObject> WrongWay::CreateObject(glm::vec3 position, 
 	wrongWay->AddComponent<Publisher>(std::make_shared<Publisher>());
 	//ANIMATIONS
 	const auto animIdle = std::make_shared<Animation>("WrongWay/Idle.png", 1, 10.f, false);
-	const auto animJump = std::make_shared<Animation>("WrongWay/JumpFront.png", 2, 8.f, true);
+	const auto animJump = std::make_shared<Animation>("WrongWay/JumpFront.png", 4, 8.f, true);
 	const auto animBackIdle = std::make_shared<Animation>("WrongWay/IdleBack.png", 1, 10.f, false);
-	const auto animBackJump = std::make_shared<Animation>("WrongWay/JumpBack.png", 2, 8.f, true);
+	const auto animBackJump = std::make_shared<Animation>("WrongWay/JumpBack.png", 4, 8.f, true);
 	//ANIMATOR
 	const auto animator = std::make_shared<CAnimator2D>(animIdle, glm::vec2{ 40, 40 });
 	wrongWay->AddComponent<CharacterAnimationTrigger>(std::make_shared<CharacterAnimationTrigger>());

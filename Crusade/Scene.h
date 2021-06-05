@@ -33,6 +33,7 @@ namespace Crusade
 	private:
 		void DeleteObjectsToBeAdded() { m_ObjectsToBeAdded.clear(); }
 		void SetName(const std::string& name) { m_Name = name; }
+		void AddCamera();
 		virtual void Load() = 0;
 		std::string m_Name;
 		std::vector < std::shared_ptr<GameObject>> m_Objects{};

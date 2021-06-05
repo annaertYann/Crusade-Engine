@@ -4,6 +4,7 @@
 #include "ResourceManager.h"
 #include "Levels.h"
 #include "RenderComponents.h"
+#include "Menu.h"
 using namespace Crusade;
 void QbertGame::LoadGame()const
 {
@@ -15,5 +16,6 @@ void QbertGame::LoadGame()const
 	sceneManager.CreateScene<Level1>("Qbert1");
 	sceneManager.CreateScene<Level2>("Qbert2");
 	sceneManager.CreateScene<Level3>("Qbert3");
-	sceneManager.LoadScene("Qbert1");
+	sceneManager.CreateScene<Menu>("Menu");
+	sceneManager.LoadScene("Menu");
 }

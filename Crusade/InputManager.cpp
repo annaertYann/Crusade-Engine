@@ -1,6 +1,8 @@
 #include "MiniginPCH.h"
 #include "InputManager.h"
 #include <SDL.h>
+
+#include "Renderer.h"
 #include "glm/vec2.hpp"
 using namespace Crusade;
 using namespace glm;
@@ -36,11 +38,11 @@ void InputManager::CalculateMousePos()
 	int x{};
 	int y{};
 	SDL_GetMouseState(&x, &y);
-	if (abs(m_ScreenMousePos.x - x) < 0.1f || abs(m_ScreenMousePos.y - y) < 0.1f)
+	if (abs(m_ScreenMousePos.x - x) > 0.1f || abs(m_ScreenMousePos.y - y) > 0.1f)
 	{
 		m_MouseMotionEvent = true;
 		m_ScreenMousePos.x = float(x);
-		m_ScreenMousePos.y = float(y);
+		m_ScreenMousePos.y = float(  Renderer::GetInstance().GetWindowSize().height-y);
 	}
 }
 void InputManager::ProcessButtons()

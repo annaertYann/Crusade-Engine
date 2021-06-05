@@ -20,7 +20,7 @@ std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 ro
 	const auto animBackIdle = std::make_shared<Animation>("Qbert/IdleBack.png", 1, 10.f, false);
 	const auto animBackJump = std::make_shared<Animation>("Qbert/JumpBack.png",2, 8.f, true);
 	//ANIMATOR
-	const auto animator = std::make_shared<CAnimator2D>(animJump, glm::vec2{ 40, 40 });
+	const auto animator = std::make_shared<CAnimator2D>(animJump, glm::vec2{ m_Size, m_Size });
 	qbert->AddComponent<CharacterAnimationTrigger>(std::make_shared<CharacterAnimationTrigger>());
 	//TRANSITIONS
 	const std::shared_ptr<bool>jumpFrontCondition{ new bool{} };
@@ -40,7 +40,7 @@ std::shared_ptr<GameObject> QBert::CreateObject(glm::vec3 position, glm::vec3 ro
 	auto rigid  = std::make_shared<CRigidBody2D>();
 	rigid->SetGravityEnabled(false);
 	qbert->AddComponent<CRigidBody2D>(rigid);
-	auto col =  std::make_shared<CRectCollider>(Rectf{ 0,0,40,40 });
+	auto col =  std::make_shared<CRectCollider>(Rectf{ 0,0,m_Size,m_Size });
 	col->SetIsTrigger(true);
 	qbert->AddComponent<CCollider>(col);
 	qbert->SetName("Qbert");

@@ -30,6 +30,9 @@ void CoilyMovment::Update()
 	case State::chase:
 		ChaseUpdate();
 		break;
+	case State::manualWaiting:
+		EggUpdate();
+		break;
 	default: ;
 	}
 
@@ -42,11 +45,7 @@ void CoilyMovment::EggUpdate()
 	{
 		if (m_JumpCounter >= m_maxJumpsBeforeTransform)
 		{
-			m_CurrentState = State::chase;
-			m_Owner->Notify("Transform");
-			m_MoveDelay.Start();
-			int number = rand()%m_QbertTransforms.size();
-			m_QbertChoice = m_QbertTransforms[number];
+			Transform();
 		}
 		else
 		{
@@ -65,6 +64,23 @@ void CoilyMovment::EggUpdate()
 		}
 	}
 }
+void CoilyMovment::Transform()
+{
+	if (m_CurrentState == State::manualWaiting)
+	{
+		AddPlayerControls();
+		m_CurrentState = State::manual;
+	}
+	else
+	{
+		m_CurrentState = State::chase;
+		int number = rand() % m_QbertTransforms.size();
+		m_QbertChoice = m_QbertTransforms[number];
+	}
+	m_Owner->Notify("Transform");
+	m_MoveDelay.Start();
+}
+
 void CoilyMovment::ChaseUpdate()
 {
 	const auto deltaTime = Time::GetInstance().GetDeltaTime();
@@ -108,6 +124,21 @@ void CoilyMovment::OnTriggerEnter(CCollider* col)
 			col->GetOwner()->Notify("Death");
 		}
 	}
+}
+void CoilyMovment::AddPlayerControls()
+{
+	auto upMovementKey = new UpMovementTrigger{ m_Owner };
+	auto downMovementKey = new DownMovementTrigger{ m_Owner };
+	auto rightMovementKey = new RightMovementTrigger{ m_Owner };
+	auto leftMovementKey = new LeftMovementTrigger{ m_Owner };
+	InputManager::GetInstance().AddTriggerInput(new InputTriggerAction{ TriggerType::controllerLeftJoyStick,std::unique_ptr<UpMovementTrigger>(upMovementKey),0 });
+	InputManager::GetInstance().AddTriggerInput(new InputTriggerAction{ TriggerType::controllerLeftJoyStick,std::unique_ptr<DownMovementTrigger>(downMovementKey),0 });
+	InputManager::GetInstance().AddTriggerInput(new InputTriggerAction{ TriggerType::controllerLeftJoyStick,std::unique_ptr<RightMovementTrigger>(rightMovementKey),0 });
+	InputManager::GetInstance().AddTriggerInput(new InputTriggerAction{ TriggerType::controllerLeftJoyStick,std::unique_ptr<LeftMovementTrigger>(leftMovementKey),0 });
+	m_UpSwitchTrigger = InputManager::GetInstance().CreateCommandKillSwitch(upMovementKey);
+	m_DownSwitchTrigger = InputManager::GetInstance().CreateCommandKillSwitch(downMovementKey);
+	m_RightSwitchTrigger = InputManager::GetInstance().CreateCommandKillSwitch(rightMovementKey);
+	m_LeftSwitchTrigger = InputManager::GetInstance().CreateCommandKillSwitch(leftMovementKey);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///UGG

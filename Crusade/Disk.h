@@ -26,5 +26,5 @@ public :
 	std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) override;
 	float GetSize()const { return m_DiskSize; }
 private:
-	float m_DiskSize = 20;
+	float m_DiskSize = 40;
 };

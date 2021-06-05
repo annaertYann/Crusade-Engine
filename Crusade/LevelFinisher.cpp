@@ -20,7 +20,8 @@ void LevelFinisher::RecieveNotification(Crusade::GameObject* , const std::string
 	{
 		m_CurrentTriggeredCubes--;
 	}
-	if (m_CurrentTriggeredCubes==m_NumberOfCubes)
+	
+	if (m_CurrentTriggeredCubes >= m_NumberOfCubes)
 	{
 		FinishLevel();
 	}

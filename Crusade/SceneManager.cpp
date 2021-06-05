@@ -39,6 +39,7 @@ void Crusade::SceneManager::LoadScene(const std::string& sceneName)
 			{
 				obj->SetRemove();
 			}
+			m_CurrentScene->AddCamera();
 			m_CurrentScene->Load();
 			return;
 		}

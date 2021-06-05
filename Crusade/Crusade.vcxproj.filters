@@ -148,6 +148,18 @@
     <ClCompile Include="AiSpawner.cpp">
       <Filter>Crusade\Game\Qbert\AI</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Crusade\Game\Qbert\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Crusade\Scene\GameObject\Component\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Crusade\Scene\GameObject\Component\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Buttons.cpp">
+      <Filter>Crusade\Game\Qbert\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\imgui-1.81\imconfig.h">
@@ -315,6 +327,18 @@
     <ClInclude Include="AiSpawner.h">
       <Filter>Crusade\Game\Qbert\AI</Filter>
     </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Crusade\Game\Qbert\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Crusade\Scene\GameObject\Component\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Crusade\Scene\GameObject\Component\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Buttons.h">
+      <Filter>Crusade\Game\Qbert\Menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Crusade">
@@ -385,6 +409,12 @@
     </Filter>
     <Filter Include="Crusade\Game\Qbert\Interatable">
       <UniqueIdentifier>{61be26b6-6906-4b1d-b54c-64912b55a67d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Game\Qbert\Menu">
+      <UniqueIdentifier>{fe82336a-3286-47d2-bb99-79fcde4ad6ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Scene\GameObject\Component\UI">
+      <UniqueIdentifier>{df009d31-f8a9-41f9-8409-dff4e167fa6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
