@@ -15,6 +15,7 @@ public:
 	void LateUpdate() override;
 private:
 	bool IsMonsterInList(const std::string& name);
-	Crusade::Delay m_SpawnDelay{10.f};
+	void spawnMonster();
+	Crusade::Delay m_SpawnDelay{2.f};
 	std::vector<Crusade::GameObject*> m_Ai;
 };

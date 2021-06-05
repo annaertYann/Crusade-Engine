@@ -11,8 +11,16 @@ void AiSpawner::Update()
 	if(m_SpawnDelay.Update(deltaTime))
 	{
 		m_SpawnDelay.Start();
-		int number = rand() % int(Monsters::END);
-		number = int(Monsters::wrongway);
+		spawnMonster();
+	}
+}
+void AiSpawner::spawnMonster()
+{
+	bool done = false;
+	int number = rand() % int(Monsters::END);
+	int tries = 0;
+	while (!done)
+	{
 		switch (Monsters(number))
 		{
 		case Monsters::coily:
@@ -21,37 +29,66 @@ void AiSpawner::Update()
 				const auto obj = Coily::GetInstance().CreateObject(m_Owner->GetCTransform()->GetPosition());
 				SceneManager::GetInstance().GetCurrentScene()->Add(obj);
 				m_Ai.push_back(obj.get());
+				done = true;
 			}
+			tries++;
 			break;
 		case Monsters::ugg:
 			if (!IsMonsterInList("Ugg"))
 			{
 				auto pos = m_Owner->GetCTransform()->GetPosition();
-				const auto obj = Ugg::GetInstance().CreateObject({0,pos.y / 4,pos.z});
+				const auto obj = Ugg::GetInstance().CreateObject({ 0,pos.y / 4,pos.z });
 				SceneManager::GetInstance().GetCurrentScene()->Add(obj);
-				obj->GetComponent<CharacterMovement>()->SetTargetToClosestCube();
 				m_Ai.push_back(obj.get());
+				done = true;
 			}
+			tries++;
 			break;
 		case Monsters::wrongway:
 			if (!IsMonsterInList("WrongWay"))
 			{
 				auto pos = m_Owner->GetCTransform()->GetPosition();
-				const auto obj = WrongWay::GetInstance().CreateObject({ pos.x*2,pos.y/4,pos.z });
+				const auto obj = WrongWay::GetInstance().CreateObject({ pos.x * 2,pos.y / 4,pos.z });
 				SceneManager::GetInstance().GetCurrentScene()->Add(obj);
 				m_Ai.push_back(obj.get());
+				done = true;
 			}
+			tries++;
 			break;
 		case Monsters::slick:
+			if (!IsMonsterInList("Slick"))
+			{
+				auto pos = m_Owner->GetCTransform()->GetPosition();
+				const auto obj = Slick::GetInstance().CreateObject(m_Owner->GetCTransform()->GetPosition());
+				SceneManager::GetInstance().GetCurrentScene()->Add(obj);
+				m_Ai.push_back(obj.get());
+				done = true;
+			}
+			tries++;
 			break;
 		case Monsters::sam:
+			if (!IsMonsterInList("Sam"))
+			{
+				auto pos = m_Owner->GetCTransform()->GetPosition();
+				const auto obj = Sam::GetInstance().CreateObject(m_Owner->GetCTransform()->GetPosition());
+				SceneManager::GetInstance().GetCurrentScene()->Add(obj);
+				m_Ai.push_back(obj.get());
+				done = true;
+			}
+			tries++;
 			break;
 		case Monsters::END:
 			break;
-		default: ;
+		default:;
 		}
+		if(tries>int(Monsters::END))
+		{
+			done = tries > int(Monsters::END) - 1;
+		}
+		number = rand() % int(Monsters::END);
 	}
 }
+
 void AiSpawner::LateUpdate()
 {
 	//REMOVE DEAD OBJECTS FROM OBJECTLIST

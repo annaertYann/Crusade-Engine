@@ -6,16 +6,19 @@
 #include "SceneManager.h"
 #include "Qbert.h"
 using namespace Crusade;
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///COILY
+///////////////////////////////////////////////////////////////////////////////////////////////////
 void CoilyMovment::Start()
 {
 	m_Publisher = m_Owner->GetComponent<Publisher>();
+	m_Publisher->AddObserver(SceneManager::GetInstance().GetCurrentScene()->FindObject("ScoreDisplay").get());
 	m_Movement = m_Owner->GetComponent<CharacterMovement>();
 	auto qberts = SceneManager::GetInstance().GetCurrentScene()->FindAllObjects("Qbert");
 	for(const auto qbert :qberts)
 	{
 		m_QbertTransforms.push_back(qbert->GetCTransform());
 	}
-	m_Publisher->AddObserver(SceneManager::GetInstance().GetCurrentScene()->FindObject("ScoreDisplay").get());
 }
 void CoilyMovment::Update()
 {
@@ -98,13 +101,17 @@ void CoilyMovment::Notify(const std::string& message)
 }
 void CoilyMovment::OnTriggerEnter(CCollider* col)
 {
-	if(col->GetOwner()->GetComponent<QbertController>())
+	if (col->GetOwner()->GetComponent<QbertController>())
 	{
-		col->GetOwner()->Notify("Death");
+		if (!m_Owner->GetComponent<CharacterMovement>()->IsFalling())
+		{
+			col->GetOwner()->Notify("Death");
+		}
 	}
 }
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///UGG
+///////////////////////////////////////////////////////////////////////////////////////////////////
 void UggMovement::Start()
 {
 	m_Movement = m_Owner->GetComponent<CharacterMovement>();
@@ -131,11 +138,15 @@ void UggMovement::OnTriggerEnter(CCollider* col)
 {
 	if (col->GetOwner()->GetComponent<QbertController>())
 	{
-		col->GetOwner()->Notify("Death");
+		if (!m_Owner->GetComponent<CharacterMovement>()->IsFalling())
+		{
+			col->GetOwner()->Notify("Death");
+		}
 	}
 }
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///WRONGWAY
+///////////////////////////////////////////////////////////////////////////////////////////////////
 void WrongWayMovement::Start()
 {
 	m_Movement = m_Owner->GetComponent<CharacterMovement>();
@@ -162,6 +173,100 @@ void WrongWayMovement::OnTriggerEnter(CCollider* col)
 {
 	if (col->GetOwner()->GetComponent<QbertController>())
 	{
-		col->GetOwner()->Notify("Death");
+		if (!m_Owner->GetComponent<CharacterMovement>()->IsFalling())
+		{
+			col->GetOwner()->Notify("Death");
+		}
+
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///SLICK
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void SlickMovement::Start()
+{
+	m_Movement = m_Owner->GetComponent<CharacterMovement>();
+	m_Publisher = m_Owner->GetComponent<Publisher>();
+	m_Publisher->AddObserver(SceneManager::GetInstance().GetCurrentScene()->FindObject("ScoreDisplay").get());
+}
+void SlickMovement::Update()
+{
+	const auto deltaTime = Time::GetInstance().GetDeltaTime();
+	if (m_MoveDelay.Update(deltaTime))
+	{
+		m_MoveDelay.Start();
+		if (rand() % 2 == 0)
+		{
+			m_Movement->Notify("Left");
+		}
+		else
+		{
+			m_Movement->Notify("Right");
+		}
+		m_Movement->Notify("Down");
+	}
+	m_Movement->ResetCurrentCube();
+}
+void SlickMovement::Notify(const std::string& message)
+{
+	if (message == "Death")
+	{
+		m_Owner->SetRemove();
+	}
+}
+void SlickMovement::OnTriggerEnter(CCollider* col)
+{
+	if (col->GetOwner()->GetComponent<QbertController>())
+	{
+		if (!m_Owner->GetComponent<CharacterMovement>()->IsFalling())
+		{
+			m_Owner->SetRemove();
+			m_Publisher->SendNotification("SamCatch");
+		}
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///SAM
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void SamMovement::Start()
+{
+	m_Movement = m_Owner->GetComponent<CharacterMovement>();
+	m_Publisher = m_Owner->GetComponent<Publisher>();
+	m_Publisher->AddObserver(SceneManager::GetInstance().GetCurrentScene()->FindObject("ScoreDisplay").get());
+}
+void SamMovement::Update()
+{
+	const auto deltaTime = Time::GetInstance().GetDeltaTime();
+	if (m_MoveDelay.Update(deltaTime))
+	{
+		m_MoveDelay.Start();
+		if(rand()%2==0)
+		{
+			m_Movement->Notify("Left");
+		}
+		else
+		{
+			m_Movement->Notify("Right");
+		}
+		m_Movement->Notify("Down");
+	}
+	m_Movement->ResetCurrentCube();
+}
+void SamMovement::Notify(const std::string& message)
+{
+	if (message == "Death")
+	{
+		m_Owner->SetRemove();
+	}
+}
+void SamMovement::OnTriggerEnter(CCollider* col)
+{
+	if (col->GetOwner()->GetComponent<QbertController>())
+	{
+		if (!m_Owner->GetComponent<CharacterMovement>()->IsFalling())
+		{
+			m_Owner->SetRemove();
+			m_Publisher->SendNotification("SamCatch");
+		}
 	}
 }

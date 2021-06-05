@@ -15,6 +15,7 @@ public:
 	void SetOffMapTarget(const Vector2f& pos,const float& speed);//This disables normal movement
 	void ResetToStart();
 	bool IsJumpingOffEdge()const { return m_DieDelay.GetIsActive(); }
+	bool IsFalling()const { return m_RigidBody->GetIsGravityEnabled(); }
 	void ResetDeathAnim();
 	void Die();
 	void SetTargetToClosestCube();
@@ -32,6 +33,7 @@ private:
 	bool m_CubeIsTriggerd = false;
 	bool m_IsEnabled = true;
 	bool m_JumpedToBack = true;
+	bool m_IsFalling = false;
 	MovementSteering* m_MovementSteering=nullptr;
 	Vector2f m_Direction{};
 	Crusade::Delay m_DirectionChoiceDelay{0.3f};

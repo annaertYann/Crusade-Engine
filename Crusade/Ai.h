@@ -19,7 +19,18 @@ public:
 	std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position = {}, glm::vec3 rotation = {}, glm::vec3 scale = { 1,1,1 }) override;
 private:
 };
-
+class Slick final : public Crusade::Prefab<Slick>
+{
+public:
+	std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position = {}, glm::vec3 rotation = {}, glm::vec3 scale = { 1,1,1 }) override;
+private:
+};
+class Sam final : public Crusade::Prefab<Sam>
+{
+public:
+	std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position = {}, glm::vec3 rotation = {}, glm::vec3 scale = { 1,1,1 }) override;
+private:
+};
 class AISpawnerPrefab final : public Crusade::Prefab<AISpawnerPrefab>
 {
 public:

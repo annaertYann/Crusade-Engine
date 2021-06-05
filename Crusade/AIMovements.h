@@ -50,4 +50,29 @@ private:
 	void OnTriggerEnter(Crusade::CCollider*) override;
 	CharacterMovement* m_Movement = nullptr;
 	Crusade::Delay m_MoveDelay{ 1.f };
+	
+};
+class SlickMovement final :public Crusade::Component
+{
+public:
+	void Start() override;
+	void Notify(const std::string& message) override;
+	void Update() override;
+private:
+	void OnTriggerEnter(Crusade::CCollider*) override;
+	CharacterMovement* m_Movement = nullptr;
+	Crusade::Delay m_MoveDelay{ 1.f };
+	Crusade::Publisher* m_Publisher = nullptr;
+};
+class SamMovement final :public Crusade::Component
+{
+public:
+	void Start() override;
+	void Notify(const std::string& message) override;
+	void Update() override;
+private:
+	void OnTriggerEnter(Crusade::CCollider*) override;
+	CharacterMovement* m_Movement = nullptr;
+	Crusade::Delay m_MoveDelay{ 1.f };
+	Crusade::Publisher* m_Publisher = nullptr;
 };

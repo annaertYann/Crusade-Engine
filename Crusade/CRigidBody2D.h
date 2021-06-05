@@ -22,6 +22,7 @@ namespace Crusade
 
 		CCollider* GetAttachedCollider()const { return m_AttachedCollider; }
 		void SetIsStatic(const bool& x) { m_IsStatic = x; }
+		bool GetIsGravityEnabled()const { return m_IsGravityEnabled; }
 	private:
 		void Start() override;
 		void DoCollisions();
