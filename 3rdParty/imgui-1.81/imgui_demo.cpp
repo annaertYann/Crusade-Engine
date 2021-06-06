@@ -93,6 +93,7 @@ Index of this file:
 // Visual Studio warnings
 #ifdef _MSC_VER
 #pragma warning (disable: 4996) // 'This function or variable may be unsafe': strcpy, strdup, sprintf, vsnprintf, sscanf, fopen
+#pragma warning (disable: 26451) // 'This function or variable may be unsafe': strcpy, strdup, sprintf, vsnprintf, sscanf, fopen
 #endif
 
 // Clang/GCC warnings with -Weverything
@@ -5735,7 +5736,7 @@ void ImGui::ShowFontSelector(const char* label)
         "- Read FAQ and docs/FONTS.md for more details.\n"
         "- If you need to add/remove fonts at runtime (e.g. for DPI change), do it before calling NewFrame().");
 }
-
+#pragma warning (disable:26451)
 // [Internal] Display details for a single font, called by ShowStyleEditor().
 static void NodeFont(ImFont* font)
 {

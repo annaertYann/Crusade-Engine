@@ -2,6 +2,7 @@
 #include <cassert>
 #include "Scene.h"
 #include "Singleton.h"
+#pragma warning (disable:26816)
 namespace Crusade
 {
 	class Scene;
