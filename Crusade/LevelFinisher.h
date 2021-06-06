@@ -11,4 +11,5 @@ private:
 	int m_NumberOfCubes=0;
 	std::string m_NextLevelName = "Qbert2";
 	void FinishLevel()const;
+	inline static bool m_HasStarted = false;
 };

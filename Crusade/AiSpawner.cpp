@@ -19,6 +19,11 @@ void AiSpawner::spawnMonster()
 	bool done = false;
 	int number = rand() % int(Monsters::END);
 	int tries = 0;
+	if(!m_CoilySpawned)
+	{
+		number = int(Monsters::coily);
+		m_CoilySpawned = true;
+	}
 	while (!done)
 	{
 		switch (Monsters(number))

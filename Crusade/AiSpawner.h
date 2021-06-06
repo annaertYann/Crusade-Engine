@@ -17,6 +17,7 @@ public:
 private:
 	bool IsMonsterInList(const std::string& name);
 	void spawnMonster();
+	bool m_CoilySpawned = false;
 	Crusade::Delay m_SpawnDelay{4.5f};
 	std::vector<Crusade::GameObject*> m_Ai;
 };

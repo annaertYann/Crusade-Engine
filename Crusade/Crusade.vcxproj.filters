@@ -160,6 +160,9 @@
     <ClCompile Include="Buttons.cpp">
       <Filter>Crusade\Game\Qbert\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="SoundPlayer.cpp">
+      <Filter>Crusade\Game\Qbert\Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\imgui-1.81\imconfig.h">
@@ -339,6 +342,9 @@
     <ClInclude Include="Buttons.h">
       <Filter>Crusade\Game\Qbert\Menu</Filter>
     </ClInclude>
+    <ClInclude Include="SoundPlayer.h">
+      <Filter>Crusade\Game\Qbert\Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Crusade">
@@ -415,6 +421,9 @@
     </Filter>
     <Filter Include="Crusade\Scene\GameObject\Component\UI">
       <UniqueIdentifier>{df009d31-f8a9-41f9-8409-dff4e167fa6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crusade\Game\Qbert\Sound">
+      <UniqueIdentifier>{0c03908b-3304-4e84-ad82-3c246812f3a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

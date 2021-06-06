@@ -55,6 +55,8 @@ private:
 	SDL_Color m_Color2;
 	CubeActivator::TriggerType m_TriggerType;
 	std::vector<CubeActivator*>m_Cubes{};
+	bool m_SpawnDisk = false;
+	bool m_HasSpawnedDisk = false;
 };
 class HexagonSave final:public Crusade::CTextSave
 {

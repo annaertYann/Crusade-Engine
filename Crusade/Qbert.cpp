@@ -53,6 +53,7 @@ void QbertController::Start()
 	m_Owner->AddComponent<Publisher>(publisher);
 	m_Publisher = publisher.get();
 	m_Publisher->AddObserver(SceneManager::GetInstance().GetCurrentScene()->FindObject("LivesDisplay").get());
+	m_Publisher->AddObserver(SceneManager::GetInstance().GetCurrentScene()->FindObject("SoundPlayer").get());
 	m_Movement = m_Owner->GetComponent<CharacterMovement>();
 	
 }
@@ -76,6 +77,18 @@ void QbertController::Notify(const std::string& message)
 	{
 		m_Publisher->SendNotification("Death");
 		m_Movement->Die();
+	}
+	else if (message == "Fall")
+	{
+		m_Publisher->SendNotification("Fall");
+	}
+	else if (message == "Jump")
+	{
+		m_Publisher->SendNotification("Jump");
+	}
+	else if (message == "Lift")
+	{
+		m_Publisher->SendNotification("Lift");
 	}
 }
 void QbertController::AddKeyBoardControls()

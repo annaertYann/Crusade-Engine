@@ -11,6 +11,12 @@ void LevelFinisher::Start()
 	m_NumberOfCubes = int(list.size());
 	m_Owner->AddComponent<Crusade::Publisher>(std::make_shared<Crusade::Publisher>());
 	m_Owner->GetComponent<Crusade::Publisher>()->AddObserver(Crusade::SceneManager::GetInstance().GetCurrentScene()->FindObject("ScoreDisplay").get());
+	m_Owner->GetComponent<Crusade::Publisher>()->AddObserver(Crusade::SceneManager::GetInstance().GetCurrentScene()->FindObject("SoundPlayer").get());
+	if(!m_HasStarted)
+	{
+		m_Owner->GetComponent<Crusade::Publisher>()->SendNotification("Begin");
+		m_HasStarted = true;
+	}
 }
 void LevelFinisher::RecieveNotification(Crusade::GameObject* , const std::string& message)
 {
@@ -23,7 +29,7 @@ void LevelFinisher::RecieveNotification(Crusade::GameObject* , const std::string
 		m_CurrentTriggeredCubes--;
 	}
 	
-	if (m_CurrentTriggeredCubes >= 3)
+	if (m_CurrentTriggeredCubes >= m_NumberOfCubes)
 	{
 		FinishLevel();
 	}
@@ -40,6 +46,7 @@ void LevelFinisher::FinishLevel()const
 	previousScene->FindObject("ScoreDisplay")->GetComponent<ScoreSave>()->Save();
 	previousScene->FindObject("LivesDisplay")->GetComponent<LifeSave>()->Save();
 	sceneManager.LoadScene(m_NextLevelName);
+	m_Owner->GetComponent<Crusade::Publisher>()->SendNotification("Advance");
 	auto nextScene = sceneManager.GetCurrentScene();
 	
 }

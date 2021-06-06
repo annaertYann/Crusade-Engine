@@ -44,7 +44,13 @@ void CubePyramidConstructor::Awake()
 		}
 		numberOfCubesInRow++;
 	}
-	
+	if(!m_HasSpawnedDisk)
+	{
+		m_SpawnDisk = true;
+		int i = 0;
+		int j = 2;
+		 CreateDisk({ pos.x - (j * hexaSize / 2) + (i * hexaSize), pos.y - j * hexaSize * 3 / 4, pos.z }, true, hexaSize);
+	}
 }
 void CubePyramidConstructor::CreateDisk(const glm::vec3& pos,bool left,float size)
 {
@@ -57,14 +63,12 @@ void CubePyramidConstructor::CreateDisk(const glm::vec3& pos,bool left,float siz
 	diskPos.y += size / 2;
 	float diskSize=Disk::GetInstance().GetSize();
 	diskPos -= diskSize / 2;
-	if(x%chance==0)
+	if(x%chance==0 || m_SpawnDisk)
 	{
 		SceneManager::GetInstance().GetCurrentScene()->Add( Disk::GetInstance().CreateObject(diskPos, {}, { 1,1,1 }));
+		m_HasSpawnedDisk = true;
 	}
 }
-
-
-
 std::shared_ptr<GameObject> Cube::CreateObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
 	auto cube = std::make_shared<GameObject>();

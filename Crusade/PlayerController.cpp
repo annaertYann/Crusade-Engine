@@ -44,7 +44,7 @@ void CharacterMovement::Update()
 		{
 			m_Renderer->SetCurrentLayer("Back");
 		}
-		
+		m_Owner->Notify("Fall");
 	}
 }
 
@@ -58,6 +58,7 @@ void CharacterMovement::SetOffMapTarget(const Vector2f& pos, const float& speed)
 	m_DieDelay.Reset();
 	m_RigidBody->SetGravityEnabled(false);
 	m_RigidBody->SetVelocity(glm::vec2{});
+	m_Owner->Notify("Lift");
 }
 bool CharacterMovement::Move()
 {
@@ -92,6 +93,7 @@ bool CharacterMovement::Move()
 				NotifyObjectOfJump();
 				m_Direction = Vector2f{};
 				m_CubeIsTriggerd = false;
+				m_Owner->Notify("Jump");
 				return true;
 			}
 		}

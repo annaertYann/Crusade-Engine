@@ -8,7 +8,6 @@ std::shared_ptr<GameObject> DeathBox::CreateObject(glm::vec3 position, glm::vec3
 	auto rigid = std::make_shared<CRigidBody2D>();
 	rigid->SetGravityEnabled(false);
 	auto col = std::make_shared<CRectCollider>(Rectf{0,0,1000,10});
-	col->SetDebugDrawing(true);
 	obj->AddComponent<CCollider>(col);
 	obj->AddComponent<CRigidBody2D>(rigid);
 	obj->AddComponent<Eraser>(std::make_shared<Eraser>());

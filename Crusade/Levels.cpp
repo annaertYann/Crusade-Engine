@@ -13,6 +13,7 @@
 #include "Disk.h"
 #include "Ai.h"
 #include "AIMovements.h"
+#include "SoundPlayer.h"
 using namespace Crusade;
 void Level::Load()
 {
@@ -37,6 +38,9 @@ void Level::Load()
 		auto qbert1 = QBert::GetInstance().CreateObject(glm::vec3{ 320,640,0 });
 		qbert1->GetComponent<QbertController>()->AddJoystickControls();
 		objects.push_back(qbert1);
+
+		qbert->GetCTransform()->SetPosition(0,200,0);
+		qbert1->GetCTransform()->SetPosition(640, 200, 0);
 	}
 	//FPS
 	auto fps = std::make_shared<GameObject>();
@@ -71,6 +75,11 @@ void Level::Load()
 		CoilyMovement::SetStartStateToManual();
 	}
 	objects.push_back(AISpawner);
+	//ADD SOUND PLAYER
+	auto soundPlayer = std::make_shared<GameObject>();
+	soundPlayer->AddComponent<SoundPlayer>(std::make_shared<SoundPlayer>());
+	soundPlayer->SetName("SoundPlayer");
+	objects.push_back(soundPlayer);
 	Add(objects);
 }
 Level::Level(std::string levelName, std::string filepath, std::string nexLevelName)

@@ -35,7 +35,7 @@ private:
 	int m_JumpCounter = 0;
 	int m_maxJumpsBeforeTransform = 6;
 	Crusade::Publisher* m_Publisher=nullptr;
-
+	glm::vec3 m_QbertPos{};
 	std::unique_ptr<Crusade::CommandKillSwitch>m_UpSwitchTrigger{};
 	std::unique_ptr<Crusade::CommandKillSwitch>m_DownSwitchTrigger{};
 	std::unique_ptr<Crusade::CommandKillSwitch>m_LeftSwitchTrigger{};

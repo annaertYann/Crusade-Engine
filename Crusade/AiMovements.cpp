@@ -78,6 +78,7 @@ void CoilyMovement::Transform()
 		m_CurrentState = State::chase;
 		int number = rand() % m_QbertTransforms.size();
 		m_QbertChoice = m_QbertTransforms[number];
+		m_QbertPos = m_QbertChoice->GetPosition();
 	}
 	m_Owner->Notify("Transform");
 	m_MoveDelay.Start();
@@ -89,24 +90,25 @@ void CoilyMovement::ChaseUpdate()
 	if (m_MoveDelay.Update(deltaTime))
 	{
 		m_MoveDelay.Start();
-		glm::vec3 closestPos{m_QbertChoice->GetPosition()};
 		const auto coilyPos = m_Owner->GetCTransform()->GetPosition();
-		if((closestPos-coilyPos).x>0)
+		if((m_QbertPos -coilyPos).x>0)
 		{
 			m_Movement->Notify("Right");
 		}
-		if ((closestPos - coilyPos).x < 0)
+		if ((m_QbertPos - coilyPos).x < 0)
 		{
 			m_Movement->Notify("Left");
 		}
-		if ((closestPos - coilyPos).y > 0)
+		if ((m_QbertPos - coilyPos).y > 0)
 		{
 			m_Movement->Notify("Up");
 		}
-		if ((closestPos - coilyPos).y < 0)
+		if ((m_QbertPos - coilyPos).y < 0)
 		{
 			m_Movement->Notify("Down");
 		}
+
+		m_QbertPos=  m_QbertChoice->GetPosition() ;
 	}
 }
 void CoilyMovement::Notify(const std::string& message)
