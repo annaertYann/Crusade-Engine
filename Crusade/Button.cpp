@@ -1,5 +1,7 @@
 #include "MiniginPCH.h"
 #include "Button.h"
+#include "Camera2D.h"
+#include "SceneManager.h"
 using namespace Crusade;
 void Button::AddCommandToButton(std::shared_ptr<ButtonAction> action)
 {
@@ -12,8 +14,7 @@ void ButtonCommand::Execute()
 {
 	auto button = m_Actor->GetComponent<Button>();
 	auto element = m_Actor->GetComponent<UIElementOnScreen>();
-	auto &pos = InputManager::GetInstance();
-	auto posPos = pos.GetScreenMousePosition();
+	auto posPos = SceneManager::GetInstance().GetCurrentScene()->FindObject("Camera")->GetComponent<Camera2D>()->GetMousePos();
 	if(utils::IsPointInRect(Point2f{posPos.x,posPos.y},Rectf{element->GetPos().x,element->GetPos().y,button->GetSize().x,button->GetSize().y}))
 	{
 		m_Action->Execute();

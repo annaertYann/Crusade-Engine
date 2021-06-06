@@ -47,11 +47,12 @@ void InputManager::CalculateMousePos()
 }
 void InputManager::ProcessButtons()
 {
-	for (const auto& input : m_InputButtonCommands)
+	for (int i{};i<m_InputButtonCommands.size();i++)
 	{
 		ZeroMemory(&m_CurrentControllerState, sizeof(XINPUT_STATE));
-		XInputGetState(input->userIndex, &m_CurrentControllerState);
-		switch (input->state)
+		XInputGetState(m_InputButtonCommands[i]->userIndex, &m_CurrentControllerState);
+		auto input = m_InputButtonCommands[i];
+		switch (m_InputButtonCommands[i]->state)
 		{
 		case InputButtonState::pressed:
 			if (!input->isDown)
@@ -100,8 +101,10 @@ void InputManager::ProcessButtons()
 }
 void InputManager::ProcessTriggers()
 {
-	for (const auto input : m_InputTriggerCommands)
+	
+	for (int i{}; i < m_InputTriggerCommands.size(); i++)
 	{
+		auto input = m_InputTriggerCommands[i];
 		ZeroMemory(&m_CurrentControllerState, sizeof(XINPUT_STATE));
 		XInputGetState(input->userIndex, &m_CurrentControllerState);
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "CSaveLoad.h"
 #include "Event.h"
 #include "Prefab.h"
 #include "GameObject.h"
@@ -29,4 +30,27 @@ class LivesDisplay final : public Crusade::Prefab<LivesDisplay>
 {
 public:
 	std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) override;
+	
+};
+
+class LifeSave final :public Crusade::CTextSave
+{
+public:
+	LifeSave() :CTextSave("Life")
+	{
+		if (!m_HasResert)
+		{
+			Save();
+		}
+	}
+	void SaveFromFile(std::ofstream& file) override;
+private:
+	static bool m_HasResert;
+};
+class LifeLoad final :public Crusade::CTextLoad
+{
+public:
+	void Start() override { Load(); }
+	LifeLoad() :CTextLoad("Life") {}
+	void LoadFromFile(std::ifstream& file) override;
 };

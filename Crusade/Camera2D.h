@@ -41,8 +41,8 @@ namespace Crusade
 		//VAR
 		Point2f m_Position = {};
 		float m_Speed = 400;
-		float m_ScaleX = 1;
-		float m_ScaleY = 1;
+		static float m_ScaleX ;
+		static float m_ScaleY ;
 		static bool m_IsWindowScaled;
 		Window m_Window{};
 		Window m_OriginalWindow{"Original",640,480};

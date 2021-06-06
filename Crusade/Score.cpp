@@ -53,6 +53,40 @@ std::shared_ptr<GameObject> ScoreDisplay::CreateObject(glm::vec3 position, glm::
 	obj->AddComponent<CTransform>(std::make_shared<CTransform>(position,rotation,scale));
 	obj->AddComponent<CTextRender>(std::make_shared<CTextRender>("Score: 0", "Lingua.otf",15,SDL_Color{255,255,255,255}));
 	obj->AddComponent<Score>(std::make_shared<Score>());
+	obj->AddComponent<ScoreSave>(std::make_shared<ScoreSave>());
+	obj->AddComponent<ScoreLoad>(std::make_shared<ScoreLoad>());
 	obj->SetName("ScoreDisplay");
 	return obj;
 }
+bool ScoreSave::m_HasResert = false;
+void ScoreSave::SaveFromFile(std::ofstream& file)
+{
+	if(!m_HasResert)
+	{
+		file << "Score" << std::endl;
+		file << 0 << std::endl;
+		m_HasResert = true;
+	}
+	else
+	{
+		auto score = m_Owner->GetComponent<Score>();
+		file << "Score" << std::endl;
+		file << score->GetScore() << std::endl;
+	}
+}
+void ScoreLoad::LoadFromFile(std::ifstream& file)
+{
+	auto score = m_Owner->GetComponent<Score>();
+	std::string line{};
+	while (file)
+	{
+		std::getline(file, line);
+		if (line == "Score")
+		{
+			std::getline(file, line);
+			score->SetScore(std::stoi(line));
+		}
+	}
+}
+
+

@@ -3,6 +3,8 @@
 #include "utils.h"
 using namespace Crusade;
 bool Camera2D::m_IsWindowScaled = false;
+float Camera2D::m_ScaleX = 1.f;
+float Camera2D::m_ScaleY = 1.f;
 Camera2D::Camera2D(const Point2f& startPos, const Window& window)
 	:m_Position(startPos)
 	,m_Window(window)

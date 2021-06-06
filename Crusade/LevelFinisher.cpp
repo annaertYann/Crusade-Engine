@@ -4,11 +4,13 @@
 #include "Scene.h"
 #include "Score.h"
 #include "Lives.h"
-#include "Levels.h"
+#include "Event.h"
 void LevelFinisher::Start()
 {
 	const auto list = Crusade::SceneManager::GetInstance().GetCurrentScene()->FindAllObjectsWithTag("Cube");
 	m_NumberOfCubes = int(list.size());
+	m_Owner->AddComponent<Crusade::Publisher>(std::make_shared<Crusade::Publisher>());
+	m_Owner->GetComponent<Crusade::Publisher>()->AddObserver(Crusade::SceneManager::GetInstance().GetCurrentScene()->FindObject("ScoreDisplay").get());
 }
 void LevelFinisher::RecieveNotification(Crusade::GameObject* , const std::string& message)
 {
@@ -21,7 +23,7 @@ void LevelFinisher::RecieveNotification(Crusade::GameObject* , const std::string
 		m_CurrentTriggeredCubes--;
 	}
 	
-	if (m_CurrentTriggeredCubes >= m_NumberOfCubes)
+	if (m_CurrentTriggeredCubes >= 3)
 	{
 		FinishLevel();
 	}
@@ -30,20 +32,14 @@ void LevelFinisher::FinishLevel()const
 {
 	auto &sceneManager = Crusade::SceneManager::GetInstance();
 	auto previousScene = sceneManager.GetCurrentScene();
+	auto disks = previousScene->FindAllObjects("Disk");
+	for (auto disk:disks)
+	{
+		m_Owner->GetComponent<Crusade::Publisher>()->SendNotification("DiscRemain");
+	}
+	previousScene->FindObject("ScoreDisplay")->GetComponent<ScoreSave>()->Save();
+	previousScene->FindObject("LivesDisplay")->GetComponent<LifeSave>()->Save();
 	sceneManager.LoadScene(m_NextLevelName);
 	auto nextScene = sceneManager.GetCurrentScene();
-
-
-	//ADJUST OBSERVERS IF NEEDED
-	if (nextScene->FindObject("ScoreDisplay"))
-	{
-		auto score1 = nextScene->FindObject("ScoreDisplay")->GetComponent<Score>();
-		const auto score2 = previousScene->FindObject("ScoreDisplay")->GetComponent<Score>();
-		score1->SetScore(score2->GetScore());
-		
-	}
-	if (nextScene->FindObject("LivesDisplay"))
-	{
-		nextScene->FindObject("LivesDisplay")->GetComponent<Lives>()->SetLives(previousScene->FindObject("LivesDisplay")->GetComponent<Lives>()->GetLives());
-	}
+	
 }

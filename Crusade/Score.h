@@ -2,6 +2,7 @@
 #include "Event.h"
 #include "RenderComponents.h"
 #include "Prefab.h"
+#include "CSaveLoad.h"
 //Points are awarded for each color change(25), defeating Coily with a flying disc(500), remaining discs at the end of a stage(50) and catching Slickand Sam(300 each).
 class Score final:public Crusade::CObserver
 {
@@ -20,4 +21,25 @@ class ScoreDisplay final : public Crusade::Prefab<ScoreDisplay>
 {
 public:
 	std::shared_ptr<Crusade::GameObject> CreateObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) override;
+};
+class ScoreSave final:public Crusade::CTextSave
+{
+public:
+	ScoreSave():CTextSave("Score")
+	{
+		if(!m_HasResert)
+		{
+			Save();
+		}
+	}
+	void SaveFromFile(std::ofstream& file) override;
+private:
+	static bool m_HasResert;
+};
+class ScoreLoad final :public Crusade::CTextLoad
+{
+public:
+	void Start() override { Load(); }
+	ScoreLoad() :CTextLoad("Score") {}
+	void LoadFromFile(std::ifstream& file) override;
 };

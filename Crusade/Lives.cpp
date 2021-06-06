@@ -3,6 +3,7 @@
 #include "RenderComponents.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "Score.h"
 using namespace Crusade;
 void Lives::Start()
 {
@@ -77,6 +78,42 @@ std::shared_ptr<GameObject> LivesDisplay::CreateObject(glm::vec3 position, glm::
 	obj->AddComponent<CTransform>(std::make_shared<CTransform>(position, rotation, scale));
 	obj->AddComponent<CTextRender>(std::make_shared<CTextRender>("Lives:", "Lingua.otf", 15, SDL_Color{ 255,255,255,255 }));
 	obj->AddComponent<Lives>(std::make_shared<Lives>());
+	obj->AddComponent<LifeLoad>(std::make_shared<LifeLoad>());
+	obj->AddComponent<LifeSave>(std::make_shared<LifeSave>());
 	obj->SetName("LivesDisplay");
 	return obj;
 }
+
+
+bool LifeSave::m_HasResert = false;
+void LifeSave::SaveFromFile(std::ofstream& file)
+{
+	if (!m_HasResert)
+	{
+		file << "Life" << std::endl;
+		file << 3 << std::endl;
+		m_HasResert = true;
+	}
+	else
+	{
+		auto score = m_Owner->GetComponent<Lives>();
+		file << "Life" << std::endl;
+		file << score->GetLives() << std::endl;
+	}
+}
+void LifeLoad::LoadFromFile(std::ifstream& file)
+{
+	auto life = m_Owner->GetComponent<Lives>();
+	std::string line{};
+	while (file)
+	{
+		std::getline(file, line);
+		if (line == "Life")
+		{
+			std::getline(file, line);
+			life->SetLives(std::stoi(line));
+		}
+	}
+}
+
+
