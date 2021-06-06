@@ -9,7 +9,8 @@ using namespace Crusade;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///COILY
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-void CoilyMovment::Start()
+CoilyMovement::State CoilyMovement::m_StartState = State::egg;
+void CoilyMovement::Start()
 {
 	m_Publisher = m_Owner->GetComponent<Publisher>();
 	m_Publisher->AddObserver(SceneManager::GetInstance().GetCurrentScene()->FindObject("ScoreDisplay").get());
@@ -19,8 +20,9 @@ void CoilyMovment::Start()
 	{
 		m_QbertTransforms.push_back(qbert->GetCTransform());
 	}
+	m_CurrentState = m_StartState;
 }
-void CoilyMovment::Update()
+void CoilyMovement::Update()
 {
 	switch (m_CurrentState)
 	{
@@ -38,7 +40,7 @@ void CoilyMovment::Update()
 
 	m_Movement->IgnoreCurrentCube();
 }
-void CoilyMovment::EggUpdate()
+void CoilyMovement::EggUpdate()
 {
 	const auto deltaTime = Time::GetInstance().GetDeltaTime();
 	if (m_MoveDelay.Update(deltaTime))
@@ -64,7 +66,7 @@ void CoilyMovment::EggUpdate()
 		}
 	}
 }
-void CoilyMovment::Transform()
+void CoilyMovement::Transform()
 {
 	if (m_CurrentState == State::manualWaiting)
 	{
@@ -81,7 +83,7 @@ void CoilyMovment::Transform()
 	m_MoveDelay.Start();
 }
 
-void CoilyMovment::ChaseUpdate()
+void CoilyMovement::ChaseUpdate()
 {
 	const auto deltaTime = Time::GetInstance().GetDeltaTime();
 	if (m_MoveDelay.Update(deltaTime))
@@ -107,7 +109,7 @@ void CoilyMovment::ChaseUpdate()
 		}
 	}
 }
-void CoilyMovment::Notify(const std::string& message)
+void CoilyMovement::Notify(const std::string& message)
 {
 	if (message == "Death")
 	{
@@ -115,7 +117,7 @@ void CoilyMovment::Notify(const std::string& message)
 		m_Publisher->SendNotification("CoilyDeath");
 	}
 }
-void CoilyMovment::OnTriggerEnter(CCollider* col)
+void CoilyMovement::OnTriggerEnter(CCollider* col)
 {
 	if (col->GetOwner()->GetComponent<QbertController>())
 	{
@@ -125,7 +127,7 @@ void CoilyMovment::OnTriggerEnter(CCollider* col)
 		}
 	}
 }
-void CoilyMovment::AddPlayerControls()
+void CoilyMovement::AddPlayerControls()
 {
 	auto upMovementKey = new UpMovementTrigger{ m_Owner };
 	auto downMovementKey = new DownMovementTrigger{ m_Owner };

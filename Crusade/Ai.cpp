@@ -48,7 +48,7 @@ std::shared_ptr<GameObject> Coily::CreateObject(glm::vec3 position, glm::vec3 ro
 	//MOVEMENT
 	coily->AddComponent<MovementSteering>(std::make_shared<MovementSteering>(std::make_shared<Seek>(200.f, Vector2f{ 0,300.f })));
 	coily->AddComponent<CharacterMovement>(std::make_shared<CharacterMovement>(40.f));
-	coily->AddComponent<CoilyMovment>(std::make_shared<CoilyMovment>());
+	coily->AddComponent<CoilyMovement>(std::make_shared<CoilyMovement>());
 	//col
 	auto rigid = std::make_shared<CRigidBody2D>();
 	rigid->SetGravityEnabled(false);

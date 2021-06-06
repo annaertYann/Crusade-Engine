@@ -19,6 +19,10 @@ void Lives::RecieveNotification(GameObject*, const std::string& message)
 			m_LifeIndicators.pop_back();
 			m_Lives--;
 			std::cout << "Qbert Died : lives-1" << std::endl;
+			if(m_Lives<=0)
+			{
+				SceneManager::GetInstance().LoadScene("Menu");
+			}
 		}
 	}
 	else if (message=="GainLife")

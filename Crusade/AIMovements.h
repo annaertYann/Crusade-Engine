@@ -5,7 +5,7 @@
 #include "Event.h"
 #include "InputManager.h"
 class CharacterMovement;
-class CoilyMovment final:public Crusade::Component
+class CoilyMovement final:public Crusade::Component
 {
 public:
 	enum class State
@@ -18,7 +18,7 @@ public:
 	void Start() override;
 	void Notify(const std::string& message) override;
 	void Update() override;
-	void SetToManualControl() { if (m_CurrentState == State::egg) { m_CurrentState = State::manualWaiting; } }
+	static void SetStartStateToManual() { m_StartState = State::manualWaiting; }
 private:
 	void AddPlayerControls();
 	void EggUpdate();
@@ -28,6 +28,7 @@ private:
 	std::vector<Crusade::CTransform*>m_QbertTransforms;
 	Crusade::CTransform* m_QbertChoice = nullptr;
 	CharacterMovement* m_Movement = nullptr;
+	static State m_StartState;
 	State m_CurrentState=State::egg;
 	Crusade::Delay m_MoveDelay{1.f};
 	bool m_MoveLeftSwitch = false;

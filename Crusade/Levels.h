@@ -4,9 +4,17 @@
 class Level :public Crusade::Scene
 {
 public:
+	enum class Mode
+	{
+		singlePlayer,
+		coop
+		,verus
+	};
 	Level(std::string levelName, std::string filepath, std::string nexLevelName);
 	void Load() override;
+	void SetMode(const Mode& mode) { m_CurrentMode = mode; }
 private:
+	Mode m_CurrentMode=Mode::singlePlayer;
 	std::string m_LevelName;
 	std::string m_FilePath;
 	std::string m_NextLevelName;

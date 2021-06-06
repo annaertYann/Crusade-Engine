@@ -1,10 +1,8 @@
 #include "MiniginPCH.h"
 #include "Levels.h"
 #include "GameObject.h"
-#include "ResourceManager.h"
 #include "CRigidBody2D.h"
 #include "Camera2D.h"
-#include "Renderer.h"
 #include "Qbert.h"
 #include "Hexagon.h"
 #include "FPS.h"
@@ -14,6 +12,7 @@
 #include "LevelFinisher.h"
 #include "Disk.h"
 #include "Ai.h"
+#include "AIMovements.h"
 using namespace Crusade;
 void Level::Load()
 {
@@ -28,7 +27,17 @@ void Level::Load()
 	//ADD QBERT
 	auto qbert = QBert::GetInstance().CreateObject(glm::vec3{ 320,640,0 });
 	qbert->GetComponent<QbertController>()->AddKeyBoardControls();
+	if (m_CurrentMode == Mode::singlePlayer)
+	{
+		qbert->GetComponent<QbertController>()->AddJoystickControls();
+	}
 	objects.push_back(qbert);
+	if(m_CurrentMode==Mode::coop)
+	{
+		auto qbert1 = QBert::GetInstance().CreateObject(glm::vec3{ 320,640,0 });
+		qbert1->GetComponent<QbertController>()->AddJoystickControls();
+		objects.push_back(qbert1);
+	}
 	//FPS
 	auto fps = std::make_shared<GameObject>();
 	fps->AddComponent<CTransform>(std::make_shared<CTransform>(glm::vec3{ 0,465,0 }, glm::vec3{}));
@@ -57,6 +66,10 @@ void Level::Load()
 	objects.push_back(name);
 	//ADD AI
 	auto AISpawner = AISpawnerPrefab::GetInstance().CreateObject(glm::vec3{ 320,640,0 });
+	if (m_CurrentMode == Mode::verus)
+	{
+		CoilyMovement::SetStartStateToManual();
+	}
 	objects.push_back(AISpawner);
 	Add(objects);
 }
