@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2/include;$(SolutionDir)3rdParty\SDL2_mixer/include;$(SolutionDir)3rdParty\imgui-1.81;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2/include;$(SolutionDir)3rdParty\imgui-1.81;$(SolutionDir)3rdParty\SDL2_mixer/include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>MiniginPCH.h</PrecompiledHeaderFile>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -118,7 +118,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\*.dll" "$(OutputPath)" /R /Y</C
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2/include;$(SolutionDir)3rdParty\SDL2_mixer\include;$(SolutionDir)3rdParty\imgui-1.81;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2/include;$(SolutionDir)3rdParty\imgui-1.81;$(SolutionDir)3rdParty\SDL2_mixer/include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>MiniginPCH.h</PrecompiledHeaderFile>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -146,7 +146,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2/include;$(SolutionDir)3rdParty\SDL2_mixer/include;$(SolutionDir)3rdParty\imgui-1.81;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2/include;$(SolutionDir)3rdParty\imgui-1.81;$(SolutionDir)3rdParty\SDL2_mixer/include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>MiniginPCH.h</PrecompiledHeaderFile>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -156,7 +156,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Projects\Crusade Engine\3rdParty\SDL2\lib/x86;D:\Projects\Crusade Engine\3rdParty\SDL2_image\lib\x86;D:\Projects\Crusade Engine\3rdParty\SDL2_ttf\lib\x86;D:\Projects\Crusade Engine\3rdParty\imgui-1.81;D:\Projects\Crusade Engine\3rdParty\SDL2_mixer\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL2\lib/x86;$(SolutionDir)3rdParty\SDL2_image\lib\x86;$(SolutionDir)3rdParty\SDL2_ttf\lib\x86;$(SolutionDir)3rdParty\imgui-1.81;$(SolutionDir)3rdParty\SDL2_mixer\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -176,7 +176,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\*.dll" "$(OutputPath)" /R /Y</C
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2/include;$(SolutionDir)3rdParty\SDL2_mixer\include;$(SolutionDir)3rdParty\imgui-1.81;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2/include;$(SolutionDir)3rdParty\imgui-1.81;$(SolutionDir)3rdParty\SDL2_mixer/include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>MiniginPCH.h</PrecompiledHeaderFile>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -186,7 +186,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\*.dll" "$(OutputPath)" /R /Y</C
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Projects\Crusade Engine\3rdParty\SDL2\lib/x64;D:\Projects\Crusade Engine\3rdParty\SDL2_image\lib\x64;D:\Projects\Crusade Engine\3rdParty\SDL2_ttf\lib\x64;D:\Projects\Crusade Engine\3rdParty\imgui-1.81;D:\Projects\Crusade Engine\3rdParty\SDL2_mixer\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL2\lib/x64;$(SolutionDir)3rdParty\SDL2_image\lib\x64;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64;$(SolutionDir)3rdParty\imgui-1.81;$(SolutionDir)3rdParty\SDL2_mixer\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -205,52 +205,34 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
     <ClInclude Include="..\3rdParty\imgui-1.81\imstb_rectpack.h" />
     <ClInclude Include="..\3rdParty\imgui-1.81\imstb_textedit.h" />
     <ClInclude Include="..\3rdParty\imgui-1.81\imstb_truetype.h" />
-    <ClInclude Include="Ai.h" />
-    <ClInclude Include="AIMovements.h" />
-    <ClInclude Include="AiSpawner.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="Buttons.h" />
     <ClInclude Include="CAnimator2D.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Canvas.h" />
-    <ClInclude Include="CharacterAnimationTrigger.h" />
     <ClInclude Include="Colliders2D.h" />
     <ClInclude Include="Command.h" />
+    <ClInclude Include="CrusadeGame.h" />
     <ClInclude Include="CSaveLoad.h" />
     <ClInclude Include="CTransform.h" />
-    <ClInclude Include="DeathBox.h" />
     <ClInclude Include="Delay.h" />
-    <ClInclude Include="Disk.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Font.h" />
-    <ClInclude Include="FPS.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Hexagon.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="LevelFinisher.h" />
-    <ClInclude Include="Levels.h" />
-    <ClInclude Include="Lives.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="Minigin.h" />
     <ClInclude Include="MiniginPCH.h" />
-    <ClInclude Include="MovementSteering.h" />
-    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Prefab.h" />
-    <ClInclude Include="Qbert.h" />
-    <ClInclude Include="QbertGame.h" />
     <ClInclude Include="RenderComponents.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="CRigidBody2D.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Score.h" />
     <ClInclude Include="SDL_Sound_System.h" />
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="Singleton.h" />
-    <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="Sound_System.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="Texture2D.h" />
@@ -301,31 +283,19 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Ai.cpp" />
-    <ClCompile Include="AiMovements.cpp" />
-    <ClCompile Include="AiSpawner.cpp" />
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Buttons.cpp" />
     <ClCompile Include="CAnimator2D.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Canvas.cpp" />
-    <ClCompile Include="CharacterAnimationTrigger.cpp" />
     <ClCompile Include="Colliders2D.cpp" />
+    <ClCompile Include="CrusadeGame.cpp" />
     <ClCompile Include="CSaveLoad.cpp" />
     <ClCompile Include="CTransform.cpp" />
-    <ClCompile Include="DeathBox.cpp" />
-    <ClCompile Include="Disk.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Font.cpp" />
-    <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Hexagon.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="LevelFinisher.cpp" />
-    <ClCompile Include="Levels.cpp" />
-    <ClCompile Include="Lives.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Minigin.cpp" />
     <ClCompile Include="MiniginPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -333,20 +303,14 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\*.dll" "$(OutputPath)" /R /Y</C
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="MovementSteering.cpp" />
-    <ClCompile Include="PlayerController.cpp" />
-    <ClCompile Include="Qbert.cpp" />
-    <ClCompile Include="QbertGame.cpp" />
     <ClCompile Include="RenderComponents.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="CRigidBody2D.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Score.cpp" />
     <ClCompile Include="SDL_Sound_System.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
-    <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="Sound_System.cpp" />
     <ClCompile Include="structs.cpp" />
     <ClCompile Include="Texture2D.cpp" />

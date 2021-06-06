@@ -9,11 +9,11 @@ public:
 	Game(Game&& other) = delete;
 	Game& operator=(const Game& other) = delete;
 	Game& operator=(Game&& other) = delete;
-	
-	virtual void LoadGame()const=0;
+
+	virtual void LoadGame()const = 0;
 };
 class NUllGame final :public Game
 {
 public:
-	 void LoadGame()const override { }
+	void LoadGame()const override {}
 };

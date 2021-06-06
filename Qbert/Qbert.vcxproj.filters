@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="QbertGame">
+      <UniqueIdentifier>{82e136f1-d3de-4ab7-b2c6-612e946e735e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Engine\3dParty">
+      <UniqueIdentifier>{3c90d731-26d1-4861-b4af-d2746f958441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3dParty\imgui">
+      <UniqueIdentifier>{4e9b93ed-fe22-464f-a141-87336a65085d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QbertGame\Characters">
+      <UniqueIdentifier>{3be00f3d-cf34-4bff-b5d9-eb7b01eb2159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QbertGame\Menu">
+      <UniqueIdentifier>{cce277dc-dd44-4ed1-8b58-f1542eb1c69f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QbertGame\Interactables">
+      <UniqueIdentifier>{694bc6f9-923b-4ac4-80c2-3436213f63f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QbertGame\Observers">
+      <UniqueIdentifier>{3ce5523f-e574-41a2-9c05-4ee0cccf1893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QbertGame\Levels">
+      <UniqueIdentifier>{cbcae4ee-8f5a-413b-8fbf-8890dcc904b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QbertGame\Game">
+      <UniqueIdentifier>{2211a10b-6363-4759-b798-23c02d6321e7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera2D.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimator2D.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Colliders2D.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CRigidBody2D.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CSaveLoad.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="FPS.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Minigin.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniginPCH.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponents.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SDL_Sound_System.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound_System.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="structs.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2f.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.81\backends\imgui_impl_opengl2.cpp">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.81\backends\imgui_impl_sdl.cpp">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.81\imgui.cpp">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.81\imgui_demo.cpp">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.81\imgui_draw.cpp">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.81\imgui_tables.cpp">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.81\imgui_widgets.cpp">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Qbert.cpp">
+      <Filter>QbertGame\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="AiMovements.cpp">
+      <Filter>QbertGame\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Ai.cpp">
+      <Filter>QbertGame\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="AiSpawner.cpp">
+      <Filter>QbertGame\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>QbertGame\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Buttons.cpp">
+      <Filter>QbertGame\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>QbertGame\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementSteering.cpp">
+      <Filter>QbertGame\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Disk.cpp">
+      <Filter>QbertGame\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathBox.cpp">
+      <Filter>QbertGame\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="Hexagon.cpp">
+      <Filter>QbertGame\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelFinisher.cpp">
+      <Filter>QbertGame\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="Lives.cpp">
+      <Filter>QbertGame\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>QbertGame\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundPlayer.cpp">
+      <Filter>QbertGame\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels.cpp">
+      <Filter>QbertGame\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="QbertGame.cpp">
+      <Filter>QbertGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterAnimationTrigger.cpp">
+      <Filter>QbertGame\Characters</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseComponent.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera2D.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimator2D.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Colliders2D.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CRigidBody2D.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CSaveLoad.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Delay.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="FPS.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Minigin.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniginPCH.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefab.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponents.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL_Sound_System.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound_System.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2f.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.81\backends\imgui_impl_opengl2.h">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.81\backends\imgui_impl_sdl.h">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.81\imconfig.h">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.81\imgui.h">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.81\imgui_internal.h">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.81\imstb_rectpack.h">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.81\imstb_textedit.h">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.81\imstb_truetype.h">
+      <Filter>Engine\3dParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Qbert.h">
+      <Filter>QbertGame\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="AIMovements.h">
+      <Filter>QbertGame\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Ai.h">
+      <Filter>QbertGame\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="AiSpawner.h">
+      <Filter>QbertGame\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>QbertGame\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Buttons.h">
+      <Filter>QbertGame\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>QbertGame\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementSteering.h">
+      <Filter>QbertGame\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Disk.h">
+      <Filter>QbertGame\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathBox.h">
+      <Filter>QbertGame\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="Hexagon.h">
+      <Filter>QbertGame\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelFinisher.h">
+      <Filter>QbertGame\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundPlayer.h">
+      <Filter>QbertGame\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="Lives.h">
+      <Filter>QbertGame\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>QbertGame\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels.h">
+      <Filter>QbertGame\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="QbertGame.h">
+      <Filter>QbertGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterAnimationTrigger.h">
+      <Filter>QbertGame\Characters</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui.ini">
+      <Filter>Engine</Filter>
+    </None>
+  </ItemGroup>
+</Project>

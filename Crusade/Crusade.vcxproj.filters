@@ -97,59 +97,8 @@
     <ClCompile Include="CSaveLoad.cpp">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Lives.cpp">
-      <Filter>Crusade\Game\Qbert\Observers</Filter>
-    </ClCompile>
-    <ClCompile Include="Score.cpp">
-      <Filter>Crusade\Game\Qbert\Observers</Filter>
-    </ClCompile>
-    <ClCompile Include="Qbert.cpp">
-      <Filter>Crusade\Game\Qbert\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Hexagon.cpp">
-      <Filter>Crusade\Game\Qbert\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="FPS.cpp">
-      <Filter>Crusade\Game\Qbert\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="MovementSteering.cpp">
-      <Filter>Crusade\Game\Qbert\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="DeathBox.cpp">
-      <Filter>Crusade\Game\Qbert\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>Crusade\Game\Qbert\Player</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Crusade\Scene\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="QbertGame.cpp">
-      <Filter>Crusade\Game\Qbert</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelFinisher.cpp">
-      <Filter>Crusade\Game\Qbert\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Levels.cpp">
-      <Filter>Crusade\Game\Qbert\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Disk.cpp">
-      <Filter>Crusade\Game\Qbert\Interatable</Filter>
-    </ClCompile>
-    <ClCompile Include="Ai.cpp">
-      <Filter>Crusade\Game\Qbert\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="AiMovements.cpp">
-      <Filter>Crusade\Game\Qbert\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="CharacterAnimationTrigger.cpp">
-      <Filter>Crusade\Game\Qbert\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="AiSpawner.cpp">
-      <Filter>Crusade\Game\Qbert\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Crusade\Game\Qbert\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Canvas.cpp">
       <Filter>Crusade\Scene\GameObject\Component\UI</Filter>
@@ -157,11 +106,8 @@
     <ClCompile Include="Button.cpp">
       <Filter>Crusade\Scene\GameObject\Component\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Buttons.cpp">
-      <Filter>Crusade\Game\Qbert\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundPlayer.cpp">
-      <Filter>Crusade\Game\Qbert\Sound</Filter>
+    <ClCompile Include="CrusadeGame.cpp">
+      <Filter>Crusade\Foundation\GameLoop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -276,62 +222,11 @@
     <ClInclude Include="CSaveLoad.h">
       <Filter>Crusade\Scene\GameObject\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Lives.h">
-      <Filter>Crusade\Game\Qbert\Observers</Filter>
-    </ClInclude>
-    <ClInclude Include="Score.h">
-      <Filter>Crusade\Game\Qbert\Observers</Filter>
-    </ClInclude>
-    <ClInclude Include="Qbert.h">
-      <Filter>Crusade\Game\Qbert\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Hexagon.h">
-      <Filter>Crusade\Game\Qbert\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="FPS.h">
-      <Filter>Crusade\Game\Qbert\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="MovementSteering.h">
-      <Filter>Crusade\Game\Qbert\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="DeathBox.h">
-      <Filter>Crusade\Game\Qbert\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerController.h">
-      <Filter>Crusade\Game\Qbert\Player</Filter>
-    </ClInclude>
     <ClInclude Include="MiniginPCH.h">
       <Filter>Crusade\Foundation\PCH</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Crusade\Foundation\GameLoop</Filter>
-    </ClInclude>
-    <ClInclude Include="QbertGame.h">
-      <Filter>Crusade\Game\Qbert</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelFinisher.h">
-      <Filter>Crusade\Game\Qbert\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Levels.h">
-      <Filter>Crusade\Game\Qbert\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Disk.h">
-      <Filter>Crusade\Game\Qbert\Interatable</Filter>
-    </ClInclude>
-    <ClInclude Include="Ai.h">
-      <Filter>Crusade\Game\Qbert\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="AIMovements.h">
-      <Filter>Crusade\Game\Qbert\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterAnimationTrigger.h">
-      <Filter>Crusade\Game\Qbert\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="AiSpawner.h">
-      <Filter>Crusade\Game\Qbert\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Crusade\Game\Qbert\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Canvas.h">
       <Filter>Crusade\Scene\GameObject\Component\UI</Filter>
@@ -339,11 +234,8 @@
     <ClInclude Include="Button.h">
       <Filter>Crusade\Scene\GameObject\Component\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Buttons.h">
-      <Filter>Crusade\Game\Qbert\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundPlayer.h">
-      <Filter>Crusade\Game\Qbert\Sound</Filter>
+    <ClInclude Include="CrusadeGame.h">
+      <Filter>Crusade\Foundation\GameLoop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -389,41 +281,14 @@
     <Filter Include="Crusade\Foundation\PCH">
       <UniqueIdentifier>{3cc3184d-e2cf-48ae-b803-7c1a4459b792}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Crusade\Game">
-      <UniqueIdentifier>{e19c996f-c9b1-40bb-abf0-620ef54dd76f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Crusade\Foundation\Services">
       <UniqueIdentifier>{f73d6cee-758d-4223-9541-1727da6c0578}</UniqueIdentifier>
     </Filter>
     <Filter Include="Crusade\Foundation\Services\Sound">
       <UniqueIdentifier>{c1a4be44-8d89-48ac-9c8b-8e0479ab08b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Crusade\Game\Qbert">
-      <UniqueIdentifier>{cc67877c-9bdd-4851-89ab-a24f090009d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Crusade\Game\Qbert\Observers">
-      <UniqueIdentifier>{c1576fe2-e326-4369-83f2-09e29a7b15e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Crusade\Game\Qbert\Player">
-      <UniqueIdentifier>{a3ebaeb3-7245-4945-b235-ca074589805b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Crusade\Game\Qbert\AI">
-      <UniqueIdentifier>{3efc7f99-4d69-4d87-870b-c8e156d0c6b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Crusade\Game\Qbert\Level">
-      <UniqueIdentifier>{371904f3-b3b2-476f-aee8-313f14c76928}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Crusade\Game\Qbert\Interatable">
-      <UniqueIdentifier>{61be26b6-6906-4b1d-b54c-64912b55a67d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Crusade\Game\Qbert\Menu">
-      <UniqueIdentifier>{fe82336a-3286-47d2-bb99-79fcde4ad6ac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Crusade\Scene\GameObject\Component\UI">
       <UniqueIdentifier>{df009d31-f8a9-41f9-8409-dff4e167fa6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Crusade\Game\Qbert\Sound">
-      <UniqueIdentifier>{0c03908b-3304-4e84-ad82-3c246812f3a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
